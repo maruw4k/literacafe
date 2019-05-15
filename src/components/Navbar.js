@@ -1,5 +1,7 @@
 import React from 'react';
 import { Link } from 'gatsby';
+import Hamburger from 'components/Hamburger'
+import 'assets/styles/index.scss'
 
 const Navbar = class extends React.Component {
   constructor(props) {
@@ -11,21 +13,9 @@ const Navbar = class extends React.Component {
   }
 
   toggleHamburger = () => {
-    // toggle the active boolean in the state
     this.setState(
       {
         active: !this.state.active,
-      },
-      // after state has been updated,
-      () => {
-        // set the class in state for the navbar accordingly
-        this.state.active
-          ? this.setState({
-              navBarActiveClass: 'is-active',
-            })
-          : this.setState({
-              navBarActiveClass: '',
-            });
       }
     );
   };
@@ -40,25 +30,18 @@ const Navbar = class extends React.Component {
         <div className="container">
           <div className="navbar-brand">
             <Link to="/" className="navbar-item" title="Logo">
-              <img src="../assets/img/logo.png" alt="The Cafe" style={{ width: '88px' }} />
+              <img src="../assets/img/logo.png" alt="The Cafe" style={{ width: '88px' }}/>
             </Link>
-            {/* Hamburger menu */}
-            <div
-              className={`navbar-burger burger ${this.state.navBarActiveClass}`}
-              data-target="navMenu"
-              onClick={() => this.toggleHamburger()}
-            >
-              <span />
-              <span />
-              <span />
-            </div>
+
+            <Hamburger onClick={this.toggleHamburger} isOpen={this.state.active}/>
+
           </div>
           <div
             id="navMenu"
-            className={`navbar-menu ${this.state.navBarActiveClass}`}
+            className={`navbar-menu` + (this.state.active ? 'is-active' : '')}
           >
             <div className="navbar-start has-text-centered">
-              <Link className="navbar-item" to="/start">
+              <Link className="navbar-item" to="/start" >
                 Start
               </Link>
               <Link className="navbar-item" to="/menu">
