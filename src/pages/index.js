@@ -1,14 +1,14 @@
-import React from 'react'
-import Helmet from 'react-helmet'
-import Navbar from 'components/Navbar'
-import useSiteMetadata from 'components/SiteMetadata'
+import React from 'react';
+import Helmet from 'react-helmet';
+import Navbar from 'components/Navbar/Navbar';
+import useSiteMetadata from 'components/SiteMetadata';
 
 const TemplateWrapper = ({ children }) => {
-  const { title, description } = useSiteMetadata()
+  const { title, description } = useSiteMetadata();
   return (
     <div>
       <Helmet>
-        <html lang="en" />
+        <html lang="pl" />
         <title>{title}</title>
         <meta name="description" content={description} />
 
@@ -45,7 +45,7 @@ const TemplateWrapper = ({ children }) => {
       <Navbar />
       <div>{children}</div>
     </div>
-  )
-}
+  );
+};
 
-export default TemplateWrapper
+export default TemplateWrapper;

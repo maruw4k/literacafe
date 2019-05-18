@@ -1,7 +1,10 @@
 import React from 'react';
 import { Link } from 'gatsby';
-import Hamburger from 'components/Hamburger'
+import Hamburger from 'components/Hamburger';
 import 'assets/styles/index.scss'
+import styles from 'components/navbar/navbar.css'
+import Image from 'components/Image'
+
 
 const Navbar = class extends React.Component {
   constructor(props) {
@@ -23,18 +26,13 @@ const Navbar = class extends React.Component {
   render() {
     return (
       <nav
-        className="navbar is-transparent"
+        className="navbar"
         role="navigation"
         aria-label="main-navigation"
       >
         <div className="container">
           <div className="navbar-brand">
-            <Link to="/" className="navbar-item" title="Logo">
-              <img src="../assets/img/logo.png" alt="The Cafe" style={{ width: '88px' }}/>
-            </Link>
-
             <Hamburger onClick={this.toggleHamburger} isOpen={this.state.active}/>
-
           </div>
           <div
             id="navMenu"
@@ -50,6 +48,12 @@ const Navbar = class extends React.Component {
               <Link className="navbar-item" to="/wydarzenia">
                 Wydarzenia
               </Link>
+
+
+              <Link to="/" className="navbar-item" title="Logo">
+                <Image filename="logo.png" />
+              </Link>
+
               <Link className="navbar-item" to="/o-nas">
                 O nas
               </Link>
