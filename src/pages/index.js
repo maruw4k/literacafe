@@ -1,6 +1,6 @@
 import React from 'react';
 import Helmet from 'react-helmet';
-import Navbar from 'components/Navbar/Navbar';
+import Navbar from 'components/Navbar';
 import GlobalStyle from 'assets/styles/GlobalStyle';
 import useSiteMetadata from 'components/SiteMetadata';
 import 'assets/styles/normalize.css';
