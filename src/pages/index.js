@@ -1,7 +1,9 @@
 import React from 'react';
 import Helmet from 'react-helmet';
 import Navbar from 'components/Navbar/Navbar';
+import GlobalStyle from 'assets/styles/GlobalStyle';
 import useSiteMetadata from 'components/SiteMetadata';
+import 'assets/styles/normalize.css';
 
 const TemplateWrapper = ({ children }) => {
   const { title, description } = useSiteMetadata();
@@ -42,6 +44,7 @@ const TemplateWrapper = ({ children }) => {
         <meta property="og:url" content="/" />
         <meta property="og:image" content="/img/og-image.jpg" />
       </Helmet>
+      <GlobalStyle />
       <Navbar />
       <div>{children}</div>
     </div>
