@@ -2,6 +2,7 @@ import React from 'react';
 import Helmet from 'react-helmet';
 import Navbar from 'components/Navbar';
 import GlobalStyle from 'assets/styles/GlobalStyle';
+import HeroImage from 'components/HeroImage';
 import useSiteMetadata from 'components/SiteMetadata';
 import 'assets/styles/normalize.css';
 
@@ -46,6 +47,7 @@ const TemplateWrapper = ({ children }) => {
       </Helmet>
       <GlobalStyle />
       <Navbar />
+      <HeroImage />
       <div>{children}</div>
     </div>
   );
