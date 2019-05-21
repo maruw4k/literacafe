@@ -1,0 +1,15 @@
+.footer-element {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.logo { grid-area: logo; }
+
+.copyright-left { grid-area: copyright-left; }
+
+.copyright-right { grid-area: copyright-right; }
+
+.address { grid-area: address; }
+
+.hours { grid-area: hours; }
