@@ -1,0 +1,23 @@
+.grid-container {
+    display: grid;
+    grid-template-columns: 1fr 1.2fr 0.6fr 1.4fr 1fr;
+    grid-template-rows: 1fr 1fr 1fr 1fr;
+    grid-template-areas: ". header header header ." "left-title left-title . right-title right-title" "left-content left-content divider right-content right-content" "left-price left-price . right-price right-price";
+    width: 600px;
+}
+
+.left-content { grid-area: left-content; }
+
+.right-content { grid-area: right-content; }
+
+.left-price { grid-area: left-price; }
+
+.right-price { grid-area: right-price; }
+
+.divider { grid-area: divider; }
+
+.left-title { grid-area: left-title; }
+
+.right-title { grid-area: right-title; }
+
+.header { grid-area: header; }

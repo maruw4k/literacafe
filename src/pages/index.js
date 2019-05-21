@@ -1,6 +1,7 @@
 import React from 'react';
 import HeroImage from 'components/HeroImage';
 import MainTemplate from 'templates/MainTemplate';
+import DayLunch from 'templates/DayLunch';
 
 const IndexPage = () => (
   <MainTemplate>
@@ -10,6 +11,7 @@ const IndexPage = () => (
       text="We believe a cup of coffee is one of the most important, simple
           pleasures in life"
     />
+    <DayLunch />
   </MainTemplate>
 );
 
