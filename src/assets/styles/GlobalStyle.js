@@ -15,6 +15,23 @@ const GlobalStyle = createGlobalStyle`
     margin: 0;
     font-size: 1.6rem;
   }
+  
+  a {
+  color: white;
+  text-decoration: none;
+  }
+  
+  a:hover {
+  text-decoration: underline;
+  }
+  
+  .container {
+    margin-left: auto;
+    margin-right: auto;
+    max-width: 1200px; 
+    padding-right: 10px;
+    padding-left: 10px;
+  }
 `;
 
 export default GlobalStyle;
