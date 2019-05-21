@@ -6,7 +6,7 @@ import styled from 'styled-components';
 
 const PostWrapper = styled.div`
   max-width: 1000px;
-  margin: 5rem auto 0 auto;
+  margin: 5rem auto 5rem auto;
 `;
 
 export default ({ data }) => {

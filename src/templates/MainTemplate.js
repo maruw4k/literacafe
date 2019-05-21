@@ -1,6 +1,7 @@
 import React from 'react';
 import Helmet from 'react-helmet';
 import Navbar from 'components/Navbar';
+import Footer from 'components/Footer';
 import GlobalStyle from 'assets/styles/GlobalStyle';
 import useSiteMetadata from 'components/SiteMetadata';
 import 'assets/styles/normalize.css';
@@ -27,6 +28,7 @@ const MainTemplate = ({ children }) => {
       <GlobalStyle />
       <Navbar />
       <div>{children}</div>
+      <Footer />
     </>
   );
 };
