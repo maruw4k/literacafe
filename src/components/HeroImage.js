@@ -1,7 +1,7 @@
-import React, { Component } from 'react';
+import React from 'react';
 import LazyHero from 'react-lazy-hero';
 import styled from 'styled-components';
-import heroImage from 'assets/images/home-main-photo.jpg';
+import { StaticQuery, graphql } from 'gatsby';
 
 const HeroText = styled.h1`
   color: white;
@@ -10,24 +10,27 @@ const HeroText = styled.h1`
   margin: 0;
 `;
 
-class HeroImage extends Component {
-  render() {
-    return (
+export default props => (
+  <StaticQuery
+    //@todo Photo name from props
+    query={graphql`
+      {
+        file(name: { eq: "news-main-photo" }) {
+          name
+          publicURL
+        }
+      }
+    `}
+    render={data => (
       <LazyHero
-        imageSrc={heroImage}
+        imageSrc={data.file.publicURL}
         opacity={0}
         isCentered={true}
         parallaxOffset={100}
-        minHeight={'75vh'}
+        minHeight={props.minHeight}
       >
-        <HeroText>
-          We believe a cup of coffee is one of the most important, simple
-          pleasures in life
-        </HeroText>
+        <HeroText>{props.text}</HeroText>
       </LazyHero>
-    );
-  }
-}
-
-export default HeroImage;
-
+    )}
+  />
+);
