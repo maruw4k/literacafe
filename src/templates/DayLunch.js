@@ -49,10 +49,10 @@ const StyledHeading = styled.h2`
   &:after {
     content: '';
     background-image: url(${image1});
-    width: 40rem;
-    height: 40rem;
+    width: 35rem;
+    height: 35rem;
     position: absolute;
-    bottom: 0;
+    bottom: -10rem;
     left: 50%;
     z-index: -1;
     background-size: cover;
