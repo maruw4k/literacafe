@@ -2,6 +2,15 @@
     display: flex;
     justify-content: center;
     align-items: center;
+    text-align: left;
+    flex-direction: column;
+    line-height: 1.4;
+}
+
+.footer-element__title {
+    font-weight: bold;
+    margin: 0;
+    text-align: left;
 }
 
 .logo { grid-area: logo; }
@@ -10,6 +19,6 @@
 
 .copyright-right { grid-area: copyright-right; }
 
-.address { grid-area: address; }
+.address { grid-area: address; font-style: normal}
 
 .hours { grid-area: hours; }

@@ -1,7 +1,6 @@
 import React from 'react';
 import LazyHero from 'react-lazy-hero';
 import styled from 'styled-components';
-import { StaticQuery, graphql } from 'gatsby';
 
 const HeroText = styled.h1`
   color: white;
@@ -11,26 +10,15 @@ const HeroText = styled.h1`
 `;
 
 export default props => (
-  <StaticQuery
-    //@todo Photo name from props
-    query={graphql`
-      {
-        file(name: { eq: "news-main-photo" }) {
-          name
-          publicURL
-        }
-      }
-    `}
-    render={data => (
-      <LazyHero
-        imageSrc={data.file.publicURL}
-        opacity={0}
-        isCentered={true}
-        parallaxOffset={100}
-        minHeight={props.minHeight}
-      >
-        <HeroText>{props.text}</HeroText>
-      </LazyHero>
-    )}
-  />
+  <LazyHero
+    imageSrc={props.fileName}
+    minHeight={props.minHeight}
+    opacity={props.opacity}
+    color="#000"
+    isCentered={true}
+    parallaxOffset={100}
+    transitionDuration={200}
+  >
+    <HeroText>{props.text}</HeroText>
+  </LazyHero>
 );

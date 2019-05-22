@@ -13,8 +13,9 @@ export default ({ data }) => {
   return (
     <MainTemplate>
       <HeroImage
-        fileName="news-main-photo"
-        min-height="20vh"
+        fileName={data.file.publicURL}
+        mihHeight="20vh"
+        opacity="0"
         text="Wydarzenia i newsy"
       />
 
@@ -35,7 +36,7 @@ export default ({ data }) => {
 };
 
 export const query = graphql`
-  query {
+  {
     allMarkdownRemark {
       totalCount
       edges {
@@ -48,6 +49,10 @@ export const query = graphql`
           html
         }
       }
+    }
+    file(name: { eq: "news-main-photo" }) {
+      name
+      publicURL
     }
   }
 `;
