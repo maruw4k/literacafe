@@ -22,10 +22,12 @@ const NavBarMenu = styled.div`
   }
   ${theme.mq.tablet} {
     display: flex;
-    justify-content: center;
+    justify-content: space-evenly;
+    margin: 0 auto;
     align-items: center;
     height: 100%;
     padding-bottom: 0;
+    max-width: 950px;
   }
 `;
 
