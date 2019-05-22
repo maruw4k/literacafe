@@ -9,6 +9,7 @@ const IndexPage = data => (
     <HeroImage
       fileName={data.data.file.publicURL}
       minHeight="70vh"
+      opacity="0"
       text="We believe a cup of coffee is one of the most important, simple
           pleasures in life"
     />

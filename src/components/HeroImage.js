@@ -12,10 +12,11 @@ const HeroText = styled.h1`
 export default props => (
   <LazyHero
     imageSrc={props.fileName}
-    opacity={0}
+    minHeight={props.minHeight}
+    opacity={props.opacity}
+    color="#000"
     isCentered={true}
     parallaxOffset={100}
-    minHeight={props.minHeight}
     transitionDuration={200}
   >
     <HeroText>{props.text}</HeroText>

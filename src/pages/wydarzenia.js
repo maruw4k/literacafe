@@ -15,6 +15,7 @@ export default ({ data }) => {
       <HeroImage
         fileName={data.file.publicURL}
         mihHeight="20vh"
+        opacity="0"
         text="Wydarzenia i newsy"
       />
 
