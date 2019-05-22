@@ -21,17 +21,18 @@ const lunch = [
 
 const StyledWrapper = styled.section`
   display: grid;
-  grid-template-columns: 2fr 1.2fr 0.6fr 1.4fr 2fr;
+  grid-template-columns: 2fr 0.2fr 2fr;
   grid-template-rows: 1fr 0.6fr 1fr 0.5fr;
-  grid-template-areas: 'header header header header header' 'left-title . . . right-title' 'left-content . divider . right-content' 'left-price . . . right-price';
+  grid-template-areas: 'header header header' 'left-title . right-title' 'left-content divider right-content' 'left-price . right-price';
 
   ${theme.mq.tablet} {
-    grid-template-areas: '. header header header .' 'left-title . . . right-title' 'left-content . divider . right-content' 'left-price . . . right-price';
+    grid-template-columns: 2fr 1fr 2fr;
   }
   padding-top: 12rem;
   padding-bottom: 15rem;
   margin: 0 auto;
-  max-width: 600px;
+  max-width: 900px;
+  overflow: hidden;
 
   div {
     display: flex;
@@ -47,6 +48,7 @@ const StyledHeading = styled.h2`
   text-transform: uppercase;
   letter-spacing: 0.5rem;
   font-size: 3rem;
+  position: relative;
 
   &:after {
     content: '';
@@ -54,7 +56,7 @@ const StyledHeading = styled.h2`
     width: 35rem;
     height: 35rem;
     position: absolute;
-    bottom: -10rem;
+    bottom: -5rem;
     left: 50%;
     z-index: -1;
     background-size: cover;
