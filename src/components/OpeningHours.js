@@ -18,7 +18,7 @@ const StyledOpeningHoursWrapper = styled.section`
 const StyledOpeningHours = styled.div`
   display: grid;
   height: 100%;
-  max-width: 800px;
+  max-width: 900px;
   margin: 0 auto;
   grid-template-columns: 1fr 1fr 1fr 1fr;
   grid-template-rows: 1fr 1fr;
