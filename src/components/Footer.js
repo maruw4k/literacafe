@@ -10,6 +10,7 @@ const FooterWrapper = styled.div`
 
 const Footer = styled.footer`
   min-height: 180px;
+  font-size: 1.5rem;
   text-align: center;
   color: white;
   display: grid;

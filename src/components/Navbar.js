@@ -6,6 +6,7 @@ import styled from 'styled-components';
 import { theme } from 'assets/styles/theme';
 
 const StyledNavbar = styled.nav`
+  font-family: 'Helvetica', 'Arial', sans-serif;
   background-color: black;
   ${theme.mq.tablet} {
     height: 13rem;

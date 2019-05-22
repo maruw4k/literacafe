@@ -42,9 +42,11 @@ const StyledWrapper = styled.section`
 `;
 
 const StyledHeading = styled.h2`
-  text-transform: uppercase;
+  font-family: 'Unna', serif;
   font-weight: bold;
+  text-transform: uppercase;
   letter-spacing: 0.5rem;
+  font-size: 3rem;
 
   &:after {
     content: '';

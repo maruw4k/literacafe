@@ -3,9 +3,12 @@ import LazyHero from 'react-lazy-hero';
 import styled from 'styled-components';
 
 const HeroText = styled.h1`
+  font-family: 'Unna', serif;
+  font-weight: 400;
+  font-size: 6rem;
+  line-height: 1;
   color: white;
-  max-width: 800px;
-  font-size: 4.5rem;
+  max-width: 700px;
   margin: 0;
 `;
 

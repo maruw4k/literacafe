@@ -14,6 +14,8 @@ const GlobalStyle = createGlobalStyle`
   body {
     margin: 0;
     font-size: 1.6rem;
+    font-family: 'Poppins', sans-serif;
+    font-weight: 300;
   }
   
   a {
