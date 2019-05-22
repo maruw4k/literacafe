@@ -1,87 +1,167 @@
 import React from 'react';
 import styled from 'styled-components';
-import image1 from 'assets/images/cup-circle-1.png'
-import 'templates/day-lunch.css'
+import image1 from 'assets/images/cup-circle-1.png';
+import apostrophes from 'assets/images/apostrophes.png';
+import { theme } from 'assets/styles/theme';
 
 const lunch = [
   {
     id: 1,
     title: 'Francuski',
-    elements: ['zupa brokułowa', 'herbata', 'ciastko'],
-    price: '26zł'
+    elements: ['zupa brokułowa', 'herbata', 'ciastko', 'kotlet'],
+    price: '26zł',
   },
   {
     id: 2,
     title: 'Amerykański',
     elements: ['Pizza', 'kawa', 'pancake'],
-    price: '18zł'
+    price: '18zł',
   },
 ];
 
-const StyledWrapper = styled.div`
+const StyledWrapper = styled.section`
+  display: grid;
+  grid-template-columns: 2fr 1.2fr 0.6fr 1.4fr 2fr;
+  grid-template-rows: 1fr 0.6fr 1fr 0.5fr;
+  grid-template-areas: 'header header header header header' 'left-title . . . right-title' 'left-content . divider . right-content' 'left-price . . . right-price';
+
+  ${theme.mq.tablet} {
+    grid-template-areas: '. header header header .' 'left-title . . . right-title' 'left-content . divider . right-content' 'left-price . . . right-price';
+  }
   padding-top: 12rem;
   padding-bottom: 15rem;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+  margin: 0 auto;
+  max-width: 600px;
+
+  div {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+  }
 `;
 
-
 const StyledHeading = styled.h2`
-  text-align: center;
   text-transform: uppercase;
   font-weight: bold;
-  letter-spacing: 1rem;
-  
+  letter-spacing: 0.5rem;
+
   &:after {
-  content: '';
-  background-image: url(${image1});
-  width: 40rem;
-  height: 40rem;
-  position: absolute;
-  bottom: 0;
-  left: 50%;
-  z-index: -1;
-  background-size: cover;
-  background-repeat: no-repeat;
+    content: '';
+    background-image: url(${image1});
+    width: 40rem;
+    height: 40rem;
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    z-index: -1;
+    background-size: cover;
+    background-repeat: no-repeat;
+  }
+`;
+
+const StyledHeader = styled.div`
+  grid-area: header;
+  flex-direction: column;
+`;
+
+const StyledTitle = styled.div`
+  padding: 0;
+  font-weight: bold;
+  text-transform: uppercase;
+  letter-spacing: 0.3rem;
+`;
+
+const StyledLeftTitle = styled(StyledTitle)`
+  grid-area: left-title;
+`;
+
+const StyledRightTitle = styled(StyledTitle)`
+  grid-area: right-title;
+`;
+
+const MealList = styled.ul`
+  list-style: square inside
+    url('data:image/gif;base64,R0lGODlhBQAKAIABAAAAAP///yH5BAEAAAEALAAAAAAFAAoAAAIIjI+ZwKwPUQEAOw==');
+  padding: 0;
+  margin: 0;
+
+  li {
+    padding-bottom: 1rem;
+  }
+`;
+
+const StyledLeftMeals = styled.div`
+  grid-area: left-content;
+  padding: 0;
+`;
+
+const StyledRightMeals = styled.div`
+  grid-area: right-content;
+  padding: 0;
+`;
+
+const StyledRightPrice = styled.div`
+  grid-area: right-price;
+  font-weight: bold;
+`;
+
+const StyledLeftPrice = styled.div`
+  grid-area: left-price;
+  font-weight: bold;
+`;
+
+const StyledDivider = styled.div`
+  grid-area: divider;
+  position: relative;
+
+  &:after {
+    content: '';
+    width: 1px;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    height: 100%;
+    background: black;
+    z-index: 1;
+    transform: translate(-50%, -50%);
   }
 `;
 
 const DayLunch = () => (
-  <StyledWrapper className="container">
-
-    <section className="lunch grid-container">
-      <div className="header">
+  <div className="container">
+    <StyledWrapper>
+      <StyledHeader>
+        <img src={apostrophes} alt="" />
         <StyledHeading>Lunch dnia</StyledHeading>
-      </div>
-      <div className="left-content">
-        {lunch[0].elements.forEach((element) => {
-        console.log(element)
-      })}
-      </div>
-      <div className="right-content">
-        {lunch[1].elements.forEach((element) => {
-          console.log(element)
-        })}
-      </div>
-      <div className="left-price">
-        {lunch[0].price}
-      </div>
-      <div className="right-price">
-        {lunch[1].price}
-      </div>
-      <div className="divider">
-        divider
-      </div>
-      <div className="left-title">
-        {lunch[0].title}
-      </div>
-      <div className="right-title">
-        {lunch[1].title}
-      </div>
-    </section>
+      </StyledHeader>
 
-  </StyledWrapper>
+      <StyledLeftTitle>{lunch[0].title}</StyledLeftTitle>
+      <StyledRightTitle>{lunch[1].title}</StyledRightTitle>
+
+      <StyledLeftMeals>
+        <MealList>
+          {lunch[0].elements.map((item, index) => (
+            <li key={index}>{item}</li>
+          ))}
+        </MealList>
+      </StyledLeftMeals>
+
+      <StyledLeftPrice>{lunch[0].price}</StyledLeftPrice>
+
+      <StyledRightMeals>
+        <MealList>
+          {lunch[1].elements.map((item, index) => (
+            <li key={index}>{item}</li>
+          ))}
+        </MealList>
+      </StyledRightMeals>
+
+      <StyledRightPrice>{lunch[1].price}</StyledRightPrice>
+
+      <StyledDivider />
+    </StyledWrapper>
+  </div>
 );
 
 export default DayLunch;
