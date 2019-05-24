@@ -4,7 +4,7 @@ import styled from 'styled-components';
 import { theme } from 'assets/styles/theme';
 
 const HeroText = styled.h1`
-  font-family: 'Unna', serif;
+  font-family: ${theme.font.family.title};
   font-weight: 400;
   font-size: 4rem;
   line-height: 1;

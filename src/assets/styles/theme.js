@@ -1,5 +1,10 @@
 export const theme = {
   font: {
+    family: {
+      main: 'Poppins, sans-serif',
+      title: 'Unna, serif',
+      nav: 'Helvetica, Arial,sans-serif',
+    },
     size: {
       xs: '1.4rem',
       s: '2.6rem',
@@ -13,6 +18,9 @@ export const theme = {
       regular: '400',
       bold: '700',
     },
+  },
+  color: {
+    lightGray: '#f8f7f5',
   },
   mq: {
     tablet: `@media (min-width: 768px)`,

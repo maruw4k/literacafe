@@ -1,4 +1,5 @@
 import { createGlobalStyle } from 'styled-components';
+import { theme } from 'assets/styles/theme';
 
 const GlobalStyle = createGlobalStyle`
   *, *::before, *::after {
@@ -12,10 +13,10 @@ const GlobalStyle = createGlobalStyle`
   }
   
   body {
-    margin: 0;
     font-size: 1.6rem;
-    font-family: 'Poppins', sans-serif;
+    font-family: ${theme.font.family.main};
     font-weight: 300;
+    overflow-x: hidden;
   }
   
   a {

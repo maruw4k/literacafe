@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import { theme } from 'assets/styles/theme';
 
 const StyledOpeningHoursWrapper = styled.section`
-  font-family: 'Helvetica', 'Arial', sans-serif;
+  font-family: ${theme.font.family.nav};
   font-size: 1.35rem;
   height: 90px;
   background-color: black;
