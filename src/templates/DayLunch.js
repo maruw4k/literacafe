@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
-import image1 from 'assets/images/cup-circle-1.png';
-import apostrophes from 'assets/images/apostrophes.png';
+import SectionHeader from 'components/SectionHeader';
+import cupCircle from 'assets/images/cup-circle-1.png';
 import { theme } from 'assets/styles/theme';
 
 const lunch = [
@@ -20,16 +20,32 @@ const lunch = [
 ];
 
 const StyledWrapper = styled.section`
+  position: relative;
+  overflow: hidden;
+  &:after {
+    content: '';
+    //@todo Add image src from graphql
+    background-image: url(${cupCircle});
+    width: 35rem;
+    height: 35rem;
+    position: absolute;
+    top: -7rem;
+    left: 50%;
+    z-index: -1;
+    background-size: cover;
+    background-repeat: no-repeat;
+  }
+`;
+
+const StyledMealsSection = styled.div`
   display: grid;
   grid-template-columns: 2fr 0.2fr 2fr;
-  grid-template-rows: 1fr 0.6fr 1fr 0.5fr;
-  grid-template-areas: 'header header header' 'left-title . right-title' 'left-content divider right-content' 'left-price . right-price';
+  grid-template-rows: 0.6fr 1fr 0.5fr;
+  grid-template-areas: 'left-title . right-title' 'left-content divider right-content' 'left-price . right-price';
 
   ${theme.mq.tablet} {
     grid-template-columns: 2fr 1fr 2fr;
   }
-  padding-top: 12rem;
-  padding-bottom: 15rem;
   margin: 0 auto;
   max-width: 900px;
   overflow: hidden;
@@ -40,33 +56,6 @@ const StyledWrapper = styled.section`
     align-items: center;
     text-align: center;
   }
-`;
-
-const StyledHeading = styled.h2`
-  font-family: 'Unna', serif;
-  font-weight: bold;
-  text-transform: uppercase;
-  letter-spacing: 0.5rem;
-  font-size: 3rem;
-  position: relative;
-
-  &:after {
-    content: '';
-    background-image: url(${image1});
-    width: 35rem;
-    height: 35rem;
-    position: absolute;
-    bottom: -5rem;
-    left: 50%;
-    z-index: -1;
-    background-size: cover;
-    background-repeat: no-repeat;
-  }
-`;
-
-const StyledHeader = styled.div`
-  grid-area: header;
-  flex-direction: column;
 `;
 
 const StyledTitle = styled.div`
@@ -132,14 +121,11 @@ const StyledDivider = styled.div`
   }
 `;
 
-const DayLunch = () => (
-  <div className="container">
-    <StyledWrapper>
-      <StyledHeader>
-        <img src={apostrophes} alt="" />
-        <StyledHeading>Lunch dnia</StyledHeading>
-      </StyledHeader>
+export default () => (
+  <StyledWrapper>
+    <SectionHeader title="Lunch dnia" />
 
+    <StyledMealsSection>
       <StyledLeftTitle>{lunch[0].title}</StyledLeftTitle>
       <StyledRightTitle>{lunch[1].title}</StyledRightTitle>
 
@@ -164,8 +150,6 @@ const DayLunch = () => (
       <StyledRightPrice>{lunch[1].price}</StyledRightPrice>
 
       <StyledDivider />
-    </StyledWrapper>
-  </div>
+    </StyledMealsSection>
+  </StyledWrapper>
 );
-
-export default DayLunch;
