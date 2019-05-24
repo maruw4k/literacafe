@@ -99,7 +99,7 @@ export default () => (
           </StyledTextContainer>
 
           <StyledButtonContainer>
-            <Button title="Zobacz menu" to="menu2" />
+            <Button title="Zobacz menu" to="menu" />
           </StyledButtonContainer>
         </StyledContent>
       </StyledWrapper>
