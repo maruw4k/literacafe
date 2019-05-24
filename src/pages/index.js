@@ -3,6 +3,7 @@ import HeroImage from 'components/HeroImage';
 import MainTemplate from 'templates/MainTemplate';
 import DayLunch from 'templates/DayLunch';
 import OurMenu from 'templates/OurMenu';
+import News from 'templates/News';
 import { graphql } from 'gatsby';
 
 const IndexPage = data => (
@@ -17,6 +18,7 @@ const IndexPage = data => (
     <div className="container">
       <DayLunch />
       <OurMenu />
+      <News />
     </div>
   </MainTemplate>
 );
