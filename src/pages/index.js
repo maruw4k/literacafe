@@ -9,7 +9,7 @@ import { graphql } from 'gatsby';
 const IndexPage = data => (
   <MainTemplate>
     <HeroImage
-      fileName={data.data.file.publicURL}
+      fileName={data.data.mainHeroImg.childImageSharp.fluid.src}
       minHeight="70vh"
       opacity={0}
       text="We believe a cup of coffee is one of the most important, simple
@@ -20,6 +20,13 @@ const IndexPage = data => (
       <OurMenu />
       <News />
     </div>
+
+    <HeroImage
+      fileName={data.data.secondHeroImg.childImageSharp.fluid.src}
+      minHeight="40vh"
+      opacity={0}
+    />
+
   </MainTemplate>
 );
 
@@ -27,9 +34,19 @@ export default IndexPage;
 
 export const query = graphql`
   query {
-    file(name: { eq: "home-main-photo" }) {
-      name
-      publicURL
+    mainHeroImg: file(relativePath: { eq: "home-main-photo.jpg" }) {
+      childImageSharp {
+        fluid(maxWidth: 5375, quality: 100) {
+          ...GatsbyImageSharpFluid_noBase64
+        }
+      }
+    }
+    secondHeroImg: file(relativePath: { eq: "home-photo3.jpg" }) {
+      childImageSharp {
+        fluid(maxWidth: 5375, quality: 100) {
+          ...GatsbyImageSharpFluid_noBase64
+        }
+      }
     }
   }
 `;

@@ -17,8 +17,16 @@ const HeroText = styled.h1`
   }
 `;
 
+const StyledHero = styled(LazyHero)`
+  &:not(:nth-of-type(1)) {
+    div {
+      background-size: initial;
+    }
+  }
+`;
+
 export default props => (
-  <LazyHero
+  <StyledHero
     imageSrc={props.fileName}
     minHeight={props.minHeight}
     opacity={props.opacity}
@@ -28,5 +36,5 @@ export default props => (
     transitionDuration={200}
   >
     <HeroText>{props.text}</HeroText>
-  </LazyHero>
+  </StyledHero>
 );
