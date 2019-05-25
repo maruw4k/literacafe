@@ -106,7 +106,7 @@ const Navbar = class extends React.Component {
         </MobileNavHeader>
 
         <NavBarMenu isActive={this.state.active}>
-          <StyledLink to="/start">Start</StyledLink>
+          <StyledLink to="/">Start</StyledLink>
           <StyledLink to="/menu">Menu</StyledLink>
           <StyledLink to="/wydarzenia">Wydarzenia</StyledLink>
 
