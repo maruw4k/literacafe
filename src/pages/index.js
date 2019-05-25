@@ -4,6 +4,7 @@ import MainTemplate from 'templates/MainTemplate';
 import DayLunch from 'templates/DayLunch';
 import OurMenu from 'templates/OurMenu';
 import News from 'templates/News';
+import About from 'templates/About';
 import { graphql } from 'gatsby';
 
 const IndexPage = data => (
@@ -26,6 +27,10 @@ const IndexPage = data => (
       minHeight="40vh"
       opacity={0}
     />
+
+    <div className="container">
+      <About />
+    </div>
 
   </MainTemplate>
 );
