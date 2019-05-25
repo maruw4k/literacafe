@@ -1,7 +1,7 @@
 import React from 'react';
+import { StaticQuery, graphql } from 'gatsby';
 import styled from 'styled-components';
 import SectionHeader from 'components/SectionHeader';
-import cupCircle from 'assets/images/cup-circle-1.png';
 import { theme } from 'assets/styles/theme';
 
 const lunch = [
@@ -24,8 +24,8 @@ const StyledWrapper = styled.section`
   overflow: hidden;
   &:after {
     content: '';
-    //@todo Add image src from graphql
-    background-image: url(${cupCircle});
+    background-image: url(${({ cupCircle }) =>
+      '' + cupCircle + '' ? cupCircle : ''});
     width: 35rem;
     height: 35rem;
     position: absolute;
@@ -122,34 +122,49 @@ const StyledDivider = styled.div`
 `;
 
 export default () => (
-  <StyledWrapper>
-    <SectionHeader title="Lunch dnia" />
+  <StaticQuery
+    query={graphql`
+      query {
+        cupCircle: file(relativePath: { eq: "cup-circle-1.png" }) {
+          childImageSharp {
+            fluid(maxWidth: 600, quality: 100) {
+              ...GatsbyImageSharpFluid_noBase64
+            }
+          }
+        }
+      }
+    `}
+    render={data => (
+      <StyledWrapper cupCircle={data.cupCircle.childImageSharp.fluid.src}>
+        <SectionHeader title="Lunch dnia" />
 
-    <StyledMealsSection>
-      <StyledLeftTitle>{lunch[0].title}</StyledLeftTitle>
-      <StyledRightTitle>{lunch[1].title}</StyledRightTitle>
+        <StyledMealsSection>
+          <StyledLeftTitle>{lunch[0].title}</StyledLeftTitle>
+          <StyledRightTitle>{lunch[1].title}</StyledRightTitle>
 
-      <StyledLeftMeals>
-        <MealList>
-          {lunch[0].elements.map((item, index) => (
-            <li key={index}>{item}</li>
-          ))}
-        </MealList>
-      </StyledLeftMeals>
+          <StyledLeftMeals>
+            <MealList>
+              {lunch[0].elements.map((item, index) => (
+                <li key={index}>{item}</li>
+              ))}
+            </MealList>
+          </StyledLeftMeals>
 
-      <StyledLeftPrice>{lunch[0].price}</StyledLeftPrice>
+          <StyledLeftPrice>{lunch[0].price}</StyledLeftPrice>
 
-      <StyledRightMeals>
-        <MealList>
-          {lunch[1].elements.map((item, index) => (
-            <li key={index}>{item}</li>
-          ))}
-        </MealList>
-      </StyledRightMeals>
+          <StyledRightMeals>
+            <MealList>
+              {lunch[1].elements.map((item, index) => (
+                <li key={index}>{item}</li>
+              ))}
+            </MealList>
+          </StyledRightMeals>
 
-      <StyledRightPrice>{lunch[1].price}</StyledRightPrice>
+          <StyledRightPrice>{lunch[1].price}</StyledRightPrice>
 
-      <StyledDivider />
-    </StyledMealsSection>
-  </StyledWrapper>
+          <StyledDivider />
+        </StyledMealsSection>
+      </StyledWrapper>
+    )}
+  />
 );

@@ -5,7 +5,6 @@ import styled from 'styled-components';
 import SectionHeader from 'components/SectionHeader';
 import Button from 'components/Button';
 import { theme } from 'assets/styles/theme';
-import cupCircle from 'assets/images/cup-circle-3.png';
 
 const StyledWrapper = styled.section`
   padding-bottom: 10rem;
@@ -13,8 +12,8 @@ const StyledWrapper = styled.section`
 
   &:after {
     content: '';
-    //@todo Add image src from graphql
-    background-image: url(${cupCircle});
+    background-image: url(${({ cupCircle }) =>
+      '' + cupCircle + '' ? cupCircle : ''});
     width: 35rem;
     height: 35rem;
     position: absolute;
@@ -75,7 +74,7 @@ const StyledTextContainer = styled.div`
 `;
 
 const NewsHeader = styled.h3`
- font-family: ${theme.font.family.title};
+  font-family: ${theme.font.family.title};
   font-size: 2.4rem;
   font-weight: bold;
   text-transform: uppercase;
@@ -101,7 +100,7 @@ export default () => (
         }
         cupCircle: file(relativePath: { eq: "cup-circle-3.png" }) {
           childImageSharp {
-            fluid(maxWidth: 700, quality: 100) {
+            fluid(maxWidth: 600, quality: 100) {
               ...GatsbyImageSharpFluid_noBase64
             }
           }
@@ -109,7 +108,7 @@ export default () => (
       }
     `}
     render={data => (
-      <StyledWrapper>
+      <StyledWrapper cupCircle={data.cupCircle.childImageSharp.fluid.src}>
         <SectionHeader title="Wydarzenia" />
 
         <StyledContent>

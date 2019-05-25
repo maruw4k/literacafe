@@ -73,16 +73,15 @@ export default () => (
       query {
         cupCircle: file(relativePath: { eq: "cup-circle-4.png" }) {
           childImageSharp {
-            fluid(maxWidth: 700, quality: 100) {
+            fluid(maxWidth: 600, quality: 100) {
               ...GatsbyImageSharpFluid_noBase64
             }
           }
         }
       }
     `}
-    render={(data) => (
+    render={data => (
       <StyledWrapper cupCircle={data.cupCircle.childImageSharp.fluid.src}>
-
         <SectionHeader title="O literze" />
 
         <StyledContent>
