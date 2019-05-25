@@ -16,6 +16,7 @@ export default ({ data }) => {
         fileName={data.file.publicURL}
         mihHeight="30vh"
         opacity="0.2"
+        backgroundSize="cover"
         text="Wydarzenia i newsy"
       />
 

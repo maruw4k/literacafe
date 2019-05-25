@@ -18,11 +18,9 @@ const HeroText = styled.h1`
 `;
 
 const StyledHero = styled(LazyHero)`
-  &:not(:nth-of-type(1)) {
     div {
-      background-size: initial;
+     ${({ backgroundSize }) => (backgroundSize ? 'background-size:' + backgroundSize : '')}; 
     }
-  }
 `;
 
 export default props => (
@@ -33,6 +31,7 @@ export default props => (
     color="#000"
     isCentered={true}
     parallaxOffset={100}
+    backgroundSize={props.backgroundSize}
     transitionDuration={200}
   >
     <HeroText>{props.text}</HeroText>

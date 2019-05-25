@@ -26,6 +26,7 @@ const IndexPage = data => (
       fileName={data.data.secondHeroImg.childImageSharp.fluid.src}
       minHeight="40vh"
       opacity={0}
+      backgroundSize="initial"
     />
 
     <div className="container">
