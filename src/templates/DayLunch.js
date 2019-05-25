@@ -1,7 +1,7 @@
 import React from 'react';
+import { StaticQuery, graphql } from 'gatsby';
 import styled from 'styled-components';
-import image1 from 'assets/images/cup-circle-1.png';
-import apostrophes from 'assets/images/apostrophes.png';
+import SectionHeader from 'components/SectionHeader';
 import { theme } from 'assets/styles/theme';
 
 const lunch = [
@@ -20,39 +20,16 @@ const lunch = [
 ];
 
 const StyledWrapper = styled.section`
-  display: grid;
-  grid-template-columns: 2fr 1.2fr 0.6fr 1.4fr 2fr;
-  grid-template-rows: 1fr 0.6fr 1fr 0.5fr;
-  grid-template-areas: 'header header header header header' 'left-title . . . right-title' 'left-content . divider . right-content' 'left-price . . . right-price';
-
-  ${theme.mq.tablet} {
-    grid-template-areas: '. header header header .' 'left-title . . . right-title' 'left-content . divider . right-content' 'left-price . . . right-price';
-  }
-  padding-top: 12rem;
-  padding-bottom: 15rem;
-  margin: 0 auto;
-  max-width: 600px;
-
-  div {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    text-align: center;
-  }
-`;
-
-const StyledHeading = styled.h2`
-  text-transform: uppercase;
-  font-weight: bold;
-  letter-spacing: 0.5rem;
-
+  position: relative;
+  overflow: hidden;
   &:after {
     content: '';
-    background-image: url(${image1});
+    background-image: url(${({ cupCircle }) =>
+      '' + cupCircle + '' ? cupCircle : ''});
     width: 35rem;
     height: 35rem;
     position: absolute;
-    bottom: -10rem;
+    top: -7rem;
     left: 50%;
     z-index: -1;
     background-size: cover;
@@ -60,9 +37,25 @@ const StyledHeading = styled.h2`
   }
 `;
 
-const StyledHeader = styled.div`
-  grid-area: header;
-  flex-direction: column;
+const StyledMealsSection = styled.div`
+  display: grid;
+  grid-template-columns: 2fr 0.2fr 2fr;
+  grid-template-rows: 0.6fr 1fr 0.5fr;
+  grid-template-areas: 'left-title . right-title' 'left-content divider right-content' 'left-price . right-price';
+
+  ${theme.mq.tablet} {
+    grid-template-columns: 2fr 1fr 2fr;
+  }
+  margin: 0 auto;
+  max-width: 900px;
+  overflow: hidden;
+
+  div {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+  }
 `;
 
 const StyledTitle = styled.div`
@@ -128,40 +121,50 @@ const StyledDivider = styled.div`
   }
 `;
 
-const DayLunch = () => (
-  <div className="container">
-    <StyledWrapper>
-      <StyledHeader>
-        <img src={apostrophes} alt="" />
-        <StyledHeading>Lunch dnia</StyledHeading>
-      </StyledHeader>
+export default () => (
+  <StaticQuery
+    query={graphql`
+      query {
+        cupCircle: file(relativePath: { eq: "cup-circle-1.png" }) {
+          childImageSharp {
+            fluid(maxWidth: 600, quality: 100) {
+              ...GatsbyImageSharpFluid_noBase64
+            }
+          }
+        }
+      }
+    `}
+    render={data => (
+      <StyledWrapper cupCircle={data.cupCircle.childImageSharp.fluid.src}>
+        <SectionHeader title="Lunch dnia" />
 
-      <StyledLeftTitle>{lunch[0].title}</StyledLeftTitle>
-      <StyledRightTitle>{lunch[1].title}</StyledRightTitle>
+        <StyledMealsSection>
+          <StyledLeftTitle>{lunch[0].title}</StyledLeftTitle>
+          <StyledRightTitle>{lunch[1].title}</StyledRightTitle>
 
-      <StyledLeftMeals>
-        <MealList>
-          {lunch[0].elements.map((item, index) => (
-            <li key={index}>{item}</li>
-          ))}
-        </MealList>
-      </StyledLeftMeals>
+          <StyledLeftMeals>
+            <MealList>
+              {lunch[0].elements.map((item, index) => (
+                <li key={index}>{item}</li>
+              ))}
+            </MealList>
+          </StyledLeftMeals>
 
-      <StyledLeftPrice>{lunch[0].price}</StyledLeftPrice>
+          <StyledLeftPrice>{lunch[0].price}</StyledLeftPrice>
 
-      <StyledRightMeals>
-        <MealList>
-          {lunch[1].elements.map((item, index) => (
-            <li key={index}>{item}</li>
-          ))}
-        </MealList>
-      </StyledRightMeals>
+          <StyledRightMeals>
+            <MealList>
+              {lunch[1].elements.map((item, index) => (
+                <li key={index}>{item}</li>
+              ))}
+            </MealList>
+          </StyledRightMeals>
 
-      <StyledRightPrice>{lunch[1].price}</StyledRightPrice>
+          <StyledRightPrice>{lunch[1].price}</StyledRightPrice>
 
-      <StyledDivider />
-    </StyledWrapper>
-  </div>
+          <StyledDivider />
+        </StyledMealsSection>
+      </StyledWrapper>
+    )}
+  />
 );
-
-export default DayLunch;

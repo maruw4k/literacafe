@@ -6,6 +6,7 @@ import styled from 'styled-components';
 import { theme } from 'assets/styles/theme';
 
 const StyledNavbar = styled.nav`
+  font-family: ${theme.font.family.nav};
   background-color: black;
   ${theme.mq.tablet} {
     height: 13rem;
@@ -14,17 +15,16 @@ const StyledNavbar = styled.nav`
 `;
 
 const NavBarMenu = styled.div`
-  display: none;
   padding-bottom: 2rem;
-  &.is-active {
-    display: block;
-  }
+  display: ${({ isActive }) => (isActive ? 'block' : 'none')};
   ${theme.mq.tablet} {
     display: flex;
-    justify-content: center;
+    justify-content: space-evenly;
+    margin: 0 auto;
     align-items: center;
     height: 100%;
     padding-bottom: 0;
+    max-width: 950px;
   }
 `;
 
@@ -95,7 +95,7 @@ const Navbar = class extends React.Component {
         <MobileNavHeader>
           <MobileLogoWrapper>
             <Link to="/">
-              <Image filename="logo.png" />
+              <Image filename="logo.png" alt="Logo LiteraCafe" />
             </Link>
           </MobileLogoWrapper>
 
@@ -105,11 +105,8 @@ const Navbar = class extends React.Component {
           />
         </MobileNavHeader>
 
-        <NavBarMenu
-          id="navMenu"
-          className={this.state.active ? ' is-active' : ''}
-        >
-          <StyledLink to="/start">Start</StyledLink>
+        <NavBarMenu isActive={this.state.active}>
+          <StyledLink to="/">Start</StyledLink>
           <StyledLink to="/menu">Menu</StyledLink>
           <StyledLink to="/wydarzenia">Wydarzenia</StyledLink>
 

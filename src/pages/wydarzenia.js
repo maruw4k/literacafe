@@ -9,20 +9,20 @@ const PostWrapper = styled.div`
   margin: 5rem auto 5rem auto;
 `;
 
-export default ({ data }) => {
-  return (
+const NewsPage = data => (
     <MainTemplate>
       <HeroImage
-        fileName={data.file.publicURL}
-        mihHeight="20vh"
-        opacity="0"
+        fileName={data.data.mainHeroImg.childImageSharp.fluid.src}
+        mihHeight="30vh"
+        opacity={0.2}
+        backgroundSize="cover"
         text="Wydarzenia i newsy"
       />
 
       <PostWrapper>
-        <h2>Ilośc postów {data.allMarkdownRemark.totalCount}</h2>
+        <h2>Ilośc postów {data.data.allMarkdownRemark.totalCount}</h2>
 
-        {data.allMarkdownRemark.edges.map(({ node }) => (
+        {data.data.allMarkdownRemark.edges.map(({ node }) => (
           <div key={node.id}>
             <h3>
               {node.frontmatter.title} <span>— {node.frontmatter.date}</span>
@@ -32,8 +32,9 @@ export default ({ data }) => {
         ))}
       </PostWrapper>
     </MainTemplate>
-  );
-};
+);
+
+export default NewsPage;
 
 export const query = graphql`
   {
@@ -50,9 +51,12 @@ export const query = graphql`
         }
       }
     }
-    file(name: { eq: "news-main-photo" }) {
-      name
-      publicURL
+    mainHeroImg: file(relativePath: { eq: "news-main-photo.jpg" }) {
+      childImageSharp {
+        fluid(maxWidth: 5375, quality: 100) {
+          ...GatsbyImageSharpFluid_noBase64
+        }
+      }
     }
   }
 `;

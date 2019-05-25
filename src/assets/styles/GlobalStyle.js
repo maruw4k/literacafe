@@ -1,4 +1,5 @@
 import { createGlobalStyle } from 'styled-components';
+import { theme } from 'assets/styles/theme';
 
 const GlobalStyle = createGlobalStyle`
   *, *::before, *::after {
@@ -12,8 +13,10 @@ const GlobalStyle = createGlobalStyle`
   }
   
   body {
-    margin: 0;
     font-size: 1.6rem;
+    font-family: ${theme.font.family.main};
+    font-weight: 300;
+    overflow-x: hidden;
   }
   
   a {
@@ -28,7 +31,7 @@ const GlobalStyle = createGlobalStyle`
   .container {
     margin-left: auto;
     margin-right: auto;
-    max-width: 1200px; 
+    max-width: 1100px; 
     padding-right: 10px;
     padding-left: 10px;
   }

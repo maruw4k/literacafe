@@ -24,6 +24,8 @@ const MainTemplate = ({ children }) => {
         <meta property="og:description" content={description} />
         <meta property="og:url" content="/" />
         <meta property="og:image" content="/img/og-image.jpg" />
+
+        <link href="https://fonts.googleapis.com/css?family=Poppins:300,400|Unna:400,700&display=swap&subset=latin-ext" rel="stylesheet"/>
       </Helmet>
 
       <GlobalStyle />
