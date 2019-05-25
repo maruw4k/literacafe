@@ -15,11 +15,8 @@ const StyledNavbar = styled.nav`
 `;
 
 const NavBarMenu = styled.div`
-  display: none;
   padding-bottom: 2rem;
-  &.is-active {
-    display: block;
-  }
+  display: ${({ isActive }) => (isActive ? 'block' : 'none')};
   ${theme.mq.tablet} {
     display: flex;
     justify-content: space-evenly;
@@ -108,10 +105,7 @@ const Navbar = class extends React.Component {
           />
         </MobileNavHeader>
 
-        <NavBarMenu
-          id="navMenu"
-          className={this.state.active ? ' is-active' : ''}
-        >
+        <NavBarMenu isActive={this.state.active}>
           <StyledLink to="/start">Start</StyledLink>
           <StyledLink to="/menu">Menu</StyledLink>
           <StyledLink to="/wydarzenia">Wydarzenia</StyledLink>
