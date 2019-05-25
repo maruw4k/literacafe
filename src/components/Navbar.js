@@ -95,7 +95,7 @@ const Navbar = class extends React.Component {
         <MobileNavHeader>
           <MobileLogoWrapper>
             <Link to="/">
-              <Image filename="logo.png" />
+              <Image filename="logo.png" alt="Logo LiteraCafe" />
             </Link>
           </MobileLogoWrapper>
 
