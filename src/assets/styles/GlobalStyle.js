@@ -16,7 +16,6 @@ const GlobalStyle = createGlobalStyle`
     font-size: 1.6rem;
     font-family: ${theme.font.family.main};
     font-weight: 300;
-    overflow-x: hidden;
   }
   
   a {
