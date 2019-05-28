@@ -5,6 +5,7 @@ import DayLunch from 'templates/DayLunch';
 import OurMenu from 'templates/OurMenu';
 import News from 'templates/News';
 import About from 'templates/About';
+import Instagram from 'templates/Instagram';
 import { graphql } from 'gatsby';
 
 const IndexPage = data => (
@@ -32,6 +33,7 @@ const IndexPage = data => (
 
       <div className="container">
         <About />
+        <Instagram />
       </div>
     </div>
   </MainTemplate>
