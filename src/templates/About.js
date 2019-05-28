@@ -6,7 +6,6 @@ import Button from 'components/Button';
 import { theme } from 'assets/styles/theme';
 
 const StyledWrapper = styled.section`
-  padding-bottom: 10rem;
   position: relative;
 
   &:after {
