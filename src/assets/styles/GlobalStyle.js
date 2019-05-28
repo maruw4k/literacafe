@@ -19,7 +19,7 @@ const GlobalStyle = createGlobalStyle`
   }
   
   a {
-  color: white;
+  color: black;
   text-decoration: none;
   }
   
@@ -31,8 +31,9 @@ const GlobalStyle = createGlobalStyle`
     margin-left: auto;
     margin-right: auto;
     max-width: 1100px; 
-    padding-right: 10px;
-    padding-left: 10px;
+    padding-right: 15px;
+    padding-left: 15px;
+    position: relative;
   }
 `;
 
