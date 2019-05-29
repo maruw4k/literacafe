@@ -1,8 +1,8 @@
 import React from 'react';
 import { Link, graphql } from 'gatsby';
+import Img from 'gatsby-image';
 import MainTemplate from 'templates/MainTemplate';
 import Button from 'components/Button';
-import Img from 'gatsby-image';
 import HeroImage from 'components/HeroImage';
 import { theme } from 'assets/styles/theme';
 
@@ -32,7 +32,7 @@ const ArticleContainer = styled.article`
   }
 `;
 
-const ArticlePhotoWrapper = styled.div`
+const ArticlePhotoWrapper = styled(Img)`
   grid-area: photo;
   overflow: hidden;
   display: flex;
@@ -54,6 +54,7 @@ const ArticleTitle = styled.h2`
 
   ${theme.mq.tablet} {
     align-items: flex-end;
+    padding-left: 0;
     padding-right: 3rem;
   }
 `;
@@ -66,6 +67,7 @@ const ArticleLead = styled.p`
   margin: 0;
 
   ${theme.mq.tablet} {
+    padding-left: 0;
     padding-right: 3rem;
   }
 `;
@@ -77,6 +79,7 @@ const ArticleBtn = styled.div`
   align-items: flex-start;
 
   ${theme.mq.tablet} {
+    justify-content: flex-start;
     align-items: flex-start;
   }
 `;
@@ -92,19 +95,17 @@ const NewsPage = data => (
     />
 
     <PostWrapper>
-      {data.data.allMarkdownRemark.edges.map(({ node }) => (
+      {data.data.allStrapiArticle.edges.map(({ node }) => (
         <ArticleContainer key={node.id}>
           <ArticlePhotoWrapper
-            src={node.frontmatter.image}
-            alt={node.frontmatter.title}
-          >
-            <img src={node.frontmatter.image} alt="" />
-          </ArticlePhotoWrapper>
-          <ArticleLead>{node.frontmatter.lead}</ArticleLead>
-          <ArticleTitle>{node.frontmatter.title}</ArticleTitle>
+            fluid={node.photo.childImageSharp.fluid}
+            alt={node.title}
+          />
+          <ArticleLead>{node.lead}</ArticleLead>
+          <ArticleTitle>{node.title}</ArticleTitle>
 
           <ArticleBtn>
-            <Button title="Zobacz" to={node.fields.slug} />
+            <Button title="Zobacz" to={node.id} />
           </ArticleBtn>
         </ArticleContainer>
       ))}
@@ -116,20 +117,19 @@ export default NewsPage;
 
 export const query = graphql`
   {
-    allMarkdownRemark {
-      totalCount
+    allStrapiArticle {
       edges {
         node {
           id
-          frontmatter {
-            title
-            date(formatString: "DD MMMM, YYYY")
-            image
-            lead
-          }
-          html
-          fields {
-            slug
+          title
+          lead
+          content
+          photo {
+            childImageSharp {
+              fluid(maxWidth: 900, quality: 100) {
+                ...GatsbyImageSharpFluid_noBase64
+              }
+            }
           }
         }
       }

@@ -1,5 +1,6 @@
 import React from 'react';
 import { graphql } from 'gatsby';
+import Img from 'gatsby-image';
 import MainTemplate from 'templates/MainTemplate';
 import HeroImage from 'components/HeroImage';
 import SectionHeader from 'components/SectionHeader';
@@ -27,22 +28,22 @@ const ArticlePhotoWrapper = styled.div`
 `;
 
 export default ({ data }) => {
-  const post = data.markdownRemark;
+  const post = data.strapiArticle;
   return (
     <MainTemplate>
       <HeroImage
-        fileName={post.frontmatter.image}
+        fileName={post.photo.childImageSharp.fluid.src}
         minHeight="50vh"
         opacity={0}
       />
 
       <ArticleWrapper className="container">
-        <ArticleHeader title={post.frontmatter.title} />
+        <ArticleHeader title={post.title} />
 
-        <ArticleParagraph dangerouslySetInnerHTML={{ __html: post.html }} />
+        <ArticleParagraph dangerouslySetInnerHTML={{ __html: post.content }} />
 
         <ArticlePhotoWrapper>
-          <img src={post.frontmatter.image} alt="" />
+          <Img fluid={post.photo.childImageSharp.fluid} alt={post.title} />
         </ArticlePhotoWrapper>
       </ArticleWrapper>
     </MainTemplate>
@@ -50,13 +51,17 @@ export default ({ data }) => {
 };
 
 export const query = graphql`
-  query($slug: String!) {
-    markdownRemark(fields: { slug: { eq: $slug } }) {
-      html
-      frontmatter {
-        title
-        image
+  query ArticleTemplate($id: String!) {
+    strapiArticle(id: {eq: $id}) {
+      title
+      content
+      photo {
+        childImageSharp {
+          fluid(maxWidth: 1920, quality: 100) {
+            ...GatsbyImageSharpFluid_noBase64
+          }
+        }
       }
     }
   }
-`;
+`
