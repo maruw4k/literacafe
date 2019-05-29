@@ -1,37 +1,115 @@
 import React from 'react';
-import { graphql } from 'gatsby';
+import { Link, graphql } from 'gatsby';
 import MainTemplate from 'templates/MainTemplate';
+import Button from 'components/Button';
+import Img from 'gatsby-image';
 import HeroImage from 'components/HeroImage';
+import { theme } from 'assets/styles/theme';
+
 import styled from 'styled-components';
 
 const PostWrapper = styled.div`
-  max-width: 1000px;
-  margin: 5rem auto 5rem auto;
+  margin: 3rem auto 5rem auto;
+  ${theme.mq.tablet} {
+    margin: 6rem auto 6rem auto;
+  }
+`;
+
+const ArticleContainer = styled.article`
+  height: 500px;
+  display: grid;
+
+  grid-template-columns: 1fr;
+  grid-template-rows: 2fr 0.6fr 0.6fr 1fr;
+  grid-template-areas: 'photo' 'title' 'description' 'btn';
+
+  ${theme.mq.tablet} {
+    margin-bottom: 3rem;
+    height: 600px;
+    grid-template-columns: 0.7fr 0.7fr 1.7fr;
+    grid-template-rows: 1fr 1fr 1fr;
+    grid-template-areas: '. title photo' '. description photo' '. btn photo';
+  }
+`;
+
+const ArticlePhotoWrapper = styled.div`
+  grid-area: photo;
+  overflow: hidden;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  img {
+    width: 100%;
+    height: auto;
+  }
+`;
+
+const ArticleTitle = styled.h2`
+  grid-area: title;
+  margin: 0;
+  display: flex;
+  align-items: center;
+  padding: 0 15px;
+
+  ${theme.mq.tablet} {
+    align-items: flex-end;
+    padding-right: 3rem;
+  }
+`;
+
+const ArticleLead = styled.p`
+  grid-area: description;
+  display: flex;
+  align-items: center;
+  padding: 0 15px;
+  margin: 0;
+
+  ${theme.mq.tablet} {
+    padding-right: 3rem;
+  }
+`;
+
+const ArticleBtn = styled.div`
+  grid-area: btn;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+
+  ${theme.mq.tablet} {
+    align-items: flex-start;
+  }
 `;
 
 const NewsPage = data => (
-    <MainTemplate>
-      <HeroImage
-        fileName={data.data.mainHeroImg.childImageSharp.fluid.src}
-        mihHeight="30vh"
-        opacity={0.2}
-        backgroundSize="cover"
-        text="Wydarzenia i newsy"
-      />
+  <MainTemplate>
+    <HeroImage
+      fileName={data.data.mainHeroImg.childImageSharp.fluid.src}
+      mihHeight="30vh"
+      opacity={0.2}
+      backgroundSize="cover"
+      text="Wydarzenia i newsy"
+    />
 
-      <PostWrapper>
-        <h2>Ilośc postów {data.data.allMarkdownRemark.totalCount}</h2>
+    <PostWrapper>
+      {data.data.allMarkdownRemark.edges.map(({ node }) => (
+        <ArticleContainer key={node.id}>
+          <ArticlePhotoWrapper
+            src={node.frontmatter.image}
+            alt={node.frontmatter.title}
+          >
+            <img src={node.frontmatter.image} alt="" />
+          </ArticlePhotoWrapper>
+          <ArticleLead>{node.frontmatter.lead}</ArticleLead>
+          <ArticleTitle>{node.frontmatter.title}</ArticleTitle>
 
-        {data.data.allMarkdownRemark.edges.map(({ node }) => (
-          <div key={node.id}>
-            <h3>
-              {node.frontmatter.title} <span>— {node.frontmatter.date}</span>
-            </h3>
-            <div dangerouslySetInnerHTML={{ __html: node.html }} />
-          </div>
-        ))}
-      </PostWrapper>
-    </MainTemplate>
+          <ArticleBtn>
+            <Button title="Zobacz" to={node.fields.slug} />
+          </ArticleBtn>
+        </ArticleContainer>
+      ))}
+    </PostWrapper>
+  </MainTemplate>
 );
 
 export default NewsPage;
@@ -46,8 +124,13 @@ export const query = graphql`
           frontmatter {
             title
             date(formatString: "DD MMMM, YYYY")
+            image
+            lead
           }
           html
+          fields {
+            slug
+          }
         }
       }
     }
