@@ -133,7 +133,7 @@ export default () => (
           </StyledTextContainer>
 
           <StyledButtonContainer>
-            <Button title="Zobacz" to="menu" />
+            <Button title="Zobacz" to="wydarzenia" />
           </StyledButtonContainer>
         </StyledContent>
       </StyledWrapper>
