@@ -7,16 +7,24 @@ import { theme } from 'assets/styles/theme';
 
 const StyledNavbar = styled.nav`
   font-family: ${theme.font.family.nav};
+  overflow: hidden;
+  height: 80px;
   background-color: black;
+  z-index: 999;
+  position: relative;
   ${theme.mq.tablet} {
     height: 13rem;
-    position: relative;
   }
 `;
 
 const NavBarMenu = styled.div`
   padding-bottom: 2rem;
-  display: ${({ isActive }) => (isActive ? 'block' : 'none')};
+  background-color: black;
+    transform: ${({ isActive }) =>
+  isActive ? 'scale(1)|' : 'scale(0)'};
+  transform: ${({ isActive }) =>
+    isActive ? 'translateX(0)' : 'translateX(500px)'};
+  transition: transform 200ms;
   ${theme.mq.tablet} {
     display: flex;
     justify-content: space-evenly;
@@ -24,6 +32,7 @@ const NavBarMenu = styled.div`
     align-items: center;
     height: 100%;
     padding-bottom: 0;
+    transform: translateY(0);
     max-width: 950px;
   }
 `;
@@ -67,6 +76,7 @@ const StyledLink = styled(Link)`
   text-align: center;
   position: relative;
   font-size: 1.7rem;
+  z-index: 100000;
 
   &:hover {
     text-decoration: none;
@@ -91,7 +101,11 @@ const Navbar = class extends React.Component {
 
   render() {
     return (
-      <StyledNavbar role="navigation" aria-label="main-navigation">
+      <StyledNavbar
+        role="navigation"
+        aria-label="main-navigation"
+        isOpen={this.state.active}
+      >
         <MobileNavHeader>
           <MobileLogoWrapper>
             <Link to="/">
