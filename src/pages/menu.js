@@ -68,10 +68,11 @@ const meals = [
           },
           {
             name: 'Zimowa latte' + 'w sezonie zimowym',
+            subname: 'w sezonie zimowym',
             price: '13zł',
           },
           {
-            name:
+            subname:
               'do każdej kawy opcjonalnie mleko : zwykłe, sojowe, bez laktozy',
             price: '2zł',
           },
@@ -99,6 +100,7 @@ const meals = [
           },
           {
             name: 'JARDIN BLEU',
+            subname: 'mieszanka  chińska, rabarbar i aromat dzikiej truskawki',
             price: '7zł',
           },
           {
@@ -107,6 +109,8 @@ const meals = [
           },
           {
             name: 'AUX PARFUMS',
+            subname:
+              'mieszanka herbat chińskich i cejlońskich o owocowo- kwiatowym smaku, z olejkami cytryny, bergamotki, figi, kwiatu lotosu,  z dodatkiem skórki pomarańczowej  i płatków róż',
             price: '7zł',
           },
           {
@@ -613,7 +617,7 @@ const meals = [
 ];
 
 const StyledCategoryNav = styled.nav`
-  position: fixed;
+  position: sticky;
   top: 0;
   background-color: white;
   z-index: 99;
@@ -632,6 +636,7 @@ const StyledCategoryNav = styled.nav`
 
     li {
       width: 33.3%;
+      margin-bottom: 1rem;
     }
 
     ${theme.mq.tablet} {
@@ -663,37 +668,6 @@ const StyledCategoryNav = styled.nav`
   }
 `;
 
-const StyledCategoryTitle = styled(SectionHeader)`
-  margin-bottom: 1rem;
-`;
-
-const StyledSubTitle = styled.h4`
-  text-transform: uppercase;
-  font-weight: bold;
-  font-size: 2rem;
-  margin-top: 3.5rem;
-  margin-bottom: 1rem;
-  text-align: center;
-`;
-
-const StyledMeal = styled.div`
-  text-transform: uppercase;
-  position: relative;
-  margin: 0 auto;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-
-  p {
-    text-align: left;
-    padding-right: 30px;
-  }
-
-  span {
-    font-weight: bold;
-  }
-`;
-
 const StyledCategoryPhoto = styled.img`
   display: none;
   ${theme.mq.tablet} {
@@ -712,8 +686,29 @@ const StyledCategoryPhoto = styled.img`
   }
 `;
 
+const StyledCategoryTitle = styled(SectionHeader)`
+  margin-bottom: 1rem;
+`;
 
-const MealContainer = styled.div`
+const StyledSubTitle = styled.h4`
+  text-transform: uppercase;
+  font-weight: bold;
+  font-size: 2rem;
+  margin-top: 3.5rem;
+  margin-bottom: 2rem;
+  text-align: center;
+`;
+
+const StyledMeal = styled.div`
+  text-transform: uppercase;
+  position: relative;
+  margin: 0 auto 3rem auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+`;
+
+const StyledMealContainer = styled.div`
   padding: 0 15px;
   margin: 0 auto 100px auto;
   max-width: 400px;
@@ -721,6 +716,27 @@ const MealContainer = styled.div`
   ${theme.mq.desktop} {
     max-width: 600px;
   }
+`;
+
+const StyledMealName = styled.div`
+  text-align: left;
+  padding-right: 30px;
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  flex-direction: column;
+
+  p {
+    margin: 0;
+  }
+  p:nth-child(2) {
+    color: grey;
+    font-size: 0.8em;
+  }
+`;
+
+const StyledMealPrice = styled.span`
+  font-weight: bold;
 `;
 
 export default ({ data }) => {
@@ -747,7 +763,7 @@ export default ({ data }) => {
         <div key={index}>
           <StyledCategoryPhoto src={item.img} alt={item.category + 'photo'} />
 
-          <MealContainer id={'category' + index}>
+          <StyledMealContainer id={'category' + index}>
             <StyledCategoryTitle title={item.category} />
 
             {item.subcategories.map((sub, index) => (
@@ -755,13 +771,17 @@ export default ({ data }) => {
                 <StyledSubTitle>{sub.name}</StyledSubTitle>
                 {sub.meals.map((meal, index) => (
                   <StyledMeal key={index}>
-                    <p>{meal.name}</p>
-                    <span>{meal.price}</span>
+                    <StyledMealName>
+                      <p>{meal.name}</p>
+                      <p>{meal.subname}</p>
+                    </StyledMealName>
+
+                    <StyledMealPrice>{meal.price}</StyledMealPrice>
                   </StyledMeal>
                 ))}
               </div>
             ))}
-          </MealContainer>
+          </StyledMealContainer>
         </div>
       ))}
     </MainTemplate>
