@@ -82,7 +82,6 @@ export default () => (
     render={data => (
       <StyledWrapper>
         <SectionHeader title="Nasze menu" />
-
         <StyledContent>
           <StyledPhotoContainer>
             <Img fluid={data.sectionPhoto.childImageSharp.fluid} />

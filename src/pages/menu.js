@@ -1,10 +1,9 @@
 import React from 'react';
 import { graphql } from 'gatsby';
-import MainTemplate from 'templates/MainTemplate';
+import MainTemplate from 'templates/Main/MainTemplate';
+import Meals from 'templates/Menu/Meals';
+import CategoryNav from 'templates/Menu/CategoryNav';
 import HeroImage from 'components/HeroImage';
-import SectionHeader from 'components/SectionHeader';
-import styled from 'styled-components';
-import { theme } from 'assets/styles/theme';
 
 const meals = [
   {
@@ -67,7 +66,7 @@ const meals = [
             price: '9zł',
           },
           {
-            name: 'Zimowa latte' + 'w sezonie zimowym',
+            name: 'Zimowa latte w sezonie zimowym',
             subname: 'w sezonie zimowym',
             price: '13zł',
           },
@@ -616,129 +615,6 @@ const meals = [
   },
 ];
 
-const StyledCategoryNav = styled.nav`
-  position: sticky;
-  top: 0;
-  background-color: white;
-  z-index: 99;
-  padding: 0 15px;
-  width: 100%;
-  border-bottom: 1px solid grey;
-
-  ul {
-    display: flex;
-    align-items: center;
-    list-style-type: none;
-    padding: 0;
-    flex-wrap: wrap;
-    margin: 0;
-    height: 60px;
-
-    li {
-      width: 33.3%;
-      margin-bottom: 1rem;
-    }
-
-    ${theme.mq.tablet} {
-      flex-direction: column;
-      height: initial;
-      justify-content: flex-start;
-      align-items: flex-start;
-      flex-wrap: nowrap;
-      li {
-        width: initial;
-      }
-    }
-  }
-
-  ${theme.mq.tablet} {
-    border-bottom: none;
-    display: block;
-    position: sticky;
-    margin-top: 100px;
-    top: 30px;
-    height: 330px;
-    width: auto;
-    left: 2vw;
-    float: left;
-  }
-
-  ${theme.mq.desktop} {
-    left: 13vw;
-  }
-`;
-
-const StyledCategoryPhoto = styled.img`
-  display: none;
-  ${theme.mq.tablet} {
-    display: block;
-    position: sticky;
-    margin-top: 150px;
-    top: 30px;
-    height: 330px;
-    width: 220px;
-    right: 2vw;
-    float: right;
-  }
-
-  ${theme.mq.desktop} {
-    right: 13vw;
-  }
-`;
-
-const StyledCategoryTitle = styled(SectionHeader)`
-  margin-bottom: 1rem;
-`;
-
-const StyledSubTitle = styled.h4`
-  text-transform: uppercase;
-  font-weight: bold;
-  font-size: 2rem;
-  margin-top: 3.5rem;
-  margin-bottom: 2rem;
-  text-align: center;
-`;
-
-const StyledMeal = styled.div`
-  text-transform: uppercase;
-  position: relative;
-  margin: 0 auto 3rem auto;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-`;
-
-const StyledMealContainer = styled.div`
-  padding: 0 15px;
-  margin: 0 auto 100px auto;
-  max-width: 400px;
-
-  ${theme.mq.desktop} {
-    max-width: 600px;
-  }
-`;
-
-const StyledMealName = styled.div`
-  text-align: left;
-  padding-right: 30px;
-  display: flex;
-  align-items: flex-start;
-  justify-content: center;
-  flex-direction: column;
-
-  p {
-    margin: 0;
-  }
-  p:nth-child(2) {
-    color: grey;
-    font-size: 0.8em;
-  }
-`;
-
-const StyledMealPrice = styled.span`
-  font-weight: bold;
-`;
-
 export default ({ data }) => {
   return (
     <MainTemplate>
@@ -749,41 +625,9 @@ export default ({ data }) => {
         text="Menu"
       />
 
-      <StyledCategoryNav>
-        <ul>
-          {meals.map((item, index) => (
-            <li key={index}>
-              <a href={'#category' + index}>{item.category}</a>
-            </li>
-          ))}
-        </ul>
-      </StyledCategoryNav>
+      <CategoryNav meals={meals} />
 
-      {meals.map((item, index) => (
-        <div key={index}>
-          <StyledCategoryPhoto src={item.img} alt={item.category + 'photo'} />
-
-          <StyledMealContainer id={'category' + index}>
-            <StyledCategoryTitle title={item.category} />
-
-            {item.subcategories.map((sub, index) => (
-              <div key={index}>
-                <StyledSubTitle>{sub.name}</StyledSubTitle>
-                {sub.meals.map((meal, index) => (
-                  <StyledMeal key={index}>
-                    <StyledMealName>
-                      <p>{meal.name}</p>
-                      <p>{meal.subname}</p>
-                    </StyledMealName>
-
-                    <StyledMealPrice>{meal.price}</StyledMealPrice>
-                  </StyledMeal>
-                ))}
-              </div>
-            ))}
-          </StyledMealContainer>
-        </div>
-      ))}
+      <Meals meals={meals} />
     </MainTemplate>
   );
 };

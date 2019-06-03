@@ -33,7 +33,7 @@ exports.createPages = ({ boundActionCreators, graphql }) => {
     result.data.allStrapiArticle.edges.forEach(({ node }) => {
       createPage({
         path: `/${node.id}`,
-        component: path.resolve(`src/templates/Post.js`),
+        component: path.resolve(`src/templates/News/Post.js`),
         context: {
           id: node.id,
         },

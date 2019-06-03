@@ -1,11 +1,11 @@
 import React from 'react';
 import HeroImage from 'components/HeroImage';
-import MainTemplate from 'templates/MainTemplate';
-import DayLunch from 'templates/DayLunch';
-import OurMenu from 'templates/OurMenu';
-import News from 'templates/News';
-import About from 'templates/About';
-import Instagram from 'templates/Instagram';
+import MainTemplate from 'templates/Main/MainTemplate';
+import DayLunch from 'templates/HomePage/DayLunch';
+import OurMenu from 'templates/HomePage/OurMenu';
+import News from 'templates/HomePage/News';
+import About from 'templates/HomePage/About';
+import Instagram from 'templates/HomePage/Instagram';
 import { graphql } from 'gatsby';
 
 const IndexPage = data => (

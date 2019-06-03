@@ -1,6 +1,6 @@
 import React from 'react';
 import { graphql } from 'gatsby';
-import MainTemplate from 'templates/MainTemplate';
+import MainTemplate from 'templates/Main/MainTemplate';
 import HeroImage from 'components/HeroImage';
 import SectionHeader from 'components/SectionHeader';
 import styled from 'styled-components';

@@ -1,6 +1,6 @@
 import React from 'react';
 import HeroImage from 'components/HeroImage';
-import MainTemplate from 'templates/MainTemplate';
+import MainTemplate from 'templates/Main/MainTemplate';
 import { graphql } from 'gatsby';
 
 const IndexPage = data => (
