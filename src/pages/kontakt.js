@@ -45,7 +45,7 @@ export default ({ data }) => {
 
 export const query = graphql`
   {
-    mainHeroImg: file(relativePath: { eq: "kontakt-main-photo.jpg" }) {
+    mainHeroImg: file(relativePath: { eq: "contact-main-photo.jpg" }) {
       childImageSharp {
         fluid(maxWidth: 5375, quality: 100) {
           ...GatsbyImageSharpFluid_noBase64
