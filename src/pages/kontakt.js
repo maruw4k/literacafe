@@ -3,6 +3,7 @@ import { graphql } from 'gatsby';
 import MainTemplate from 'templates/Main/MainTemplate';
 import HeroImage from 'components/HeroImage';
 import SectionHeader from 'components/SectionHeader';
+import Map from 'components/Map';
 import styled from 'styled-components';
 
 const StyledWrapper = styled.div`
@@ -12,12 +13,27 @@ const StyledWrapper = styled.div`
   padding: 0 15px 50px 15px;
 `;
 
+const center = { lat: 52.267164, lng: 20.948894 };
+const mapProps = {
+  options: {
+    center,
+    zoom: 17,
+  },
+  onMount: map => {
+    new window.google.maps.Marker({
+      position: center,
+      map,
+      title: 'LiteraCafe',
+    });
+  },
+};
+
 export default ({ data }) => {
   return (
     <MainTemplate>
       <HeroImage
         fileName={data.mainHeroImg.childImageSharp.fluid.src}
-        minHeight="60vh"
+        minHeight="50vh"
         opacity={0.2}
         text="Kontakt"
       />
@@ -39,6 +55,8 @@ export default ({ data }) => {
           <a href="mailto:litera.cafe19@gmail.com"> litera.cafe19@gmail.com</a>
         </p>
       </StyledWrapper>
+
+      <Map id="contactMap" {...mapProps} />
     </MainTemplate>
   );
 };
