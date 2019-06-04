@@ -7,6 +7,7 @@ import News from 'templates/HomePage/News';
 import About from 'templates/HomePage/About';
 import Instagram from 'templates/HomePage/Instagram';
 import { graphql } from 'gatsby';
+import Letter from 'components/Letter';
 
 const IndexPage = data => (
   <MainTemplate>
@@ -30,6 +31,8 @@ const IndexPage = data => (
         opacity={0}
         backgroundSize="initial"
       />
+
+      <Letter letter="A" background="" />
 
       <div className="container">
         <About />
