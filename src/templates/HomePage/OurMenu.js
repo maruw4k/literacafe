@@ -4,6 +4,7 @@ import Img from 'gatsby-image';
 import styled from 'styled-components';
 import SectionHeader from 'components/SectionHeader';
 import Button from 'components/Button';
+import Letter from 'components/Letter';
 import { theme } from 'assets/styles/theme';
 import cupCircle from 'assets/images/cup-circle-2.png';
 
@@ -81,6 +82,14 @@ export default () => (
     `}
     render={data => (
       <StyledWrapper>
+
+        <Letter
+          letter="M"
+          background={data.sectionPhoto.childImageSharp.fluid.src}
+          top={-10}
+          right={-15}
+        />
+
         <SectionHeader title="Nasze menu" />
         <StyledContent>
           <StyledPhotoContainer>

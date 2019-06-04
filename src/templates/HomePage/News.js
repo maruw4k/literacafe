@@ -4,6 +4,7 @@ import Img from 'gatsby-image';
 import styled from 'styled-components';
 import SectionHeader from 'components/SectionHeader';
 import Button from 'components/Button';
+import Letter from 'components/Letter';
 import { theme } from 'assets/styles/theme';
 
 const StyledWrapper = styled.section`
@@ -109,6 +110,14 @@ export default () => (
     `}
     render={data => (
       <StyledWrapper cupCircle={data.cupCircle.childImageSharp.fluid.src}>
+
+        <Letter
+          letter="W"
+          background={data.sectionPhoto.childImageSharp.fluid.src}
+          top={-12}
+          left={-15}
+        />
+
         <SectionHeader title="Wydarzenia" />
 
         <StyledContent>

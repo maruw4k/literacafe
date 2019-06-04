@@ -1,7 +1,8 @@
 import React from 'react';
 import { StaticQuery, graphql } from 'gatsby';
-import styled from 'styled-components';
 import SectionHeader from 'components/SectionHeader';
+import Letter from 'components/Letter';
+import styled from 'styled-components';
 import { theme } from 'assets/styles/theme';
 
 const lunch = [
@@ -21,7 +22,6 @@ const lunch = [
 
 const StyledWrapper = styled.section`
   position: relative;
-  overflow: hidden;
   &:after {
     content: '';
     background-image: url(${({ cupCircle }) =>
@@ -29,7 +29,7 @@ const StyledWrapper = styled.section`
     width: 35rem;
     height: 35rem;
     position: absolute;
-    top: -7rem;
+    top: -13rem;
     left: 50%;
     z-index: -1;
     background-size: cover;
@@ -131,11 +131,26 @@ export default () => (
               ...GatsbyImageSharpFluid_noBase64
             }
           }
+        },
+        backgroundLetter: file(relativePath: { eq: "background-letter-l.jpg" }) {
+          childImageSharp {
+            fluid(maxWidth: 600, quality: 100) {
+              ...GatsbyImageSharpFluid_noBase64
+            }
+          }
         }
       }
     `}
     render={data => (
       <StyledWrapper cupCircle={data.cupCircle.childImageSharp.fluid.src}>
+
+        <Letter
+          letter="L"
+          background={data.backgroundLetter.childImageSharp.fluid.src}
+          top={-17}
+          left={-15}
+        />
+
         <SectionHeader title="Lunch dnia" />
 
         <StyledMealsSection>

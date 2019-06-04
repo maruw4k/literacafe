@@ -4,6 +4,7 @@ import Img from 'gatsby-image';
 import SectionHeader from 'components/SectionHeader';
 import { theme } from 'assets/styles/theme';
 import styled from 'styled-components';
+import Letter from 'components/Letter';
 
 const StyledWrapper = styled.section`
   padding-bottom: 10rem;
@@ -57,6 +58,14 @@ export default () => (
     `}
     render={data => (
       <StyledWrapper>
+
+        <Letter
+          letter="I"
+          background={data.allInstaNode.edges[0].node.localFile.childImageSharp.fluid.src}
+          top={-12}
+          left={-15}
+        />
+
         <StyledHeader title="Instagram" />
 
         <StyledLink

@@ -4,6 +4,7 @@ import styled from 'styled-components';
 import SectionHeader from 'components/SectionHeader';
 import Button from 'components/Button';
 import { theme } from 'assets/styles/theme';
+import Letter from 'components/Letter';
 
 const StyledWrapper = styled.section`
   position: relative;
@@ -76,11 +77,26 @@ export default () => (
               ...GatsbyImageSharpFluid_noBase64
             }
           }
+        },
+        backgroundLetter: file(relativePath: { eq: "background-letter-l.jpg" }) {
+          childImageSharp {
+            fluid(maxWidth: 600, quality: 100) {
+              ...GatsbyImageSharpFluid_noBase64
+            }
+          }
         }
       }
     `}
     render={data => (
       <StyledWrapper cupCircle={data.cupCircle.childImageSharp.fluid.src}>
+
+        <Letter
+          letter="O"
+          background={data.backgroundLetter.childImageSharp.fluid.src}
+          top={-12}
+          right={-15}
+        />
+
         <SectionHeader title="O literze" />
 
         <StyledContent>
