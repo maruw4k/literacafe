@@ -1,20 +1,19 @@
 import React from 'react';
 import { graphql } from 'gatsby';
-import HeroImage from 'components/HeroImage';
 import MainTemplate from 'templates/Main/MainTemplate';
 import DayLunch from 'templates/HomePage/DayLunch';
 import OurMenu from 'templates/HomePage/OurMenu';
 import News from 'templates/HomePage/News';
 import About from 'templates/HomePage/About';
 import Instagram from 'templates/HomePage/Instagram';
+import Hero from '../components/Hero';
 
 const IndexPage = data => (
   <MainTemplate>
     <div style={{ overflow: 'hidden' }}>
-      <HeroImage
-        fileName={data.data.mainHeroImg.childImageSharp.fluid.src}
-        minHeight="70vh"
-        opacity={0}
+      <Hero
+        fluid={data.data.mainHeroImg.childImageSharp.fluid}
+        height="70vh"
         text="We believe a cup of coffee is one of the most important, simple
           pleasures in life"
       />
@@ -25,12 +24,12 @@ const IndexPage = data => (
         <News />
       </div>
 
-      <HeroImage
-        fileName={data.data.secondHeroImg.childImageSharp.fluid.src}
-        minHeight="40vh"
-        opacity={0}
-        backgroundSize="initial"
-      />
+      {/*<HeroImage*/}
+      {/*  fileName={data.data.secondHeroImg.childImageSharp.fluid.src}*/}
+      {/*  minHeight="40vh"*/}
+      {/*  opacity={0}*/}
+      {/*  backgroundSize="initial"*/}
+      {/*/>*/}
 
       <div className="container">
         <About />
