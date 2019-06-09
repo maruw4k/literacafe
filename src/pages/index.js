@@ -1,12 +1,12 @@
 import React from 'react';
 import { graphql } from 'gatsby';
+import Hero from 'components/Hero';
 import MainTemplate from 'templates/Main/MainTemplate';
 import DayLunch from 'templates/HomePage/DayLunch';
 import OurMenu from 'templates/HomePage/OurMenu';
 import News from 'templates/HomePage/News';
 import About from 'templates/HomePage/About';
 import Instagram from 'templates/HomePage/Instagram';
-import Hero from '../components/Hero';
 
 const IndexPage = data => (
   <MainTemplate>
@@ -23,6 +23,11 @@ const IndexPage = data => (
         <OurMenu />
         <News />
       </div>
+
+      <Hero
+        fluid={data.data.secondHeroImg.childImageSharp.fluid}
+        height="40vh"
+      />
 
       {/*<HeroImage*/}
       {/*  fileName={data.data.secondHeroImg.childImageSharp.fluid.src}*/}

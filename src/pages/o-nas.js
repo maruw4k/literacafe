@@ -2,7 +2,7 @@ import React from 'react';
 import { graphql } from 'gatsby';
 import Img from 'gatsby-image';
 import MainTemplate from 'templates/Main/MainTemplate';
-import HeroImage from 'components/HeroImage';
+import Hero from 'components/Hero';
 import styled from 'styled-components';
 import SectionHeader from 'components/SectionHeader';
 import { theme } from 'assets/styles/theme';
@@ -53,9 +53,9 @@ const SignatureContainer = styled.div`
 
 const NewsPage = data => (
   <MainTemplate>
-    <HeroImage
-      fileName={data.data.mainHeroImg.childImageSharp.fluid.src}
-      mihHeight="40vh"
+    <Hero
+      fluid={data.data.mainHeroImg.childImageSharp.fluid}
+      height="60vh"
       opacity={0.2}
       text="L I T E R A  &nbsp; C A F E"
     />

@@ -1,10 +1,9 @@
 import React from 'react';
 import { graphql } from 'gatsby';
+import Hero from 'components/Hero';
 import MainTemplate from 'templates/Main/MainTemplate';
-import HeroImage from 'components/HeroImage';
 import SectionHeader from 'components/SectionHeader';
 import styled from 'styled-components';
-import Hero from '../components/Hero';
 
 const StyledWrapper = styled.div`
   max-width: 600px;

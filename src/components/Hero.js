@@ -1,7 +1,7 @@
 import React from 'react';
 import Image from 'gatsby-image';
 import styled from 'styled-components';
-import { theme } from '../assets/styles/theme';
+import { theme } from 'assets/styles/theme';
 
 const Container = styled.div`
   display: flex;
@@ -22,7 +22,8 @@ const Overlay = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  background-color: rgba(0, 0, 0, 0.2);
+  background-color: rgba(0,0,0,${props => props.opacity ? props.opacity : 0});
+  z-index: 99;
 `;
 
 const BgImage = styled(Image)`
@@ -30,9 +31,8 @@ const BgImage = styled(Image)`
   top: 0;
   left: 0;
   width: 100%;
-  z-index: -1;
+  z-index: 1;
   height: 100vh;
-  // Adjust image positioning (if image covers area with defined height) and add font-family for polyfill
   & > picture img {
   transform: translateY(${props => props.bposition}px);
     object-fit: ${props => props.fit || 'cover'} !important;
@@ -40,8 +40,7 @@ const BgImage = styled(Image)`
     font-family: 'object-fit: ${props =>
       props.fit || 'cover'} !important; object-position: ${props =>
   props.position || '50% 50%'} !important;'
-    
-  }
+  } 
 `;
 
 const HeroText = styled.h1`
@@ -52,6 +51,7 @@ const HeroText = styled.h1`
   color: white;
   max-width: 700px;
   margin: 0;
+  z-index: 99;
 
   ${theme.mq.tablet} {
     font-size: 6rem;
@@ -82,11 +82,10 @@ class Hero extends React.Component {
   };
 
   render() {
-    const { children } = this.props;
     return (
       <Container {...this.props}>
-        <BgImage {...this.props} bposition={this.state.offset / 4} />
-        <Overlay>
+        <BgImage {...this.props} bposition={this.state.offset / 2} />
+        <Overlay opacity={this.props.opacity}>
           <HeroText>{this.props.text}</HeroText>
         </Overlay>
       </Container>

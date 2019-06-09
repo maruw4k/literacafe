@@ -1,9 +1,9 @@
 import React from 'react';
 import { graphql } from 'gatsby';
+import Hero from 'components/Hero';
 import MainTemplate from 'templates/Main/MainTemplate';
 import Meals from 'templates/Menu/Meals';
 import CategoryNav from 'templates/Menu/CategoryNav';
-import HeroImage from 'components/HeroImage';
 
 const meals = [
   {
@@ -618,9 +618,9 @@ const meals = [
 export default ({ data }) => {
   return (
     <MainTemplate>
-      <HeroImage
-        fileName={data.mainHeroImg.childImageSharp.fluid.src}
-        minHeight="40vh"
+      <Hero
+        fluid={data.mainHeroImg.childImageSharp.fluid}
+        height="40vh"
         opacity={0.2}
         text="Menu"
       />
