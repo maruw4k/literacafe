@@ -5,7 +5,7 @@ import Meals from 'templates/Menu/Meals';
 import CategoryNav from 'templates/Menu/CategoryNav';
 import HeroImage from 'components/HeroImage';
 
-const meals = [
+const testMeals = [
   {
     category: 'Napoje gorące',
     img: 'https://i.imgur.com/xan6K5P.png',
@@ -616,6 +616,29 @@ const meals = [
 ];
 
 export default ({ data }) => {
+  let groupedMeals = [];
+
+  data.mainCategories.edges.map(item => {
+    let menu = {};
+    menu.categoryName = item.node.name;
+    menu.categoryId = item.node.strapiId;
+    menu.id = item.node.id;
+    menu.photo = item.node.photo;
+    menu.subcategories = data.subCategories.edges.filter(
+      item => item.node.strapiParent.id === menu.categoryId
+    );
+
+    menu.subcategories.map(({ node }) => {
+      const currentId = node.strapiId;
+      node.meals = [];
+      node.meals = data.allMeals.edges.filter(
+        item => item.node.subcategory.id === currentId
+      );
+    });
+
+    groupedMeals.push(menu);
+  });
+
   return (
     <MainTemplate>
       <HeroImage
@@ -625,9 +648,9 @@ export default ({ data }) => {
         text="Menu"
       />
 
-      <CategoryNav meals={meals} />
+      <CategoryNav categories={data.mainCategories.edges} />
 
-      <Meals meals={meals} />
+      <Meals groupedMeals={groupedMeals} />
     </MainTemplate>
   );
 };
@@ -638,6 +661,51 @@ export const query = graphql`
       childImageSharp {
         fluid(maxWidth: 5375, quality: 100) {
           ...GatsbyImageSharpFluid_noBase64
+        }
+      }
+    }
+    mainCategories: allStrapiCategory {
+      totalCount
+      edges {
+        node {
+          strapiId
+          id
+          name
+          photo {
+            childImageSharp {
+              fixed(height: 330, width: 220) {
+                ...GatsbyImageSharpFixed_noBase64
+              }
+            }
+          }
+          is_active
+        }
+      }
+    }
+    subCategories: allStrapiSubcategory {
+      totalCount
+      edges {
+        node {
+          strapiId
+          id
+          name
+          is_active
+          strapiParent {
+            id
+          }
+        }
+      }
+    }
+    allMeals: allStrapiMeal {
+      edges {
+        node {
+          id
+          strapiId
+          name
+          price
+          subcategory {
+            id
+          }
         }
       }
     }

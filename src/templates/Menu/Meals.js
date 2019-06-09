@@ -1,9 +1,10 @@
 import React from 'react';
 import SectionHeader from 'components/SectionHeader';
+import Img from 'gatsby-image';
 import { theme } from 'assets/styles/theme';
 import styled from 'styled-components';
 
-const StyledCategoryPhoto = styled.img`
+const StyledCategoryPhoto = styled(Img)`
   display: none;
   ${theme.mq.tablet} {
     display: block;
@@ -74,26 +75,34 @@ const StyledMealPrice = styled.span`
   font-weight: bold;
 `;
 
-export default ({ meals }) => (
+export default ({ groupedMeals }) => (
   <>
-    {meals.map((item, index) => (
+    {groupedMeals.map((item, index) => (
       <div key={index}>
-        <StyledCategoryPhoto src={item.img} alt={item.category + 'photo'} />
+        {item.photo ? (
+          <StyledCategoryPhoto
+            fixed={item.photo.childImageSharp.fixed}
+            alt={item.category + 'photo'}
+          />
+        ) : (
+          ''
+        )}
 
-        <StyledMealContainer id={'category' + index}>
-          <StyledCategoryTitle title={item.category} />
+        <StyledMealContainer id={item.id}>
+          <StyledCategoryTitle title={item.categoryName} />
 
           {item.subcategories.map((sub, index) => (
             <div key={index}>
-              <StyledSubTitle>{sub.name}</StyledSubTitle>
-              {sub.meals.map((meal, index) => (
+              <StyledSubTitle>{sub.node.name}</StyledSubTitle>
+
+              {sub.node.meals.map((meal, index) => (
                 <StyledMeal key={index}>
                   <StyledMealName>
-                    <p>{meal.name}</p>
-                    <p>{meal.subname}</p>
+                    <p>{meal.node.name}</p>
+                    <p>{meal.node.subname}</p>
                   </StyledMealName>
 
-                  <StyledMealPrice>{meal.price}</StyledMealPrice>
+                  <StyledMealPrice>{meal.node.price}</StyledMealPrice>
                 </StyledMeal>
               ))}
             </div>
