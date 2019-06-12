@@ -63,15 +63,44 @@ const StyledLink = styled(Link)`
   color: white;
   text-decoration: none;
   line-height: 1.5;
-  padding: 1rem 1.2rem;
+  padding: 0.5rem 1rem;
   text-align: center;
   position: relative;
   font-size: 1.7rem;
+  z-index: 1;
+  overflow: hidden;
+  transition: color 0.3s ease-in-out;
 
   &:hover {
     text-decoration: none;
     color: black;
     background-color: white;
+  }
+
+  ${theme.mq.tablet} {
+    &::before {
+      content: '';
+      z-index: -1;
+      position: absolute;
+      top: 100%;
+      right: 100%;
+      width: 1em;
+      height: 1em;
+      border-radius: 50%;
+      background-color: white;
+      transform-origin: center;
+      transform: translate(50%, -50%) scale(0);
+      transition: transform 0.35s ease-in-out;
+    }
+
+    &:hover {
+      text-decoration: none;
+      background-color: initial;
+      color: black;
+      &::before {
+        transform: translate(50%, -50%) scale(15);
+      }
+    }
   }
 `;
 
