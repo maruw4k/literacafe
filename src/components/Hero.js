@@ -33,14 +33,12 @@ const BgImage = styled(Image)`
   width: 100%;
   z-index: 1;
   height: 100vh;
+  
   & > picture img {
-  transform: translateY(${props => props.bposition}px);
+    transform: translateY(${props => props.bposition}px);
     object-fit: ${props => props.fit || 'cover'} !important;
     object-position: ${props => props.position || '50% 100%'} !important;
-    font-family: 'object-fit: ${props =>
-      props.fit || 'cover'} !important; object-position: ${props =>
-  props.position || '50% 50%'} !important;'
-  } 
+  }
 `;
 
 const HeroText = styled.h1`
@@ -68,11 +66,11 @@ class Hero extends React.Component {
   }
 
   componentDidMount() {
-    window.addEventListener('scroll', this.parallaxShift);
+    // window.addEventListener('scroll', this.parallaxShift);
   }
 
   componentWillUnmount() {
-    window.removeEventListener('scroll', this.parallaxShift);
+    // window.removeEventListener('scroll', this.parallaxShift);
   }
 
   parallaxShift = () => {

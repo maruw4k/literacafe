@@ -34,6 +34,7 @@ export default ({ data }) => {
       <Hero
         fluid={data.mainHeroImg.childImageSharp.fluid}
         height="60vh"
+        position="50% -30%"
         text="Wypożyczamy tandemy"
       />
 

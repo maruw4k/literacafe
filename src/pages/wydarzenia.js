@@ -9,8 +9,9 @@ const NewsPage = data => (
 
     <Hero
       fluid={data.data.mainHeroImg.childImageSharp.fluid}
-      height="40vh"
+      height="50vh"
       opacity={0.2}
+      position="top"
       text="Wydarzenia i newsy"
     />
 

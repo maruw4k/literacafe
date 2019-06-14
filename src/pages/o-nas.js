@@ -55,7 +55,7 @@ const NewsPage = data => (
   <MainTemplate>
     <Hero
       fluid={data.data.mainHeroImg.childImageSharp.fluid}
-      height="60vh"
+      height="50vh"
       opacity={0.2}
       text="L I T E R A  &nbsp; C A F E"
     />

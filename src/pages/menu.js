@@ -620,7 +620,8 @@ export default ({ data }) => {
     <MainTemplate>
       <Hero
         fluid={data.mainHeroImg.childImageSharp.fluid}
-        height="40vh"
+        height="50vh"
+        position="center"
         opacity={0.2}
         text="Menu"
       />
