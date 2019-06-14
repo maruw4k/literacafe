@@ -5,6 +5,7 @@ import MainTemplate from 'templates/Main/MainTemplate';
 import Hero from 'components/Hero';
 import styled from 'styled-components';
 import SectionHeader from 'components/SectionHeader';
+import Letter from 'components/Letter';
 import { theme } from 'assets/styles/theme';
 
 const StyledContainer = styled.div`
@@ -18,7 +19,7 @@ const StyledContainer = styled.div`
   &:after {
     content: '';
     background-image: url(${({ cupCircle }) =>
-  '' + cupCircle + '' ? cupCircle : ''});
+      '' + cupCircle + '' ? cupCircle : ''});
     width: 35rem;
     height: 35rem;
     position: absolute;
@@ -63,7 +64,10 @@ const NewsPage = data => (
     <div style={{ overflow: 'hidden' }}>
       <SectionHeader title="Poznaj to miejsce" />
 
-      <StyledContainer paddingBottom="4rem" cupCircle={data.data.cupCircle.childImageSharp.fluid.src}>
+      <StyledContainer
+        paddingBottom="4rem"
+        cupCircle={data.data.cupCircle.childImageSharp.fluid.src}
+      >
         <StyledParagraph right>
           LiteraCafe to kawiarnia zlokalizowana przy ulicy Literackiej, na
           warszawskich Bielanach. Przyjazne wszystkim miejsce spotkań przy
@@ -71,6 +75,13 @@ const NewsPage = data => (
           mogli Państwo kupić świeże bułeczki, croissanty, pieczywo jasne i
           ciemne, z ziarnami i bez!
         </StyledParagraph>
+
+        <Letter
+          letter="O"
+          background={data.data.photo1.childImageSharp.fluid.src}
+          top={-12}
+          right={-15}
+        />
       </StyledContainer>
 
       <PhotoContainer right>
@@ -88,6 +99,13 @@ const NewsPage = data => (
         </StyledParagraph>
       </StyledContainer>
 
+      <Letter
+        letter="W"
+        background={data.data.photo1.childImageSharp.fluid.src}
+        top={-20}
+        left={15}
+      />
+
       <StyledContainer>
         <PhotoContainer center>
           <Img fluid={data.data.photo2.childImageSharp.fluid} />
@@ -103,6 +121,13 @@ const NewsPage = data => (
           oglądania meczów. Już wkrótce aktualny kalendarz spotkań.
         </StyledParagraph>
       </StyledContainer>
+
+      <Letter
+        letter="K"
+        background={data.data.photo2.childImageSharp.fluid.src}
+        top={5}
+        right={15}
+      />
 
       <PhotoContainer>
         <Img fluid={data.data.photo3.childImageSharp.fluid} />
