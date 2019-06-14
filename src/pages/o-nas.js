@@ -19,7 +19,7 @@ const StyledContainer = styled.div`
   &:after {
     content: '';
     background-image: url(${({ cupCircle }) =>
-      '' + cupCircle + '' ? cupCircle : ''});
+  '' + cupCircle + '' ? cupCircle : ''});
     width: 35rem;
     height: 35rem;
     position: absolute;
@@ -36,6 +36,28 @@ const PhotoContainer = styled.div`
   ${({ center }) => (center ? 'margin: 0 auto;' : '')};
   padding-bottom: 4rem;
   max-width: 1500px;
+  position: relative;
+  z-index: -1;
+`;
+
+const PhotoText = styled.h3`
+  font-family: ${theme.font.family.title};
+  font-weight: 400;
+  font-size: 3rem;
+  line-height: 1;
+  text-align: center;
+  color: white;
+  max-width: 700px;
+  margin: 0;
+  z-index: 99;
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+
+  ${theme.mq.tablet} {
+    font-size: 4.5rem;
+  }
 `;
 
 const StyledParagraph = styled.p`
@@ -108,6 +130,11 @@ const NewsPage = data => (
 
       <StyledContainer>
         <PhotoContainer center>
+          <PhotoText>
+            We believe a cup of coffee is one of the most important, simple
+            pleasures in life
+          </PhotoText>
+
           <Img fluid={data.data.photo2.childImageSharp.fluid} />
         </PhotoContainer>
       </StyledContainer>
