@@ -1,8 +1,8 @@
 import React from 'react';
 import { graphql } from 'gatsby';
 import Img from 'gatsby-image';
+import Hero from 'components/Hero';
 import MainTemplate from 'templates/Main/MainTemplate';
-import HeroImage from 'components/HeroImage';
 import SectionHeader from 'components/SectionHeader';
 import styled from 'styled-components';
 
@@ -31,9 +31,9 @@ export default ({ data }) => {
   const post = data.strapiArticle;
   return (
     <MainTemplate>
-      <HeroImage
-        fileName={post.photo.childImageSharp.fluid.src}
-        minHeight="50vh"
+      <Hero
+        fluid={post.photo.childImageSharp.fluid}
+        height="50vh"
         opacity={0}
       />
 

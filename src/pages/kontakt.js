@@ -1,9 +1,9 @@
 import React from 'react';
 import { graphql } from 'gatsby';
-import MainTemplate from 'templates/Main/MainTemplate';
-import HeroImage from 'components/HeroImage';
 import SectionHeader from 'components/SectionHeader';
 import Map from 'components/Map';
+import Hero from 'components/Hero';
+import MainTemplate from 'templates/Main/MainTemplate';
 import styled from 'styled-components';
 
 const StyledWrapper = styled.div`
@@ -31,11 +31,11 @@ const mapProps = {
 export default ({ data }) => {
   return (
     <MainTemplate>
-      <HeroImage
-        fileName={data.mainHeroImg.childImageSharp.fluid.src}
-        minHeight="50vh"
-        opacity={0.2}
+      <Hero
+        fluid={data.mainHeroImg.childImageSharp.fluid}
+        height="50vh"
         text="Kontakt"
+        opacity={0.2}
       />
 
       <StyledWrapper>

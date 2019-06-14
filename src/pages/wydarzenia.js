@@ -1,18 +1,19 @@
 import React from 'react';
 import { graphql } from 'gatsby';
+import Hero from 'components/Hero';
 import MainTemplate from 'templates/Main/MainTemplate';
-import HeroImage from 'components/HeroImage';
 import Articles from 'templates/News/Articles';
 
 const NewsPage = data => (
   <MainTemplate>
-    <HeroImage
-      fileName={data.data.mainHeroImg.childImageSharp.fluid.src}
-      mihHeight="30vh"
+
+    <Hero
+      fluid={data.data.mainHeroImg.childImageSharp.fluid}
+      height="40vh"
       opacity={0.2}
-      backgroundSize="cover"
       text="Wydarzenia i newsy"
     />
+
     <Articles />
   </MainTemplate>
 );
