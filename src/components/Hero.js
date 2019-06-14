@@ -84,7 +84,7 @@ class Hero extends React.Component {
   render() {
     return (
       <Container {...this.props}>
-        <BgImage {...this.props} bposition={this.state.offset / 2} />
+        <BgImage {...this.props} />
         <Overlay opacity={this.props.opacity}>
           <HeroText>{this.props.text}</HeroText>
         </Overlay>
