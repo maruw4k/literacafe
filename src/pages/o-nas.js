@@ -146,35 +146,35 @@ export const query = graphql`
     cupCircle: file(relativePath: { eq: "cup-circle-1.png" }) {
       childImageSharp {
         fluid(maxWidth: 600, quality: 100) {
-          ...GatsbyImageSharpFluid_noBase64
+          ...GatsbyImageSharpFluid
         }
       }
     }
     mainHeroImg: file(relativePath: { eq: "about-main-photo.jpg" }) {
       childImageSharp {
         fluid(maxWidth: 5375, quality: 100) {
-          ...GatsbyImageSharpFluid_noBase64
+          ...GatsbyImageSharpFluid
         }
       }
     }
     photo1: file(relativePath: { eq: "about-photo1.jpeg" }) {
       childImageSharp {
         fluid(maxWidth: 1523, quality: 100) {
-          ...GatsbyImageSharpFluid_noBase64
+          ...GatsbyImageSharpFluid
         }
       }
     }
     photo2: file(relativePath: { eq: "about-photo2.jpeg" }) {
       childImageSharp {
         fluid(maxWidth: 1100, quality: 100) {
-          ...GatsbyImageSharpFluid_noBase64
+          ...GatsbyImageSharpFluid
         }
       }
     }
     photo3: file(relativePath: { eq: "about-photo3.jpeg" }) {
       childImageSharp {
         fluid(maxWidth: 1523, quality: 100) {
-          ...GatsbyImageSharpFluid_noBase64
+          ...GatsbyImageSharpFluid
         }
       }
     }

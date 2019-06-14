@@ -47,7 +47,7 @@ export default () => (
               localFile {
                 childImageSharp {
                   fluid(maxWidth: 300) {
-                    ...GatsbyImageSharpFluid_noBase64
+                    ...GatsbyImageSharpFluid
                   }
                 }
               }

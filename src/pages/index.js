@@ -51,14 +51,14 @@ export const query = graphql`
     mainHeroImg: file(relativePath: { eq: "home-main-photo.jpg" }) {
       childImageSharp {
         fluid(maxWidth: 5375, quality: 100) {
-          ...GatsbyImageSharpFluid_noBase64
+          ...GatsbyImageSharpFluid
         }
       }
     }
     secondHeroImg: file(relativePath: { eq: "home-photo3.jpg" }) {
       childImageSharp {
         fluid(maxWidth: 5375, quality: 100) {
-          ...GatsbyImageSharpFluid_noBase64
+          ...GatsbyImageSharpFluid
         }
       }
     }

@@ -74,14 +74,14 @@ export default () => (
         cupCircle: file(relativePath: { eq: "cup-circle-4.png" }) {
           childImageSharp {
             fluid(maxWidth: 600, quality: 100) {
-              ...GatsbyImageSharpFluid_noBase64
+              ...GatsbyImageSharpFluid
             }
           }
         },
         backgroundLetter: file(relativePath: { eq: "background-letter-l.jpg" }) {
           childImageSharp {
             fluid(maxWidth: 600, quality: 100) {
-              ...GatsbyImageSharpFluid_noBase64
+              ...GatsbyImageSharpFluid
             }
           }
         }

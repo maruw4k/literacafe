@@ -95,14 +95,14 @@ export default () => (
         sectionPhoto: file(relativePath: { eq: "home-photo2.jpg" }) {
           childImageSharp {
             fluid(maxWidth: 700, quality: 100) {
-              ...GatsbyImageSharpFluid_noBase64
+              ...GatsbyImageSharpFluid
             }
           }
         }
         cupCircle: file(relativePath: { eq: "cup-circle-3.png" }) {
           childImageSharp {
             fluid(maxWidth: 600, quality: 100) {
-              ...GatsbyImageSharpFluid_noBase64
+              ...GatsbyImageSharpFluid
             }
           }
         }

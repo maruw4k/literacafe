@@ -95,7 +95,7 @@ export default () => (
               photo {
                 childImageSharp {
                   fluid(maxWidth: 900, quality: 100) {
-                    ...GatsbyImageSharpFluid_noBase64
+                    ...GatsbyImageSharpFluid
                   }
                 }
               }
