@@ -14,15 +14,19 @@ const StyledCategoryNav = styled.nav`
   ul {
     display: flex;
     align-items: center;
+    justify-content: center;
     list-style-type: none;
     padding: 0;
     flex-wrap: wrap;
     margin: 0;
-    height: 60px;
+    height: 65px;
+    text-align: center;
 
     li {
       width: 33.3%;
-      margin-bottom: 1rem;
+      ${theme.mq.tablet} {
+        margin-bottom: 1rem;
+      }
     }
 
     ${theme.mq.tablet} {
@@ -55,13 +59,13 @@ const StyledCategoryNav = styled.nav`
 `;
 
 export default ({ meals }) => (
-    <StyledCategoryNav>
-      <ul>
-        {meals.map((item, index) => (
-          <li key={index}>
-            <a href={'#category' + index}>{item.category}</a>
-          </li>
-        ))}
-      </ul>
-    </StyledCategoryNav>
+  <StyledCategoryNav>
+    <ul>
+      {meals.map((item, index) => (
+        <li key={index}>
+          <a href={'#category' + index}>{item.category}</a>
+        </li>
+      ))}
+    </ul>
+  </StyledCategoryNav>
 );
