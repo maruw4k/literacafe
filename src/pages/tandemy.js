@@ -33,8 +33,8 @@ export default ({ data }) => {
     <MainTemplate>
       <Hero
         fluid={data.mainHeroImg.childImageSharp.fluid}
-        height="60vh"
-        position="50% -30%"
+        height="55vh"
+        position="top"
         text="Wypożyczamy tandemy"
       />
 

@@ -27,7 +27,7 @@ const IndexPage = data => (
       <Hero
         fluid={data.data.secondHeroImg.childImageSharp.fluid}
         position="top"
-        height="55vh"
+        height="45vh"
       />
 
       <div className="container">

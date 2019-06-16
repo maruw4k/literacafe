@@ -1,94 +1,70 @@
 import React from 'react';
-import Image from 'gatsby-image';
 import styled from 'styled-components';
+import BackgroundImage from 'gatsby-background-image';
 import { theme } from 'assets/styles/theme';
 
-const Container = styled.div`
-  display: flex;
-  position: relative;
-  align-items: center;
-  overflow: hidden;
-  height: ${props => props.height || '100vh'};
-`;
-
-const Overlay = styled.div`
-  text-align: center;
-  margin: 0 auto;
-  position: absolute;
-  left: 0;
-  right: 0;
-  top: 0;
-  bottom: 0;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  background-color: rgba(0,0,0,${props => props.opacity ? props.opacity : 0});
-  z-index: 99;
-`;
-
-const BgImage = styled(Image)`
-  position: absolute;
-  top: 0;
-  left: 0;
+const StyledBackgroundSection = styled.section`
   width: 100%;
-  z-index: 1;
-  height: 100vh;
-  
-  & > picture img {
-    transform: translateY(${props => props.bposition}px);
-    object-fit: ${props => props.fit || 'cover'} !important;
-    object-position: ${props => props.position || '50% 100%'} !important;
+  position: relative;
+  height: ${props => props.height || '100vh'};
+
+  &:after {
+    content: '';
+    width: 100%;
+    height: 100%;
+    background: black;
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    opacity: ${props => props.opacity || '0.1'};
+
+    ${theme.mq.tablet} {
+      opacity: ${props => props.opacity || '0'};
+    }
+  }
+`;
+
+const StyledBackgroundImage = styled(BackgroundImage)`
+  height: 100%;
+  background-position: ${props => props.position || '50% 50%'};
+
+  ${theme.mq.tablet} {
+    &::before {
+      background-attachment: fixed;
+    }
   }
 `;
 
 const HeroText = styled.h1`
   font-family: ${theme.font.family.title};
   font-weight: 400;
-  font-size: 4rem;
+  font-size: 5rem;
+  text-align: center;
   line-height: 1;
   color: white;
+  width: 80%;
   max-width: 700px;
   margin: 0;
   z-index: 99;
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
 
   ${theme.mq.tablet} {
     font-size: 6rem;
   }
 `;
 
-class Hero extends React.Component {
-  constructor() {
-    super();
-
-    this.state = {
-      offset: 0,
-    };
-  }
-
-  componentDidMount() {
-    // window.addEventListener('scroll', this.parallaxShift);
-  }
-
-  componentWillUnmount() {
-    // window.removeEventListener('scroll', this.parallaxShift);
-  }
-
-  parallaxShift = () => {
-    this.setState({
-      offset: window.pageYOffset,
-    });
-  };
-
-  render() {
-    return (
-      <Container {...this.props}>
-        <BgImage {...this.props} />
-        <Overlay opacity={this.props.opacity}>
-          <HeroText>{this.props.text}</HeroText>
-        </Overlay>
-      </Container>
-    );
-  }
-}
-
-export default Hero;
+export default props => (
+  <StyledBackgroundSection height={props.height}>
+    <StyledBackgroundImage
+      Tag="section"
+      fluid={props.fluid}
+      position={props.position}
+    />
+    <HeroText>{props.text}</HeroText>
+  </StyledBackgroundSection>
+);
