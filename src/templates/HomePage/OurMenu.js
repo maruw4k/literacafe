@@ -6,7 +6,6 @@ import SectionHeader from 'components/SectionHeader';
 import Button from 'components/Button';
 import Letter from 'components/Letter';
 import { theme } from 'assets/styles/theme';
-import cupCircle from 'assets/images/cup-circle-2.png';
 
 const StyledWrapper = styled.section`
   margin: 0 auto 10rem auto;
@@ -14,8 +13,7 @@ const StyledWrapper = styled.section`
 
   &:after {
     content: '';
-    //@todo Add image src from graphql
-    background-image: url(${cupCircle});
+    background-image: url(${({ cupCircle }) => (cupCircle ? cupCircle : '')});
     width: 35rem;
     height: 35rem;
     position: absolute;
@@ -71,13 +69,6 @@ export default () => (
             }
           }
         }
-        cupCircle: file(relativePath: { eq: "cup-circle-1.png" }) {
-          childImageSharp {
-            fluid(maxWidth: 700, quality: 100) {
-              ...GatsbyImageSharpFluid
-            }
-          }
-        }
         letterM: file(relativePath: { eq: "home-photo1.jpg" }) {
           childImageSharp {
             fixed(width: 300, height: 290) {
@@ -85,10 +76,17 @@ export default () => (
             }
           }
         }
+        cupCircle: file(relativePath: { eq: "cup-circles/cup-circle-2.jpg" }) {
+          childImageSharp {
+            fluid(maxWidth: 400, quality: 100) {
+              ...GatsbyImageSharpFluid
+            }
+          }
+        }
       }
     `}
     render={data => (
-      <StyledWrapper>
+      <StyledWrapper cupCircle={data.cupCircle.childImageSharp.fluid.src}>
         <Letter
           letter="M"
           background={data.letterM.childImageSharp.fixed.src}

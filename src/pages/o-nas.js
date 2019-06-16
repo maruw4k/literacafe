@@ -192,9 +192,9 @@ export const query = graphql`
         }
       }
     }
-    cupCircle: file(relativePath: { eq: "cup-circle-1.png" }) {
+    cupCircle: file(relativePath: { eq: "cup-circles/cup-circle-1.jpg" }) {
       childImageSharp {
-        fluid(maxWidth: 600, quality: 100) {
+        fluid(maxWidth: 400, quality: 100) {
           ...GatsbyImageSharpFluid
         }
       }
