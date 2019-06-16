@@ -78,14 +78,20 @@ export default () => (
             }
           }
         }
+        letterM: file(relativePath: { eq: "home-photo1.jpg" }) {
+          childImageSharp {
+            fixed(width: 300, height: 290) {
+              ...GatsbyImageSharpFixed
+            }
+          }
+        }
       }
     `}
     render={data => (
       <StyledWrapper>
-
         <Letter
           letter="M"
-          background={data.sectionPhoto.childImageSharp.fluid.src}
+          background={data.letterM.childImageSharp.fixed.src}
           top={-10}
           right={-15}
         />

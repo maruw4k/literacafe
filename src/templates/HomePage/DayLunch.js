@@ -131,11 +131,11 @@ export default () => (
               ...GatsbyImageSharpFluid
             }
           }
-        },
-        backgroundLetter: file(relativePath: { eq: "background-letter-l.jpg" }) {
+        }
+        letterL: file(relativePath: { eq: "background-letter-l.jpg" }) {
           childImageSharp {
-            fluid(maxWidth: 600, quality: 100) {
-              ...GatsbyImageSharpFluid
+            fixed(width: 220, height: 290) {
+              ...GatsbyImageSharpFixed
             }
           }
         }
@@ -143,10 +143,9 @@ export default () => (
     `}
     render={data => (
       <StyledWrapper cupCircle={data.cupCircle.childImageSharp.fluid.src}>
-
         <Letter
           letter="L"
-          background={data.backgroundLetter.childImageSharp.fluid.src}
+          background={data.letterL.childImageSharp.fixed.src}
           top={-17}
           left={-15}
         />

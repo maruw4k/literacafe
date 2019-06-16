@@ -78,10 +78,10 @@ export default () => (
             }
           }
         },
-        backgroundLetter: file(relativePath: { eq: "background-letter-l.jpg" }) {
+        letterO: file(relativePath: { eq: "background-letter-l.jpg" }) {
           childImageSharp {
-            fluid(maxWidth: 600, quality: 100) {
-              ...GatsbyImageSharpFluid
+            fixed(width: 300, height: 300) {
+              ...GatsbyImageSharpFixed
             }
           }
         }
@@ -92,7 +92,7 @@ export default () => (
 
         <Letter
           letter="O"
-          background={data.backgroundLetter.childImageSharp.fluid.src}
+          background={data.letterO.childImageSharp.fixed.src}
           top={-12}
           right={-15}
         />

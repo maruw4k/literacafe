@@ -106,14 +106,20 @@ export default () => (
             }
           }
         }
+        letterW: file(relativePath: { eq: "home-photo2.jpg" }) {
+          childImageSharp {
+            fixed(width: 300, height: 300) {
+              ...GatsbyImageSharpFixed
+            }
+          }
+        }
       }
     `}
     render={data => (
       <StyledWrapper cupCircle={data.cupCircle.childImageSharp.fluid.src}>
-
         <Letter
           letter="W"
-          background={data.sectionPhoto.childImageSharp.fluid.src}
+          background={data.letterW.childImageSharp.fixed.src}
           top={-12}
           left={-15}
         />

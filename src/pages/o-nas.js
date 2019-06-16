@@ -74,10 +74,10 @@ const SignatureContainer = styled.div`
   }
 `;
 
-const NewsPage = data => (
+export default ({data}) => (
   <MainTemplate>
     <Hero
-      fluid={data.data.mainHeroImg.childImageSharp.fluid}
+      fluid={data.mainHeroImg.childImageSharp.fluid}
       height="50vh"
       opacity={0.2}
       text="L I T E R A  &nbsp; C A F E"
@@ -88,7 +88,7 @@ const NewsPage = data => (
 
       <StyledContainer
         paddingBottom="4rem"
-        cupCircle={data.data.cupCircle.childImageSharp.fluid.src}
+        cupCircle={data.cupCircle.childImageSharp.fluid.src}
       >
         <StyledParagraph right>
           LiteraCafe to kawiarnia zlokalizowana przy ulicy Literackiej, na
@@ -97,17 +97,16 @@ const NewsPage = data => (
           mogli Państwo kupić świeże bułeczki, croissanty, pieczywo jasne i
           ciemne, z ziarnami i bez!
         </StyledParagraph>
-
         <Letter
           letter="O"
-          background={data.data.photo1.childImageSharp.fluid.src}
+          background={data.letterO.childImageSharp.fixed.src}
           top={-12}
           right={-15}
         />
       </StyledContainer>
 
       <PhotoContainer right>
-        <Img fluid={data.data.photo1.childImageSharp.fluid} />
+        <Img fluid={data.photo1.childImageSharp.fluid} />
       </PhotoContainer>
 
       <StyledContainer paddingBottom="4rem">
@@ -123,7 +122,7 @@ const NewsPage = data => (
 
       <Letter
         letter="W"
-        background={data.data.photo1.childImageSharp.fluid.src}
+        background={data.letterW.childImageSharp.fixed.src}
         top={-20}
         left={15}
       />
@@ -135,7 +134,7 @@ const NewsPage = data => (
             pleasures in life
           </PhotoText>
 
-          <Img fluid={data.data.photo2.childImageSharp.fluid} />
+          <Img fluid={data.photo2.childImageSharp.fluid} />
         </PhotoContainer>
       </StyledContainer>
 
@@ -151,13 +150,13 @@ const NewsPage = data => (
 
       <Letter
         letter="K"
-        background={data.data.photo2.childImageSharp.fluid.src}
+        background={data.letterK.childImageSharp.fixed.src}
         top={5}
         right={15}
       />
 
       <PhotoContainer>
-        <Img fluid={data.data.photo3.childImageSharp.fluid} />
+        <Img fluid={data.photo3.childImageSharp.fluid} />
       </PhotoContainer>
 
       <StyledContainer paddingBottom="4rem">
@@ -171,14 +170,12 @@ const NewsPage = data => (
 
       <StyledContainer>
         <SignatureContainer>
-          <Img fixed={data.data.signature.childImageSharp.fixed} />
+          <Img fixed={data.signature.childImageSharp.fixed} />
         </SignatureContainer>
       </StyledContainer>
     </div>
   </MainTemplate>
 );
-
-export default NewsPage;
 
 export const query = graphql`
   {
@@ -233,6 +230,27 @@ export const query = graphql`
     signature: file(relativePath: { eq: "signature.png" }) {
       childImageSharp {
         fixed(width: 169, height: 51) {
+          ...GatsbyImageSharpFixed
+        }
+      }
+    }
+    letterO: file(relativePath: { eq: "about-photo1.jpeg" }) {
+      childImageSharp {
+        fixed(width: 220, height: 290) {
+          ...GatsbyImageSharpFixed
+        }
+      }
+    }
+    letterW: file(relativePath: { eq: "about-photo2.jpeg" }) {
+      childImageSharp {
+        fixed(width: 290, height: 290) {
+          ...GatsbyImageSharpFixed
+        }
+      }
+    }
+    letterK: file(relativePath: { eq: "about-photo3.jpeg" }) {
+      childImageSharp {
+        fixed(width: 220, height: 290) {
           ...GatsbyImageSharpFixed
         }
       }

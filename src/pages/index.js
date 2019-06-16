@@ -8,11 +8,11 @@ import News from 'templates/HomePage/News';
 import About from 'templates/HomePage/About';
 import Instagram from 'templates/HomePage/Instagram';
 
-const IndexPage = data => (
+const IndexPage = ({data}) => (
   <MainTemplate>
     <div style={{ overflow: 'hidden' }}>
       <Hero
-        fluid={data.data.mainHeroImg.childImageSharp.fluid}
+        fluid={data.mainHeroImg.childImageSharp.fluid}
         height="70vh"
         text="We believe a cup of coffee is one of the most important, simple
           pleasures in life"
@@ -25,7 +25,7 @@ const IndexPage = data => (
       </div>
 
       <Hero
-        fluid={data.data.secondHeroImg.childImageSharp.fluid}
+        fluid={data.secondHeroImg.childImageSharp.fluid}
         position="top"
         height="45vh"
       />
