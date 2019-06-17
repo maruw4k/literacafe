@@ -94,7 +94,7 @@ export default () => (
               content
               photo {
                 childImageSharp {
-                  fluid(maxWidth: 900, quality: 100) {
+                  fluid(maxWidth: 900) {
                     ...GatsbyImageSharpFluid
                   }
                 }

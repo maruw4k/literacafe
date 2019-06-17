@@ -192,37 +192,37 @@ export const query = graphql`
         }
       }
     }
-    cupCircle: file(relativePath: { eq: "cup-circles/cup-circle-1.jpg" }) {
+    cupCircle: file(relativePath: { eq: "cup-circles/cup-circle-1.png" }) {
       childImageSharp {
-        fluid(maxWidth: 400, quality: 100) {
+        fluid(maxWidth: 400) {
           ...GatsbyImageSharpFluid
         }
       }
     }
     mainHeroImg: file(relativePath: { eq: "about-main-photo.jpg" }) {
       childImageSharp {
-        fluid(maxWidth: 5375, quality: 100) {
+        fluid(maxWidth: 1920) {
           ...GatsbyImageSharpFluid
         }
       }
     }
     photo1: file(relativePath: { eq: "about-photo1.jpeg" }) {
       childImageSharp {
-        fluid(maxWidth: 1523, quality: 100) {
+        fluid(maxWidth: 1523) {
           ...GatsbyImageSharpFluid
         }
       }
     }
     photo2: file(relativePath: { eq: "about-photo2.jpeg" }) {
       childImageSharp {
-        fluid(maxWidth: 1100, quality: 100) {
+        fluid(maxWidth: 1100) {
           ...GatsbyImageSharpFluid
         }
       }
     }
     photo3: file(relativePath: { eq: "about-photo3.jpeg" }) {
       childImageSharp {
-        fluid(maxWidth: 1523, quality: 100) {
+        fluid(maxWidth: 1523) {
           ...GatsbyImageSharpFluid
         }
       }
