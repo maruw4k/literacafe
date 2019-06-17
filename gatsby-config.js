@@ -6,7 +6,6 @@ module.exports = {
     description: `Strona kawiarni LiteraCafe`,
     author: `@maruw4k`,
   },
-  pathPrefix: '/gatsby-bulma-default',
   plugins: [
     'gatsby-plugin-sass',
     `gatsby-plugin-react-helmet`,
