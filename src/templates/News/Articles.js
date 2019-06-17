@@ -23,9 +23,17 @@ const ArticleContainer = styled.article`
   ${theme.mq.tablet} {
     margin-bottom: 3rem;
     height: 600px;
-    grid-template-columns: 0.7fr 0.7fr 1.7fr;
+    grid-template-columns: 0.2fr 1fr 1.7fr;
     grid-template-rows: 1fr 1fr 1fr;
     grid-template-areas: '. title photo' '. description photo' '. btn photo';
+  }
+
+  ${theme.mq.desktop} {
+    grid-template-columns: 0.5fr 1fr 1.7fr;
+  }
+
+  ${theme.mq.huge} {
+    grid-template-columns: 0.7fr 0.7fr 1.7fr;
   }
 `;
 
