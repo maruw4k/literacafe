@@ -1,7 +1,6 @@
 import React from 'react';
 import { graphql } from 'gatsby';
 import Img from 'gatsby-image';
-import Hero from 'components/Hero';
 import MainTemplate from 'templates/Main/MainTemplate';
 import SectionHeader from 'components/SectionHeader';
 import styled from 'styled-components';
@@ -15,8 +14,8 @@ const ArticleHeader = styled(SectionHeader)`
 `;
 
 const ArticleParagraph = styled.div`
-max-width: 600px;
-margin: 0 auto 2rem auto;
+  max-width: 600px;
+  margin: 0 auto 2rem auto;
 `;
 
 const ArticlePhotoWrapper = styled.div`
@@ -31,12 +30,6 @@ export default ({ data }) => {
   const post = data.strapiArticle;
   return (
     <MainTemplate>
-      <Hero
-        fluid={post.photo.childImageSharp.fluid}
-        height="50vh"
-        opacity={0}
-      />
-
       <ArticleWrapper className="container">
         <ArticleHeader title={post.title} />
 
@@ -52,7 +45,7 @@ export default ({ data }) => {
 
 export const query = graphql`
   query ArticleTemplate($id: String!) {
-    strapiArticle(id: {eq: $id}) {
+    strapiArticle(id: { eq: $id }) {
       title
       content
       photo {
@@ -64,4 +57,4 @@ export const query = graphql`
       }
     }
   }
-`
+`;
