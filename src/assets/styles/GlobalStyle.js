@@ -35,6 +35,18 @@ const GlobalStyle = createGlobalStyle`
     padding-left: 15px;
     position: relative;
   }
+  
+  .smaller {
+  position: fixed;
+  left: 0;
+  right: 0;
+  z-index: 1000;
+  height: 7rem;
+  
+  .logo-wrapper {
+  height: 20px;
+  }
+  }
 `;
 
 export default GlobalStyle;

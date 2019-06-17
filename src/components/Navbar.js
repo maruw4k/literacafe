@@ -8,9 +8,14 @@ import { theme } from 'assets/styles/theme';
 const StyledNavbar = styled.nav`
   font-family: ${theme.font.family.nav};
   background-color: black;
+  position: fixed;
+  right: 0;
+  left: 0;
+  top: 0;
+  z-index: 999;
   ${theme.mq.tablet} {
     height: 13rem;
-    position: relative;
+    //position: relative;
   }
 `;
 
@@ -109,18 +114,57 @@ const Navbar = class extends React.Component {
     super(props);
     this.state = {
       active: false,
+      fixed: false,
     };
   }
 
   toggleHamburger = () => {
     this.setState({
-      active: !this.state.active,
+      active: true,
     });
   };
 
+  toggleFixedMenu = () => {
+    this.setState({
+      fixed: true,
+    });
+  };
+
+  componentDidMount() {
+    const nav = document.querySelector('.navigation');
+    const navTop = nav.offsetTop;
+
+    function stickyNavigation() {
+      // console.log('navTop = ' + navTop);
+      // console.log('scrollY = ' + window.scrollY);      // console.log('navTop = ' + navTop);
+      // console.log('scrollY = ' + window.scrollY);
+
+      // if (window.scrollY >= navTop) {
+      //   // nav offsetHeight = height of nav
+      //   document.body.style.paddingTop = nav.offsetHeight + 'px';
+      //   document.body.classList.add('fixed-nav');
+      // } else {
+      //   document.body.style.paddingTop = 0;
+      //   document.body.classList.remove('fixed-nav');
+      // }
+
+      // if (window.scrollY > 600) {
+      //   toggleFixedMenu;
+      // } else {
+      //   toggleFixedMenu();
+      // }
+    }
+
+    window.addEventListener('scroll', stickyNavigation);
+  }
+
   render() {
     return (
-      <StyledNavbar role="navigation" aria-label="main-navigation">
+      <StyledNavbar
+        role="navigation"
+        aria-label="main-navigation"
+        className="navigation"
+      >
         <MobileNavHeader>
           <MobileLogoWrapper>
             <Link to="/">
@@ -139,7 +183,7 @@ const Navbar = class extends React.Component {
           <StyledLink to="/menu">Menu</StyledLink>
           <StyledLink to="/wydarzenia">Wydarzenia</StyledLink>
 
-          <LogoWrapper>
+          <LogoWrapper className="logo-wrapper">
             <Link to="/">
               <Image filename="logo.png" />
             </Link>

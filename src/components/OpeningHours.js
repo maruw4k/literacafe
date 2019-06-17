@@ -9,6 +9,7 @@ const StyledOpeningHoursWrapper = styled.section`
   background-color: black;
   color: white;
   ${theme.mq.tablet} {
+    margin-top: 13rem;
     height: 50px;
     border-top: 1px solid white;
     border-bottom: 1px solid white;
