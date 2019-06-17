@@ -48,13 +48,18 @@ const StyledCategoryNav = styled.nav`
     margin-top: 100px;
     top: 30px;
     height: 330px;
-    width: auto;
+    width: 20%;
     left: 2vw;
     float: left;
+    background-color: initial;
   }
 
   ${theme.mq.desktop} {
-    left: 13vw;
+    width: 15%;
+  }
+  ${theme.mq.huge} {
+    margin-left: 15%;
+    max-width: 250px;
   }
 `;
 
