@@ -125,7 +125,7 @@ export default () => (
   <StaticQuery
     query={graphql`
       query {
-        cupCircle: file(relativePath: { eq: "cup-circles/cup-circle-1.jpg" }) {
+        cupCircle: file(relativePath: { eq: "cup-circles/cup-circle-1.png" }) {
           childImageSharp {
             fluid(maxWidth: 400) {
               ...GatsbyImageSharpFluid
