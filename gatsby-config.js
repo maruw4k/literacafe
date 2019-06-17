@@ -31,7 +31,7 @@ module.exports = {
     {
       resolve: `gatsby-source-strapi`,
       options: {
-        apiURL: `http://localhost:1337`,
+        apiURL: `https://pacific-bastion-24909.herokuapp.com`,
         queryLimit: 1000, // Default to 100
         contentTypes: [`article`]
       },
