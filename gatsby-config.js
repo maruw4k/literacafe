@@ -6,7 +6,6 @@ module.exports = {
     description: `Strona kawiarni LiteraCafe`,
     author: `@maruw4k`,
   },
-  pathPrefix: '/gatsby-bulma-default',
   plugins: [
     'gatsby-plugin-sass',
     `gatsby-plugin-react-helmet`,
@@ -26,6 +25,14 @@ module.exports = {
       options: {
         name: `images`,
         path: `${__dirname}/src/assets/images`,
+      },
+    },
+    {
+      resolve: `gatsby-source-strapi`,
+      options: {
+        apiURL: `http://localhost:1337`,
+        queryLimit: 1000, // Default to 100
+        contentTypes: [`article`]
       },
     },
     {

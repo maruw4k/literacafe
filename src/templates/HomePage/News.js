@@ -4,6 +4,7 @@ import Img from 'gatsby-image';
 import styled from 'styled-components';
 import SectionHeader from 'components/SectionHeader';
 import Button from 'components/Button';
+import Letter from 'components/Letter';
 import { theme } from 'assets/styles/theme';
 
 const StyledWrapper = styled.section`
@@ -93,15 +94,22 @@ export default () => (
       query {
         sectionPhoto: file(relativePath: { eq: "home-photo2.jpg" }) {
           childImageSharp {
-            fluid(maxWidth: 700, quality: 100) {
-              ...GatsbyImageSharpFluid_noBase64
+            fluid(maxWidth: 700) {
+              ...GatsbyImageSharpFluid
             }
           }
         }
-        cupCircle: file(relativePath: { eq: "cup-circle-3.png" }) {
+        cupCircle: file(relativePath: { eq: "cup-circles/cup-circle-3.png" }) {
           childImageSharp {
-            fluid(maxWidth: 600, quality: 100) {
-              ...GatsbyImageSharpFluid_noBase64
+            fluid(maxWidth: 400) {
+              ...GatsbyImageSharpFluid
+            }
+          }
+        }
+        letterW: file(relativePath: { eq: "home-photo2.jpg" }) {
+          childImageSharp {
+            fixed(width: 300, height: 300) {
+              ...GatsbyImageSharpFixed
             }
           }
         }
@@ -109,6 +117,13 @@ export default () => (
     `}
     render={data => (
       <StyledWrapper cupCircle={data.cupCircle.childImageSharp.fluid.src}>
+        <Letter
+          letter="W"
+          background={data.letterW.childImageSharp.fixed.src}
+          top={-12}
+          left={-15}
+        />
+
         <SectionHeader title="Wydarzenia" />
 
         <StyledContent>

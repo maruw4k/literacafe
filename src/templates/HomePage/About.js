@@ -4,6 +4,7 @@ import styled from 'styled-components';
 import SectionHeader from 'components/SectionHeader';
 import Button from 'components/Button';
 import { theme } from 'assets/styles/theme';
+import Letter from 'components/Letter';
 
 const StyledWrapper = styled.section`
   position: relative;
@@ -70,10 +71,17 @@ export default () => (
   <StaticQuery
     query={graphql`
       query {
-        cupCircle: file(relativePath: { eq: "cup-circle-4.png" }) {
+        cupCircle: file(relativePath: { eq: "cup-circles/cup-circle-4.jpg" }) {
           childImageSharp {
-            fluid(maxWidth: 600, quality: 100) {
-              ...GatsbyImageSharpFluid_noBase64
+            fluid(maxWidth: 400) {
+              ...GatsbyImageSharpFluid
+            }
+          }
+        },
+        letterO: file(relativePath: { eq: "background-letter-l.jpg" }) {
+          childImageSharp {
+            fixed(width: 300, height: 300) {
+              ...GatsbyImageSharpFixed
             }
           }
         }
@@ -81,6 +89,14 @@ export default () => (
     `}
     render={data => (
       <StyledWrapper cupCircle={data.cupCircle.childImageSharp.fluid.src}>
+
+        <Letter
+          letter="O"
+          background={data.letterO.childImageSharp.fixed.src}
+          top={-12}
+          right={-15}
+        />
+
         <SectionHeader title="O literze" />
 
         <StyledContent>

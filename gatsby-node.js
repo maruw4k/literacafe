@@ -1,43 +1,46 @@
 const path = require(`path`);
-const { createFilePath } = require(`gatsby-source-filesystem`);
 
-exports.onCreateNode = ({ node, getNode, actions }) => {
-  const { createNodeField } = actions;
-  if (node.internal.type === `MarkdownRemark`) {
-    const slug = createFilePath({ node, getNode, basePath: `pages` });
-    createNodeField({
-      node,
-      name: `slug`,
-      value: slug,
-    });
-  }
-};
+const makeRequest = (graphql, request) => new Promise((resolve, reject) => {
+  // Query for nodes to use in creating pages.
+  resolve(
+    graphql(request).then(result => {
+      if (result.errors) {
+        reject(result.errors)
+      }
 
-exports.createPages = ({ graphql, actions }) => {
-  const { createPage } = actions;
-  return graphql(`
+      return result;
+    })
+  )
+});
+
+// Implement the Gatsby API “createPages”. This is called once the
+// data layer is bootstrapped to let plugins create pages from data.
+exports.createPages = ({ boundActionCreators, graphql }) => {
+  const { createPage } = boundActionCreators;
+
+  const getArticles = makeRequest(graphql, `
     {
-      allMarkdownRemark {
+      allStrapiArticle {
         edges {
           node {
-            fields {
-              slug
-            }
+            id
           }
         }
       }
     }
-  `).then(result => {
-    result.data.allMarkdownRemark.edges.forEach(({ node }) => {
+    `).then(result => {
+    // Create pages for each article.
+    result.data.allStrapiArticle.edges.forEach(({ node }) => {
       createPage({
-        path: node.fields.slug,
-        component: path.resolve(`src/templates/Post.js`),
+        path: `/${node.id}`,
+        component: path.resolve(`src/templates/News/Post.js`),
         context: {
-          // Data passed to context is available
-          // in page queries as GraphQL variables.
-          slug: node.fields.slug,
+          id: node.id,
         },
-      });
-    });
+      })
+    })
   });
+
+  // Query for articles nodes to use in creating pages.
+  return getArticles;
 };

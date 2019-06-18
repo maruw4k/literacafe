@@ -1,7 +1,7 @@
 import React from 'react';
 import { graphql } from 'gatsby';
-import MainTemplate from 'templates/MainTemplate';
-import HeroImage from 'components/HeroImage';
+import Hero from 'components/Hero';
+import MainTemplate from 'templates/Main/MainTemplate';
 import SectionHeader from 'components/SectionHeader';
 import styled from 'styled-components';
 
@@ -31,10 +31,10 @@ const StyledPriceTable = styled.ul`
 export default ({ data }) => {
   return (
     <MainTemplate>
-      <HeroImage
-        fileName={data.mainHeroImg.childImageSharp.fluid.src}
-        minHeight="60vh"
-        opacity={0.2}
+      <Hero
+        fluid={data.mainHeroImg.childImageSharp.fluid}
+        height="55vh"
+        position="top"
         text="Wypożyczamy tandemy"
       />
 
@@ -83,8 +83,8 @@ export const query = graphql`
   {
     mainHeroImg: file(relativePath: { eq: "tandemy-main-photo.jpg" }) {
       childImageSharp {
-        fluid(maxWidth: 5375, quality: 100) {
-          ...GatsbyImageSharpFluid_noBase64
+        fluid(maxWidth: 1920) {
+          ...GatsbyImageSharpFluid
         }
       }
     }
