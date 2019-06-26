@@ -1,22 +1,26 @@
 import { graphql, useStaticQuery } from 'gatsby';
 
 const useSiteText = () => {
-  const { strapiText } = useStaticQuery(
+  const { allStrapiText } = useStaticQuery(
     graphql`
       query SITE_TEXT_QUERY {
         allStrapiText {
-          edges {
-            node {
-              key
-              pl
-              eng
-            }
+          nodes {
+            key
+            pl
+            eng
           }
         }
       }
     `
   );
-  return strapiText;
+
+  const siteTexts = {};
+  allStrapiText.nodes.map(item => {
+    return (siteTexts[item.key] = item.pl);
+  });
+
+  return siteTexts;
 };
 
 export default useSiteText;
