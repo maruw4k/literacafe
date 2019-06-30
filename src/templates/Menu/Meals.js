@@ -10,14 +10,18 @@ const StyledCategoryPhoto = styled.img`
     position: sticky;
     margin-top: 150px;
     top: 30px;
-    height: 330px;
-    width: 220px;
-    right: 2vw;
+    height: auto;
+    width: 20%;
     float: right;
   }
 
   ${theme.mq.desktop} {
-    right: 13vw;
+    width: 15%;
+  }
+
+  ${theme.mq.huge} {
+    margin-right: 10%;
+    max-width: 220px;
   }
 `;
 

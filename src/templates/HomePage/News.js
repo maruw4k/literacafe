@@ -94,14 +94,14 @@ export default () => (
       query {
         sectionPhoto: file(relativePath: { eq: "home-photo2.jpg" }) {
           childImageSharp {
-            fluid(maxWidth: 700, quality: 100) {
+            fluid(maxWidth: 700) {
               ...GatsbyImageSharpFluid
             }
           }
         }
         cupCircle: file(relativePath: { eq: "cup-circles/cup-circle-3.png" }) {
           childImageSharp {
-            fluid(maxWidth: 400, quality: 100) {
+            fluid(maxWidth: 400) {
               ...GatsbyImageSharpFluid
             }
           }

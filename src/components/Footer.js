@@ -2,7 +2,6 @@ import React from 'react';
 import styled from 'styled-components';
 import Image from 'components/Image';
 import { theme } from 'assets/styles/theme';
-import 'components/footer.css';
 
 const FooterWrapper = styled.div`
   background-color: black;
@@ -16,12 +15,54 @@ const Footer = styled.footer`
   display: grid;
   padding-top: 10px;
 
-  grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
-  grid-template-rows: 2fr 1fr 2fr 0.2fr 0.5fr;
-  grid-template-areas: '. . logo logo logo . .' '. address address address address address .' '. hours hours hours hours hours . ' '. . copyright-left copyright-left copyright-left . .' '. . copyright-right copyright-right copyright-right . .';
+  .footer-element__link {
+    color: white;
+  }
+
+  .footer-element {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: left;
+    flex-direction: column;
+    line-height: 1.5;
+  }
+
+  .footer-element__title {
+    font-weight: bold;
+    margin: 0;
+    text-align: left;
+  }
+
+  .logo {
+    grid-area: logo;
+  }
+
+  .copyright-left {
+    grid-area: copyright-left;
+  }
+
+  .copyright-right {
+    grid-area: copyright-right;
+  }
+
+  .address {
+    grid-area: address;
+    font-style: normal;
+  }
+
+  .hours {
+    grid-area: hours;
+  }
+
+  grid-template-columns: 1fr;
+  grid-template-rows: 3fr 2fr 4fr 0.5fr 0.5fr;
+  padding-bottom: 2rem;
+  grid-template-areas: 'logo' 'address' 'hours' 'copyright-left' 'copyright-right';
 
   ${theme.mq.tablet} {
-    padding-top: 40px;
+    padding-top: 4rem;
+    padding-bottom: 0;
     grid-template-columns: 1fr 1fr 0.5fr 0.5fr 0.5fr 1fr 1fr;
     grid-template-rows: 1fr 0.5fr 1fr 1fr;
     grid-template-areas: '. . logo logo logo . .' 'address address . . . hours hours' 'address address . . . hours hours' 'copyright-left copyright-left . . . copyright-right copyright-right';
@@ -38,10 +79,13 @@ const LogoWrapper = styled.div`
 export default () => (
   <FooterWrapper>
     <Footer className="container">
-      <div className="footer-element copyright-left">©LiteraCafe 2019</div>
+      <div className="footer-element copyright-left">© LiteraCafe 2019</div>
       <div className="footer-element copyright-right">
         <div>
-          Created by <a href="https://alterpage.pl/">AlterPage</a>
+          Created by{' '}
+          <a href="https://alterpage.pl/" className="footer-element__link">
+            AlterPage
+          </a>
         </div>
       </div>
       <address className="footer-element address">
@@ -49,12 +93,25 @@ export default () => (
           <div className="footer-element__title">Adres:</div>
           Literacka 19, 01-864 Warszawa
           <div>
-            Mail:
-            <a href="mailto:litera.cafe19@gmail.com">litera.cafe19@gmail.com</a>
+            Mail:{' '}
+            <a
+              href="mailto:litera.cafe19@gmail.com"
+              className="footer-element__link"
+            >
+              {' '}
+              litera.cafe19@gmail.com
+            </a>
           </div>
           <div>
-            Tel: <a href="tel:606120727">606 120 727</a>,
-            <a href="tel:501167463">501 167 463</a>
+            Tel:{' '}
+            <a href="tel:606120727" className="footer-element__link">
+              606 120 727
+            </a>
+            ,
+            <a href="tel:501167463" className="footer-element__link">
+              {' '}
+              501 167 463
+            </a>
           </div>
         </div>
       </address>

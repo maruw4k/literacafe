@@ -41,9 +41,10 @@ export default () => (
   <StaticQuery
     query={graphql`
       query {
-        allInstaNode(limit: 4) {
+        allInstaNode(limit: 4, sort: { fields: [timestamp], order: [DESC] }) {
           edges {
             node {
+              timestamp
               localFile {
                 childImageSharp {
                   fluid(maxWidth: 300) {
@@ -58,10 +59,11 @@ export default () => (
     `}
     render={data => (
       <StyledWrapper>
-
         <Letter
           letter="I"
-          background={data.allInstaNode.edges[0].node.localFile.childImageSharp.fluid.src}
+          background={
+            data.allInstaNode.edges[0].node.localFile.childImageSharp.fluid.src
+          }
           top={-12}
           left={-15}
         />
