@@ -14,8 +14,8 @@ const StyledNavbar = styled.nav`
   top: 0;
   z-index: 999;
   ${theme.mq.tablet} {
-    height: 13rem;
-    //position: relative;
+    height: ${({ isFixed }) => (isFixed ? '7rem' : '13rem')};
+    transition: height 400ms;
   }
 `;
 
@@ -37,9 +37,9 @@ const LogoWrapper = styled.div`
   display: none;
   ${theme.mq.tablet} {
     display: block;
-    width: 138px;
     height: auto;
     margin: 0 4vw;
+    width: ${({ isFixed }) => (isFixed ? '80px' : '138px')};
   }
 `;
 
@@ -125,37 +125,19 @@ const Navbar = class extends React.Component {
   };
 
   toggleFixedMenu = () => {
-    this.setState({
-      fixed: true,
-    });
+    if (window.scrollY > 900) {
+      this.setState(prevState => ({
+        fixed: true,
+      }));
+    } else {
+      this.setState(prevState => ({
+        fixed: false,
+      }));
+    }
   };
 
   componentDidMount() {
-    const nav = document.querySelector('.navigation');
-    const navTop = nav.offsetTop;
-
-    function stickyNavigation() {
-      // console.log('navTop = ' + navTop);
-      // console.log('scrollY = ' + window.scrollY);      // console.log('navTop = ' + navTop);
-      // console.log('scrollY = ' + window.scrollY);
-
-      // if (window.scrollY >= navTop) {
-      //   // nav offsetHeight = height of nav
-      //   document.body.style.paddingTop = nav.offsetHeight + 'px';
-      //   document.body.classList.add('fixed-nav');
-      // } else {
-      //   document.body.style.paddingTop = 0;
-      //   document.body.classList.remove('fixed-nav');
-      // }
-
-      // if (window.scrollY > 600) {
-      //   toggleFixedMenu;
-      // } else {
-      //   toggleFixedMenu();
-      // }
-    }
-
-    window.addEventListener('scroll', stickyNavigation);
+    window.addEventListener('scroll', this.toggleFixedMenu);
   }
 
   render() {
@@ -164,6 +146,7 @@ const Navbar = class extends React.Component {
         role="navigation"
         aria-label="main-navigation"
         className="navigation"
+        isFixed={this.state.fixed}
       >
         <MobileNavHeader>
           <MobileLogoWrapper>
@@ -178,12 +161,12 @@ const Navbar = class extends React.Component {
           />
         </MobileNavHeader>
 
-        <NavBarMenu isActive={this.state.active}>
+        <NavBarMenu isActive={this.state.active} isFixed={this.state.fixed}>
           <StyledLink to="/">Start</StyledLink>
           <StyledLink to="/menu">Menu</StyledLink>
           <StyledLink to="/wydarzenia">Wydarzenia</StyledLink>
 
-          <LogoWrapper className="logo-wrapper">
+          <LogoWrapper className="logo-wrapper" isFixed={this.state.fixed}>
             <Link to="/">
               <Image filename="logo.png" />
             </Link>
