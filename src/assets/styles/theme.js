@@ -23,6 +23,7 @@ export const theme = {
     lightGray: '#f8f7f5',
   },
   mq: {
+    phone: `@media (min-width: 576px)`,
     tablet: `@media (min-width: 768px)`,
     desktop: `@media (min-width: 1024px)`,
     huge: `@media(min-width: 1440px)`,
