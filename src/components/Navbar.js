@@ -8,14 +8,29 @@ import { theme } from 'assets/styles/theme';
 const Navbar = styled.nav`
   font-family: ${theme.font.family.nav};
   background-color: black;
+  height: 80px;
   position: fixed;
   right: 0;
   left: 0;
   top: 0;
-  z-index: 999;
+  z-index: ${({ isVisible }) => (isVisible ? '9999' : '-1')};
   transform: ${({ isVisible }) =>
     isVisible ? 'translateY(0);' : 'translateY(-150px);'};
   transition: transform 300ms;
+
+  &::before {
+    content: '';
+    position: fixed;
+    background-color: black;
+    opacity: ${({ isOpen }) => (isOpen ? '0.4' : '0')};
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    height: 100vh;
+    transition: opacity 300ms;
+  }
+
   ${theme.mq.tablet} {
     height: 13rem;
   }
@@ -23,7 +38,11 @@ const Navbar = styled.nav`
 
 const NavBarMenu = styled.div`
   padding-bottom: 2rem;
-  display: ${({ isOpen }) => (isOpen ? 'block' : 'none')};
+  background-color: black;
+  transform: ${({ isOpen }) =>
+    isOpen ? 'translateY(0)' : 'translateY(-1000px)'};
+  transition: transform 300ms;
+
   ${theme.mq.tablet} {
     display: flex;
     justify-content: space-evenly;
@@ -32,6 +51,7 @@ const NavBarMenu = styled.div`
     height: 100%;
     padding-bottom: 0;
     max-width: 950px;
+    transform: translateY(0);
   }
 `;
 
@@ -49,7 +69,7 @@ const MobileNavHeader = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 1rem 1rem;
+  padding: 1rem 2rem;
   ${theme.mq.tablet} {
     display: none;
   }
@@ -58,6 +78,8 @@ const MobileNavHeader = styled.div`
 const MobileLogoWrapper = styled.div`
   height: 100%;
   width: 9rem;
+  position: relative;
+  z-index: 99;
   ${theme.mq.tablet} {
     display: none;
   }
@@ -154,6 +176,7 @@ export default class extends React.Component {
         aria-label="main-navigation"
         className="navigation"
         isVisible={this.state.isVisible}
+        isOpen={this.state.isOpen}
       >
         <MobileNavHeader>
           <MobileLogoWrapper>
