@@ -3,22 +3,8 @@ import { StaticQuery, graphql } from 'gatsby';
 import SectionHeader from 'components/SectionHeader';
 import Letter from 'components/Letter';
 import styled from 'styled-components';
+import ReactMarkdown from 'react-markdown';
 import { theme } from 'assets/styles/theme';
-
-const lunch = [
-  {
-    id: 1,
-    title: 'Francuski',
-    elements: ['zupa brokułowa', 'herbata', 'ciastko', 'kotlet'],
-    price: '26zł',
-  },
-  {
-    id: 2,
-    title: 'Amerykański',
-    elements: ['Pizza', 'kawa', 'pancake'],
-    price: '18zł',
-  },
-];
 
 const StyledWrapper = styled.section`
   position: relative;
@@ -38,86 +24,55 @@ const StyledWrapper = styled.section`
 `;
 
 const StyledMealsSection = styled.div`
-  display: grid;
-  grid-template-columns: 2fr 0.2fr 2fr;
-  grid-template-rows: 0.6fr 1fr 0.5fr;
-  grid-template-areas: 'left-title . right-title' 'left-content divider right-content' 'left-price . right-price';
-
-  ${theme.mq.tablet} {
-    grid-template-columns: 2fr 1fr 2fr;
-  }
-  margin: 0 auto;
   max-width: 900px;
-  overflow: hidden;
+  margin: 0 auto;
+  display: flex;
+  flex-wrap: wrap;
+`;
 
-  div {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    text-align: center;
+const MealWrapper = styled.div`
+  text-align: center;
+  width: 100%;
+  margin: 0 auto 3rem auto;
+
+  ${theme.mq.phone} {
+    width: 50%;
+    margin: 3rem auto;
+    min-height: 150px;
+
+    &:nth-child(even) {
+      border-left: 1px solid black;
+    }
   }
 `;
 
-const StyledTitle = styled.div`
+const MealTitle = styled.h3`
+  font-size: 1.8rem;
   padding: 0;
   font-weight: bold;
   text-transform: uppercase;
   letter-spacing: 0.3rem;
-`;
+  margin: 0 0 2rem;
 
-const StyledLeftTitle = styled(StyledTitle)`
-  grid-area: left-title;
-`;
-
-const StyledRightTitle = styled(StyledTitle)`
-  grid-area: right-title;
-`;
-
-const MealList = styled.ul`
-  list-style: square inside
-    url('data:image/gif;base64,R0lGODlhBQAKAIABAAAAAP///yH5BAEAAAEALAAAAAAFAAoAAAIIjI+ZwKwPUQEAOw==');
-  padding: 0;
-  margin: 0;
-
-  li {
-    padding-bottom: 1rem;
+  ${theme.mq.phone} {
+    margin: 0 0 3rem;
   }
 `;
 
-const StyledLeftMeals = styled.div`
-  grid-area: left-content;
-  padding: 0;
-`;
-
-const StyledRightMeals = styled.div`
-  grid-area: right-content;
-  padding: 0;
-`;
-
-const StyledRightPrice = styled.div`
-  grid-area: right-price;
+const MealPrice = styled.p`
   font-weight: bold;
 `;
 
-const StyledLeftPrice = styled.div`
-  grid-area: left-price;
-  font-weight: bold;
-`;
+const MealList = styled(ReactMarkdown)`
+  ul {
+    list-style: square inside
+      url('data:image/gif;base64,R0lGODlhBQAKAIABAAAAAP///yH5BAEAAAEALAAAAAAFAAoAAAIIjI+ZwKwPUQEAOw==');
+    padding: 0;
+    margin: 0;
 
-const StyledDivider = styled.div`
-  grid-area: divider;
-  position: relative;
-
-  &:after {
-    content: '';
-    width: 1px;
-    position: absolute;
-    left: 50%;
-    top: 50%;
-    height: 100%;
-    background: black;
-    z-index: 1;
-    transform: translate(-50%, -50%);
+    li {
+      padding-bottom: 1rem;
+    }
   }
 `;
 
@@ -139,46 +94,45 @@ export default () => (
             }
           }
         }
+        dayLunches: allStrapiLunch(filter: { active: { eq: true } }) {
+          nodes {
+            title
+            content
+            date
+            price
+            active
+            strapiId
+          }
+        }
       }
     `}
     render={data => (
-      <StyledWrapper cupCircle={data.cupCircle.childImageSharp.fluid.src}>
-        <Letter
-          letter="L"
-          background={data.letterL.childImageSharp.fixed.src}
-          top={-17}
-          left={-15}
-        />
+      <>
+        {data.dayLunches.nodes.length > 0 ? (
+          <StyledWrapper cupCircle={data.cupCircle.childImageSharp.fluid.src}>
+            <Letter
+              letter="L"
+              background={data.letterL.childImageSharp.fixed.src}
+              top={-17}
+              left={-15}
+            />
 
-        <SectionHeader title="Lunch dnia" />
+            <SectionHeader title="Lunch dnia" />
 
-        <StyledMealsSection>
-          <StyledLeftTitle>{lunch[0].title}</StyledLeftTitle>
-          <StyledRightTitle>{lunch[1].title}</StyledRightTitle>
-
-          <StyledLeftMeals>
-            <MealList>
-              {lunch[0].elements.map((item, index) => (
-                <li key={index}>{item}</li>
+            <StyledMealsSection>
+              {data.dayLunches.nodes.map(item => (
+                <MealWrapper key={item.strapiId}>
+                  <MealTitle>{item.title}</MealTitle>
+                  <MealList source={item.content} />
+                  <MealPrice>{item.price}</MealPrice>
+                </MealWrapper>
               ))}
-            </MealList>
-          </StyledLeftMeals>
-
-          <StyledLeftPrice>{lunch[0].price}</StyledLeftPrice>
-
-          <StyledRightMeals>
-            <MealList>
-              {lunch[1].elements.map((item, index) => (
-                <li key={index}>{item}</li>
-              ))}
-            </MealList>
-          </StyledRightMeals>
-
-          <StyledRightPrice>{lunch[1].price}</StyledRightPrice>
-
-          <StyledDivider />
-        </StyledMealsSection>
-      </StyledWrapper>
+            </StyledMealsSection>
+          </StyledWrapper>
+        ) : (
+          ''
+        )}
+      </>
     )}
   />
 );

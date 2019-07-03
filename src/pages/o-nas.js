@@ -179,19 +179,6 @@ export default ({data}) => (
 
 export const query = graphql`
   {
-    allMarkdownRemark {
-      totalCount
-      edges {
-        node {
-          id
-          frontmatter {
-            title
-            date(formatString: "DD MMMM, YYYY")
-          }
-          html
-        }
-      }
-    }
     cupCircle: file(relativePath: { eq: "cup-circles/cup-circle-1.png" }) {
       childImageSharp {
         fluid(maxWidth: 400) {

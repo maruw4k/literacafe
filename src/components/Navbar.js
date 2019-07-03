@@ -5,18 +5,44 @@ import Image from 'components/Image';
 import styled from 'styled-components';
 import { theme } from 'assets/styles/theme';
 
-const StyledNavbar = styled.nav`
+const Navbar = styled.nav`
   font-family: ${theme.font.family.nav};
   background-color: black;
+  height: 80px;
+  position: fixed;
+  right: 0;
+  left: 0;
+  top: 0;
+  z-index: ${({ isVisible }) => (isVisible ? '9999' : '-1')};
+  transform: ${({ isVisible }) =>
+    isVisible ? 'translateY(0);' : 'translateY(-150px);'};
+  transition: transform 300ms;
+
+  &::before {
+    content: '';
+    position: fixed;
+    background-color: black;
+    opacity: ${({ isOpen }) => (isOpen ? '0.4' : '0')};
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    height: 100vh;
+    transition: opacity 300ms;
+  }
+
   ${theme.mq.tablet} {
     height: 13rem;
-    position: relative;
   }
 `;
 
 const NavBarMenu = styled.div`
   padding-bottom: 2rem;
-  display: ${({ isActive }) => (isActive ? 'block' : 'none')};
+  background-color: black;
+  transform: ${({ isOpen }) =>
+    isOpen ? 'translateY(0)' : 'translateY(-1000px)'};
+  transition: transform 300ms;
+
   ${theme.mq.tablet} {
     display: flex;
     justify-content: space-evenly;
@@ -25,6 +51,7 @@ const NavBarMenu = styled.div`
     height: 100%;
     padding-bottom: 0;
     max-width: 950px;
+    transform: translateY(0);
   }
 `;
 
@@ -32,9 +59,9 @@ const LogoWrapper = styled.div`
   display: none;
   ${theme.mq.tablet} {
     display: block;
-    width: 138px;
     height: auto;
     margin: 0 4vw;
+    width: 138px;
   }
 `;
 
@@ -42,7 +69,7 @@ const MobileNavHeader = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 1rem 1rem;
+  padding: 1rem 2rem;
   ${theme.mq.tablet} {
     display: none;
   }
@@ -51,6 +78,8 @@ const MobileNavHeader = styled.div`
 const MobileLogoWrapper = styled.div`
   height: 100%;
   width: 9rem;
+  position: relative;
+  z-index: 99;
   ${theme.mq.tablet} {
     display: none;
   }
@@ -104,23 +133,51 @@ const StyledLink = styled(Link)`
   }
 `;
 
-const Navbar = class extends React.Component {
+export default class extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      active: false,
+      isOpen: false,
+      isVisible: true,
+      prevScrollPos: window.pageYOffset,
     };
   }
 
   toggleHamburger = () => {
     this.setState({
-      active: !this.state.active,
+      isOpen: !this.state.isOpen,
     });
   };
 
+  toggleFixedMenu = () => {
+    const { prevScrollPos } = this.state;
+    let currentScrollPos = window.pageYOffset;
+    const visible = prevScrollPos > currentScrollPos;
+
+    this.setState({
+      prevScrollPos: currentScrollPos,
+      isVisible: visible,
+      isOpen: false,
+    });
+  };
+
+  componentDidMount() {
+    window.addEventListener('scroll', this.toggleFixedMenu);
+  }
+
+  componentWillUnmount() {
+    window.removeEventListener('scroll', this.toggleFixedMenu);
+  }
+
   render() {
     return (
-      <StyledNavbar role="navigation" aria-label="main-navigation">
+      <Navbar
+        role="navigation"
+        aria-label="main-navigation"
+        className="navigation"
+        isVisible={this.state.isVisible}
+        isOpen={this.state.isOpen}
+      >
         <MobileNavHeader>
           <MobileLogoWrapper>
             <Link to="/">
@@ -130,16 +187,16 @@ const Navbar = class extends React.Component {
 
           <Hamburger
             onClick={this.toggleHamburger}
-            isOpen={this.state.active}
+            isOpen={this.state.isOpen}
           />
         </MobileNavHeader>
 
-        <NavBarMenu isActive={this.state.active}>
+        <NavBarMenu isOpen={this.state.isOpen} isVisible={this.state.isVisible}>
           <StyledLink to="/">Start</StyledLink>
           <StyledLink to="/menu">Menu</StyledLink>
           <StyledLink to="/wydarzenia">Wydarzenia</StyledLink>
 
-          <LogoWrapper>
+          <LogoWrapper className="logo-wrapper">
             <Link to="/">
               <Image filename="logo.png" />
             </Link>
@@ -149,9 +206,7 @@ const Navbar = class extends React.Component {
           <StyledLink to="/tandemy">Tandemy</StyledLink>
           <StyledLink to="/kontakt">Kontakt</StyledLink>
         </NavBarMenu>
-      </StyledNavbar>
+      </Navbar>
     );
   }
-};
-
-export default Navbar;
+}

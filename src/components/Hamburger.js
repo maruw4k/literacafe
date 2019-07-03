@@ -2,31 +2,33 @@ import React from 'react';
 import styled from 'styled-components';
 import { theme } from 'assets/styles/theme';
 
-const StyledHamburger = styled.div`
+const StyledHamburger = styled.button`
+  background-color: black;
+  border: none;
   color: white;
   cursor: pointer;
-  height: 6rem;
+  height: 5rem;
   position: relative;
-  width: 6rem;
+  width: 5rem;
   span {
     background-color: white;
     display: block;
     height: 1px;
-    left: calc(50% - 8px);
+    left: calc(50% - 15px);
     position: absolute;
     transform-origin: center;
     transition-duration: 150ms;
     transition-property: background-color, opacity, transform;
     transition-timing-function: ease-out;
-    width: 20px;
+    width: 30px;
     &:nth-child(1) {
-      top: calc(50% - 6px);
+      top: calc(50% - 8px);
     }
     &:nth-child(2) {
       top: calc(50% - 1px);
     }
     &:nth-child(3) {
-      top: calc(50% + 4px);
+      top: calc(50% + 6px);
     }
   }
   &:hover {
@@ -35,13 +37,13 @@ const StyledHamburger = styled.div`
   &.is-active {
     span {
       &:nth-child(1) {
-        transform: translateY(5px) rotate(45deg);
+        transform: translateY(7px) rotate(45deg);
       }
       &:nth-child(2) {
         opacity: 0;
       }
       &:nth-child(3) {
-        transform: translateY(-5px) rotate(-45deg);
+        transform: translateY(-7px) rotate(-45deg);
       }
     }
   }
@@ -54,9 +56,7 @@ const StyledHamburger = styled.div`
 const Hamburger = props => {
   return (
     <StyledHamburger
-      className={
-        (props.isOpen ? ' is-active' : '') + ''
-      }
+      className={(props.isOpen ? ' is-active' : '')}
       data-target="navMenu"
       onClick={props.onClick}
     >

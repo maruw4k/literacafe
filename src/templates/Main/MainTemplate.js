@@ -1,6 +1,7 @@
 import React from 'react';
 import Helmet from 'react-helmet';
 import Navbar from 'components/Navbar';
+import Cookie from 'components/Cookie';
 import Footer from 'components/Footer';
 import OpeningHours from 'components/OpeningHours'
 import GlobalStyle from 'assets/styles/GlobalStyle';
@@ -32,6 +33,7 @@ const MainTemplate = ({ children }) => {
       <Navbar />
       <OpeningHours />
       {children}
+      <Cookie />
       <Footer />
     </>
   );
