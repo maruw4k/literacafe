@@ -139,7 +139,7 @@ export default class extends React.Component {
     this.state = {
       isOpen: false,
       isVisible: true,
-      prevScrollPos: window.pageYOffset,
+      prevScrollPos: 0,
     };
   }
 
