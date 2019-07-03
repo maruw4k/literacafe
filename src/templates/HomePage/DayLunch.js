@@ -94,7 +94,7 @@ export default () => (
             }
           }
         }
-        dayLunches: allStrapiLunch(filter: { active: { eq: 1 } }) {
+        dayLunches: allStrapiLunch(filter: { active: { eq: true } }) {
           nodes {
             title
             content
