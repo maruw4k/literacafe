@@ -63,14 +63,14 @@ const StyledCategoryNav = styled.nav`
   }
 `;
 
-export default ({ meals }) => (
-  <StyledCategoryNav>
-    <ul>
-      {meals.map((item, index) => (
-        <li key={index}>
-          <a href={'#category' + index}>{item.category}</a>
-        </li>
-      ))}
-    </ul>
-  </StyledCategoryNav>
+export default ({ categories }) => (
+    <StyledCategoryNav>
+      <ul>
+        {categories.map((item, index) => (
+          <li key={index}>
+            <a href={'#' + item.node.id}>{item.node.name}</a>
+          </li>
+        ))}
+      </ul>
+    </StyledCategoryNav>
 );
