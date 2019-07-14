@@ -13,13 +13,15 @@ const Navbar = styled.nav`
   right: 0;
   left: 0;
   top: 0;
-  z-index: ${({ isVisible }) => (isVisible ? '9999' : '-1')};
+  z-index: 999;
   transform: ${({ isVisible }) =>
     isVisible ? 'translateY(0);' : 'translateY(-150px);'};
   transition: transform 300ms;
 
   &::before {
     content: '';
+    transform: ${({ isOpen }) =>
+      isOpen ? 'translateY(0);' : 'translateY(-1000px);'};
     position: fixed;
     background-color: black;
     opacity: ${({ isOpen }) => (isOpen ? '0.4' : '0')};
@@ -33,6 +35,10 @@ const Navbar = styled.nav`
 
   ${theme.mq.tablet} {
     height: 13rem;
+
+    &::before {
+      display: none;
+    }
   }
 `;
 
@@ -139,7 +145,7 @@ export default class extends React.Component {
     this.state = {
       isOpen: false,
       isVisible: true,
-      prevScrollPos: window.pageYOffset,
+      prevScrollPos: 0,
     };
   }
 
@@ -152,7 +158,7 @@ export default class extends React.Component {
   toggleFixedMenu = () => {
     const { prevScrollPos } = this.state;
     let currentScrollPos = window.pageYOffset;
-    const visible = prevScrollPos > currentScrollPos;
+    const visible = prevScrollPos > currentScrollPos || currentScrollPos < 80;
 
     this.setState({
       prevScrollPos: currentScrollPos,
