@@ -113,8 +113,8 @@ export default () => (
           lead
           photo {
             childImageSharp {
-              fixed(width: 535, height: 315) {
-                ...GatsbyImageSharpFixed
+                fluid(maxWidth: 700) {
+                ...GatsbyImageSharpFluid
               }
             }
           }
@@ -134,7 +134,7 @@ export default () => (
 
         <StyledContent>
           <StyledPhotoContainer>
-            <Img fixed={data.newestArticle.photo.childImageSharp.fixed} />
+            <Img fluid={data.newestArticle.photo.childImageSharp.fluid} />
           </StyledPhotoContainer>
 
           <StyledTextContainer>

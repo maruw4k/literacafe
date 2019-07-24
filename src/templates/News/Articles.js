@@ -81,7 +81,7 @@ const ArticleBtn = styled.div`
   grid-area: btn;
   display: flex;
   justify-content: center;
-  align-items: flex-start;
+  align-items: center;
 
   ${theme.mq.tablet} {
     justify-content: flex-start;
