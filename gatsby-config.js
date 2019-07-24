@@ -32,7 +32,7 @@ module.exports = {
       options: {
         apiURL: `https://pacific-bastion-24909.herokuapp.com`,
         queryLimit: 1000, // Default to 100
-        contentTypes: [`article`, `text`, `lunch`, `category`, `subcategory`, `meal`]
+        contentTypes: [`article`, `text`, `category`, `subcategory`, `meal`]
       },
     },
     {
