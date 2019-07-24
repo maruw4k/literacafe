@@ -5,9 +5,11 @@ import Letter from 'components/Letter';
 import styled from 'styled-components';
 import ReactMarkdown from 'react-markdown';
 import { theme } from 'assets/styles/theme';
+import axios from 'axios';
 
-const StyledWrapper = styled.section`
+const SectionWrapper = styled.section`
   position: relative;
+  min-height: 300px;
   &:after {
     content: '';
     background-image: url(${({ cupCircle }) =>
@@ -23,7 +25,7 @@ const StyledWrapper = styled.section`
   }
 `;
 
-const StyledMealsSection = styled.div`
+const MealsSection = styled.div`
   max-width: 900px;
   margin: 0 auto;
   display: flex;
@@ -76,6 +78,97 @@ const MealList = styled(ReactMarkdown)`
   }
 `;
 
+const Loader = styled.div`
+  width: 8rem;
+  height: 9rem;
+  text-align: center;
+  margin: 5rem auto;
+  border: 10px solid transparent;
+  border-top-color: #e2a36d;
+  border-bottom-color: #e2a36d;
+  border-radius: 50%;
+  animation: spin-stretch 2s ease infinite;
+
+  @keyframes spin-stretch {
+    50% {
+      transform: rotate(360deg) scale(0.7, 0.63);
+      border-width: 8px;
+    }
+    100% {
+      transform: rotate(720deg) scale(1, 1);
+      border-width: 10px;
+    }
+  }
+`;
+
+class DayLunch extends React.Component {
+  constructor() {
+    super();
+
+    this.state = {
+      loading: false,
+      error: false,
+      meals: [],
+    };
+  }
+
+  componentDidMount() {
+    this.fetchLunchMeals();
+  }
+
+  fetchLunchMeals = () => {
+    this.setState({ loading: true });
+    axios
+      .get(`https://pacific-bastion-24909.herokuapp.com/lunches?active=true`)
+      .then(meals => {
+        this.setState({
+          loading: false,
+          meals: meals.data,
+        });
+      })
+      .catch(error => {
+        this.setState({ loading: false, error: error });
+      });
+  };
+
+  render() {
+    const data = this.props.data;
+
+    if (this.state.loading) {
+      return (
+        <SectionWrapper cupCircle={data.cupCircle.childImageSharp.fluid.src}>
+          <Loader />
+        </SectionWrapper>
+      );
+    } else if (this.state.meals.length > 0) {
+      return (
+        <SectionWrapper cupCircle={data.cupCircle.childImageSharp.fluid.src}>
+          <Letter
+            letter="L"
+            background={data.letterL.childImageSharp.fixed.src}
+            top={-17}
+            left={-15}
+          />
+
+          <SectionHeader title="Lunch dnia" />
+
+          <MealsSection>
+            {this.state.meals.map(item => (
+              <MealWrapper key={item.id}>
+                <MealTitle>{item.title}</MealTitle>
+                <MealList source={item.content} />
+                <MealPrice>{item.price}</MealPrice>
+              </MealWrapper>
+            ))}
+          </MealsSection>
+        </SectionWrapper>
+      );
+    } else {
+      return false;
+    }
+  }
+}
+
 export default () => (
   <StaticQuery
     query={graphql`
@@ -94,45 +187,8 @@ export default () => (
             }
           }
         }
-        dayLunches: allStrapiLunch(filter: { active: { eq: true } }) {
-          nodes {
-            title
-            content
-            date
-            price
-            active
-            strapiId
-          }
-        }
       }
     `}
-    render={data => (
-      <>
-        {data.dayLunches.nodes.length > 0 ? (
-          <StyledWrapper cupCircle={data.cupCircle.childImageSharp.fluid.src}>
-            <Letter
-              letter="L"
-              background={data.letterL.childImageSharp.fixed.src}
-              top={-17}
-              left={-15}
-            />
-
-            <SectionHeader title="Lunch dnia" />
-
-            <StyledMealsSection>
-              {data.dayLunches.nodes.map(item => (
-                <MealWrapper key={item.strapiId}>
-                  <MealTitle>{item.title}</MealTitle>
-                  <MealList source={item.content} />
-                  <MealPrice>{item.price}</MealPrice>
-                </MealWrapper>
-              ))}
-            </StyledMealsSection>
-          </StyledWrapper>
-        ) : (
-          ''
-        )}
-      </>
-    )}
+    render={data => <DayLunch data={data} />}
   />
 );

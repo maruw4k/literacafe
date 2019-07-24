@@ -40,7 +40,7 @@ const StyledBackgroundImage = styled(BackgroundImage)`
 const HeroText = styled.h1`
   font-family: ${theme.font.family.title};
   font-weight: 400;
-  font-size: 5rem;
+  font-size: 4.5rem;
   text-align: center;
   line-height: 1;
   color: white;

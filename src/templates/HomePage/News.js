@@ -77,15 +77,9 @@ const StyledTextContainer = styled.div`
 const NewsHeader = styled.h3`
   font-family: ${theme.font.family.title};
   font-size: 2.4rem;
-  font-weight: bold;
-  text-transform: uppercase;
+  font-style: italic;
+  font-weight: normal;
   margin: 0 0 2rem 0;
-
-  span {
-    text-transform: none;
-    font-style: italic;
-    font-weight: normal;
-  }
 `;
 
 export default () => (
@@ -113,6 +107,18 @@ export default () => (
             }
           }
         }
+        newestArticle: strapiArticle {
+          id
+          title
+          lead
+          photo {
+            childImageSharp {
+              fixed(width: 535, height: 315) {
+                ...GatsbyImageSharpFixed
+              }
+            }
+          }
+        }
       }
     `}
     render={data => (
@@ -128,23 +134,12 @@ export default () => (
 
         <StyledContent>
           <StyledPhotoContainer>
-            <Img fluid={data.sectionPhoto.childImageSharp.fluid} />
+            <Img fixed={data.newestArticle.photo.childImageSharp.fixed} />
           </StyledPhotoContainer>
 
           <StyledTextContainer>
-            <NewsHeader>
-              <span>jesienna</span>dziewczyna
-            </NewsHeader>
-            <p>
-              Serdecznie zapraszamy na jesienny koncert, gdzie w klimatycznym
-              wnętrzu kawiarenki zanurzymy się w muzykę wypełnioną po brzegi
-              najpiękniejszą poezją.
-            </p>
-
-            <p>
-              <b>Wystąpią:</b> <br />
-              Margo Promińska - wokal Weronika Olbrot - piano
-            </p>
+            <NewsHeader>{data.newestArticle.title}</NewsHeader>
+            <p>{data.newestArticle.lead}</p>
           </StyledTextContainer>
 
           <StyledButtonContainer>

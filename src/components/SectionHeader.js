@@ -4,10 +4,13 @@ import { theme } from 'assets/styles/theme';
 import apostrophes from 'assets/images/apostrophes.png';
 
 const StyledWrapper = styled.div`
-  margin-top: 5rem;
   padding-top: 5rem;
   margin-bottom: 5rem;
   text-align: center;
+
+  ${theme.mq.tablet} {
+    margin-top: 5rem;
+  }
 `;
 
 const StyledHeading = styled.h2`
