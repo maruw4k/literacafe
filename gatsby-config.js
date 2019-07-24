@@ -32,7 +32,7 @@ module.exports = {
       options: {
         apiURL: `https://pacific-bastion-24909.herokuapp.com`,
         queryLimit: 1000, // Default to 100
-        contentTypes: [`article`, `text`, `category`, `subcategory`, `meal`]
+        contentTypes: [`article`, `text`, `category`, `subcategory`, `meal`],
       },
     },
     {
@@ -41,10 +41,10 @@ module.exports = {
         name: `gatsby-starter-default`,
         short_name: `starter`,
         start_url: `/`,
-        background_color: `#663399`,
-        theme_color: `#663399`,
+        background_color: `#000000`,
+        theme_color: `#000000`,
         display: `minimal-ui`,
-        icon: `src/assets/images/icon.png`
+        icon: `src/assets/images/icon.png`,
       },
     },
     {
@@ -74,4 +74,4 @@ module.exports = {
       },
     },
   ],
-}
+};
