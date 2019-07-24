@@ -8,8 +8,12 @@ import Letter from 'components/Letter';
 import { theme } from 'assets/styles/theme';
 
 const StyledWrapper = styled.section`
-  margin: 0 auto 10rem auto;
+  margin: 0 auto 5rem auto;
   position: relative;
+
+  ${theme.mq.tablet} {
+    margin: 0 auto 10rem auto;
+  }
 
   &:after {
     content: '';
