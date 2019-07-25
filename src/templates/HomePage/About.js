@@ -67,7 +67,7 @@ const StyledSecondTextContainer = styled.div`
   }
 `;
 
-export default () => (
+export default props => (
   <StaticQuery
     query={graphql`
       query {
@@ -77,7 +77,7 @@ export default () => (
               ...GatsbyImageSharpFluid
             }
           }
-        },
+        }
         letterO: file(relativePath: { eq: "background-letter-l.jpg" }) {
           childImageSharp {
             fixed(width: 300, height: 300) {
@@ -89,7 +89,6 @@ export default () => (
     `}
     render={data => (
       <StyledWrapper cupCircle={data.cupCircle.childImageSharp.fluid.src}>
-
         <Letter
           letter="O"
           background={data.letterO.childImageSharp.fixed.src}
@@ -100,23 +99,9 @@ export default () => (
         <SectionHeader title="O literze" />
 
         <StyledContent>
-          <StyledFirstTextContainer>
-            LiteraCafe to kawiarnia zlokalizowana przy ulicy Literackiej, na
-            warszawskich Bielanach. Przyjazne wszystkim miejsce spotkań przy
-            pysznej kawie, doskonałych ciastach. Tu, codziennie rano będziecie
-            mogli Państwo kupić świeże bułeczki, croissanty, pieczywo jasne i
-            ciemne, z ziarnami i bez!
-          </StyledFirstTextContainer>
+          <StyledFirstTextContainer>{props.text1}</StyledFirstTextContainer>
 
-          <StyledSecondTextContainer>
-            W naszej kawiarni znajdą Państwo wiele książek, które można czytać
-            na miejscu delektując się kawą lub „wypożyczyć”, ale nie jak w
-            zwykłej bibliotece. Żadnych kart i formalności! Wystarczy wziąć
-            książkę z półki a po jej przeczytaniu, to Państwo decydują czy oddać
-            tę samą czy przynieść inną. Do dyspozycji naszych Gości mamy gry
-            planszowe zarówno klasyczne jak i nowości, więc zapraszamy do….
-            grywalizacji !!!
-          </StyledSecondTextContainer>
+          <StyledSecondTextContainer>{props.text2}</StyledSecondTextContainer>
 
           <StyledButtonContainer>
             <Button title="Zobacz" to="o-nas" />

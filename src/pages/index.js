@@ -7,15 +7,15 @@ import OurMenu from 'templates/HomePage/OurMenu';
 import News from 'templates/HomePage/News';
 import About from 'templates/HomePage/About';
 import Instagram from 'templates/HomePage/Instagram';
+import useSiteText from 'components/SiteText';
 
-const IndexPage = ({data}) => (
+const IndexPage = ({ data }) => (
   <MainTemplate>
     <div style={{ overflow: 'hidden' }}>
       <Hero
         fluid={data.mainHeroImg.childImageSharp.fluid}
         height="70vh"
-        text="We believe a cup of coffee is one of the most important, simple
-          pleasures in life"
+        text={useSiteText().homepage_hero}
       />
 
       <div className="container">
@@ -31,7 +31,7 @@ const IndexPage = ({data}) => (
       />
 
       <div className="container">
-        <About />
+        <About text1={useSiteText().about_1} text2={useSiteText().about_2} />
         <Instagram />
       </div>
     </div>
