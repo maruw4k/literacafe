@@ -116,10 +116,12 @@ export default () => (
       <PostWrapper>
         {data.allStrapiArticle.edges.map(({ node }) => (
           <ArticleContainer key={node.id}>
-            <ArticlePhotoWrapper
-              fluid={node.photo.childImageSharp.fluid}
-              alt={node.title}
-            />
+            {node.photo && (
+              <ArticlePhotoWrapper
+                fluid={node.photo.childImageSharp.fluid}
+                alt={node.title}
+              />
+            )}
             <ArticleLead>{node.lead}</ArticleLead>
             <ArticleTitle>{node.title}</ArticleTitle>
 

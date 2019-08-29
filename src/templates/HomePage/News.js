@@ -113,7 +113,7 @@ export default () => (
           lead
           photo {
             childImageSharp {
-                fluid(maxWidth: 700) {
+              fluid(maxWidth: 700) {
                 ...GatsbyImageSharpFluid
               }
             }
@@ -133,9 +133,11 @@ export default () => (
         <SectionHeader title="Wydarzenia" />
 
         <StyledContent>
-          <StyledPhotoContainer>
-            <Img fluid={data.newestArticle.photo.childImageSharp.fluid} />
-          </StyledPhotoContainer>
+          {data.newestArticle.photo && (
+            <StyledPhotoContainer>
+              <Img fluid={data.newestArticle.photo.childImageSharp.fluid} />
+            </StyledPhotoContainer>
+          )}
 
           <StyledTextContainer>
             <NewsHeader>{data.newestArticle.title}</NewsHeader>

@@ -35,9 +35,11 @@ export default ({ data }) => {
 
         <ArticleParagraph dangerouslySetInnerHTML={{ __html: post.content }} />
 
-        <ArticlePhotoWrapper>
-          <Img fluid={post.photo.childImageSharp.fluid} alt={post.title} />
-        </ArticlePhotoWrapper>
+        {post.photo && (
+          <ArticlePhotoWrapper>
+            <Img fluid={post.photo.childImageSharp.fluid} alt={post.title} />
+          </ArticlePhotoWrapper>
+        )}
       </ArticleWrapper>
     </MainTemplate>
   );

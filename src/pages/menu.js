@@ -22,9 +22,10 @@ export default ({ data }) => {
     menu.subcategories.forEach(({ node }) => {
       const currentId = node.strapiId;
       node.meals = [];
-      node.meals = data.allMeals.edges.filter(
-        item => item.node.subcategory.id === currentId
-      );
+      node.meals = data.allMeals.edges.filter(function(meal) {
+        if (meal.node.subcategory !== null)
+          return meal.node.subcategory.id === currentId;
+      });
     });
 
     groupedMeals.push(menu);
@@ -43,7 +44,6 @@ export default ({ data }) => {
       <CategoryNav categories={data.mainCategories.edges} />
 
       <Meals groupedMeals={groupedMeals} />
-
     </MainTemplate>
   );
 };
