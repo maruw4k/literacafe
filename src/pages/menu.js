@@ -52,8 +52,8 @@ export const query = graphql`
   {
     mainHeroImg: file(relativePath: { eq: "menu-main-photo.jpg" }) {
       childImageSharp {
-        fluid(maxWidth: 5375, quality: 100) {
-          ...GatsbyImageSharpFluid_noBase64
+        fluid(maxWidth: 1920) {
+          ...GatsbyImageSharpFluid
         }
       }
     }
@@ -66,7 +66,7 @@ export const query = graphql`
           name
           photo {
             childImageSharp {
-              fixed(height: 330, width: 220) {
+              fixed(height: 330, width: 250) {
                 ...GatsbyImageSharpFixed_noBase64
               }
             }
