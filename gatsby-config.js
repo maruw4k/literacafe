@@ -1,5 +1,9 @@
 const path = require('path');
 
+require('dotenv').config({
+  path: `.env.${process.env.NODE_ENV}`,
+});
+
 module.exports = {
   siteMetadata: {
     title: `LiteraCafe`,
@@ -30,7 +34,7 @@ module.exports = {
     {
       resolve: `gatsby-source-strapi`,
       options: {
-        apiURL: `https://pacific-bastion-24909.herokuapp.com`,
+        apiURL: `${process.env.GATSBY_STRAPI_API_URL}`,
         queryLimit: 1000, // Default to 100
         contentTypes: [`article`, `text`, `category`, `subcategory`, `meal`],
       },
