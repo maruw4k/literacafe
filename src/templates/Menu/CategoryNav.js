@@ -10,6 +10,7 @@ const StyledCategoryNav = styled.nav`
   padding: 0 15px;
   width: 100%;
   border-bottom: 1px solid grey;
+  line-height: 1;
 
   ul {
     display: flex;
@@ -46,7 +47,7 @@ const StyledCategoryNav = styled.nav`
     display: block;
     position: sticky;
     margin-top: 100px;
-    top: 30px;
+    top: 150px;
     height: 330px;
     width: 20%;
     left: 2vw;
@@ -64,13 +65,13 @@ const StyledCategoryNav = styled.nav`
 `;
 
 export default ({ categories }) => (
-    <StyledCategoryNav>
-      <ul>
-        {categories.map((item, index) => (
-          <li key={index}>
-            <a href={'#' + item.node.id}>{item.node.name}</a>
-          </li>
-        ))}
-      </ul>
-    </StyledCategoryNav>
+  <StyledCategoryNav>
+    <ul>
+      {categories.map((item, index) => (
+        <li key={index}>
+          <a href={'#' + item.node.id}>{item.node.name}</a>
+        </li>
+      ))}
+    </ul>
+  </StyledCategoryNav>
 );

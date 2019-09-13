@@ -21,6 +21,7 @@ const StyledLetter = styled.span`
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     font-size: 27rem;
+    line-height: initial;
   }
 
   ${theme.mq.huge} {
