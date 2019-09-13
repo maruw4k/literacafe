@@ -1,6 +1,7 @@
 import React from 'react';
+import { Link } from 'gatsby';
 import styled from 'styled-components';
-import Image from 'components/Image';
+import logo from 'assets/images/logo.svg';
 import { theme } from 'assets/styles/theme';
 
 const FooterWrapper = styled.div`
@@ -69,7 +70,7 @@ const Footer = styled.footer`
   }
 `;
 
-const LogoWrapper = styled.div`
+const LogoWrapper = styled(Link)`
   display: block;
   width: 138px;
   height: auto;
@@ -128,8 +129,8 @@ export default () => (
         </div>
       </div>
       <div className="footer-element logo">
-        <LogoWrapper>
-          <Image filename="logo.png" />
+        <LogoWrapper to='/'>
+          <img src={logo} width="127" height="81" alt="Litera Cafe"/>
         </LogoWrapper>
       </div>
     </Footer>

@@ -1,9 +1,14 @@
 import React from 'react';
 import { Link } from 'gatsby';
 import Hamburger from 'components/Hamburger';
-import Image from 'components/Image';
+import logo from 'assets/images/logo.svg';
 import styled from 'styled-components';
 import { theme } from 'assets/styles/theme';
+
+const PageLogo = styled.img`
+  max-width: 100%;
+  height: auto;
+`;
 
 const Navbar = styled.nav`
   font-family: ${theme.font.family.nav};
@@ -75,7 +80,7 @@ const MobileNavHeader = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 1rem 2rem;
+  padding: 1rem 2rem 0 1rem;
   ${theme.mq.tablet} {
     display: none;
   }
@@ -187,7 +192,7 @@ export default class extends React.Component {
         <MobileNavHeader>
           <MobileLogoWrapper>
             <Link to="/">
-              <Image filename="logo.png" alt="Logo LiteraCafe" />
+              <PageLogo src={logo} alt="Litera Cafe" width="127" height="81" />
             </Link>
           </MobileLogoWrapper>
 
@@ -204,7 +209,7 @@ export default class extends React.Component {
 
           <LogoWrapper className="logo-wrapper">
             <Link to="/">
-              <Image filename="logo.png" />
+              <PageLogo src={logo} alt="Litera Cafe" width="127" height="81" />
             </Link>
           </LogoWrapper>
 
