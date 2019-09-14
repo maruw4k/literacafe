@@ -89,7 +89,7 @@ export default ({ data }) => {
     articleDate.getFullYear();
 
   const transformImageUri = input =>
-    /^https?:/.test(input) ? input : `${process.env.STRAPI_API_URL}${input}`;
+    /^https?:/.test(input) ? input : `${process.env.GATSBY_STRAPI_API_URL}${input}`;
 
   return (
     <MainTemplate>
