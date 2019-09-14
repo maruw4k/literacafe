@@ -58,6 +58,7 @@ const Hamburger = props => {
     <StyledHamburger
       className={(props.isOpen ? ' is-active' : '')}
       data-target="navMenu"
+      aria-label="Otwórz menu"
       onClick={props.onClick}
     >
       <span />

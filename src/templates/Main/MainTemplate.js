@@ -16,7 +16,7 @@ const MainTemplate = ({ children }) => {
       <Helmet>
         <html lang="pl" />
         <title>{title}</title>
-        <meta property="description" content={description} />
+        <meta name="description" content={description} />
 
         <meta property="twitter:card" content={title} />
         <meta property="twitter:description" content={description} />
