@@ -42,7 +42,7 @@ const StyledLink = styled(Link)`
   }
 
   &:after {
-    content: '→';
+    content: ${({ isReverseArrow }) => (isReverseArrow ? "'←'" : "'→'")};
     display: flex;
     font-size: 2rem;
     justify-content: center;
@@ -59,7 +59,7 @@ const StyledLink = styled(Link)`
 `;
 
 const Button = props => {
-  return <StyledLink to={props.to}>{props.title}</StyledLink>;
+  return <StyledLink {...props}>{props.title}</StyledLink>;
 };
 
 export default Button;
