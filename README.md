@@ -3,6 +3,7 @@
 * [Site URL](#site-url)
 * [Technologies](#technologies)
 * [Setup](#setup)
+* [Audits](#audits)
 
 
 ## General info
@@ -45,3 +46,9 @@ To compile page and make it ready for deployment:
 ```
 $ gatsby build
 ```
+
+## Audits
+
+[![JMyD44I.png](https://i.imgur.com/JMyD44I.png)](https://i.imgur.com/JMyD44I.png)
+
+[Lighthouse Report](https://googlechrome.github.io/lighthouse/viewer/?gist=0ef09eda4d27989abe5ff81ac25bd11e)
