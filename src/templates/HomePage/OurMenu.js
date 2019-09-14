@@ -5,6 +5,7 @@ import styled from 'styled-components';
 import SectionHeader from 'components/SectionHeader';
 import Button from 'components/Button';
 import Letter from 'components/Letter';
+import RevealBlock from 'components/RevealBlock';
 import { theme } from 'assets/styles/theme';
 
 const StyledWrapper = styled.section`
@@ -53,6 +54,9 @@ const StyledTextContainer = styled.div`
 
 const StyledPhotoContainer = styled.div`
   grid-area: photo;
+  position: relative;
+  display: inline-block;
+  overflow: hidden;
 `;
 
 const StyledButtonContainer = styled.div`
@@ -101,6 +105,7 @@ export default () => (
         <SectionHeader title="Nasze menu" />
         <StyledContent>
           <StyledPhotoContainer>
+            <RevealBlock direction="right" />
             <Img fluid={data.sectionPhoto.childImageSharp.fluid} />
           </StyledPhotoContainer>
 

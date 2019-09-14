@@ -22,9 +22,10 @@ export default ({ data }) => {
     menu.subcategories.forEach(({ node }) => {
       const currentId = node.strapiId;
       node.meals = [];
-      node.meals = data.allMeals.edges.filter(
-        item => item.node.subcategory.id === currentId
-      );
+      node.meals = data.allMeals.edges.filter(function(meal) {
+        if (meal.node.subcategory !== null)
+          return meal.node.subcategory.id === currentId;
+      });
     });
 
     groupedMeals.push(menu);
@@ -43,7 +44,6 @@ export default ({ data }) => {
       <CategoryNav categories={data.mainCategories.edges} />
 
       <Meals groupedMeals={groupedMeals} />
-
     </MainTemplate>
   );
 };
@@ -52,8 +52,8 @@ export const query = graphql`
   {
     mainHeroImg: file(relativePath: { eq: "menu-main-photo.jpg" }) {
       childImageSharp {
-        fluid(maxWidth: 5375, quality: 100) {
-          ...GatsbyImageSharpFluid_noBase64
+        fluid(maxWidth: 1920) {
+          ...GatsbyImageSharpFluid
         }
       }
     }
@@ -66,7 +66,7 @@ export const query = graphql`
           name
           photo {
             childImageSharp {
-              fixed(height: 330, width: 220) {
+              fixed(height: 330, width: 250) {
                 ...GatsbyImageSharpFixed_noBase64
               }
             }

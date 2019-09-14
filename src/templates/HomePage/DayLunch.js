@@ -119,7 +119,7 @@ class DayLunch extends React.Component {
   fetchLunchMeals = () => {
     this.setState({ loading: true });
     axios
-      .get(`https://pacific-bastion-24909.herokuapp.com/lunches?active=true`)
+      .get(`${process.env.GATSBY_STRAPI_API_URL}/lunches?active=true`)
       .then(meals => {
         this.setState({
           loading: false,

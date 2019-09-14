@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { graphql } from 'gatsby';
 import Hero from 'components/Hero';
 import MainTemplate from 'templates/Main/MainTemplate';
@@ -7,36 +7,47 @@ import OurMenu from 'templates/HomePage/OurMenu';
 import News from 'templates/HomePage/News';
 import About from 'templates/HomePage/About';
 import Instagram from 'templates/HomePage/Instagram';
+import useSiteText from 'components/SiteText';
+import AOS from 'aos';
 
-const IndexPage = ({data}) => (
-  <MainTemplate>
-    <div style={{ overflow: 'hidden' }}>
-      <Hero
-        fluid={data.mainHeroImg.childImageSharp.fluid}
-        height="70vh"
-        text="We believe a cup of coffee is one of the most important, simple
-          pleasures in life"
-      />
+const IndexPage = ({ data }) => {
+  useEffect(() => {
+    AOS.init({
+      duration: 1000,
+      once: true,
+      easing: 'ease-out-quart',
+    });
+  });
 
-      <div className="container">
-        <DayLunch />
-        <OurMenu />
-        <News />
+  return (
+    <MainTemplate>
+      <div style={{ overflow: 'hidden' }}>
+        <Hero
+          fluid={data.mainHeroImg.childImageSharp.fluid}
+          height="70vh"
+          text={useSiteText().homepage_hero}
+        />
+
+        <div className="container">
+          <DayLunch />
+          <OurMenu />
+          <News />
+        </div>
+
+        <Hero
+          fluid={data.secondHeroImg.childImageSharp.fluid}
+          position="top"
+          height="45vh"
+        />
+
+        <div className="container">
+          <About text1={useSiteText().about_1} text2={useSiteText().about_2} />
+          <Instagram />
+        </div>
       </div>
-
-      <Hero
-        fluid={data.secondHeroImg.childImageSharp.fluid}
-        position="top"
-        height="45vh"
-      />
-
-      <div className="container">
-        <About />
-        <Instagram />
-      </div>
-    </div>
-  </MainTemplate>
-);
+    </MainTemplate>
+  );
+};
 
 export default IndexPage;
 

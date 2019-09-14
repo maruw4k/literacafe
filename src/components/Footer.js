@@ -1,6 +1,7 @@
 import React from 'react';
+import { Link } from 'gatsby';
 import styled from 'styled-components';
-import Image from 'components/Image';
+import logo from 'assets/images/logo.svg';
 import { theme } from 'assets/styles/theme';
 
 const FooterWrapper = styled.div`
@@ -40,6 +41,10 @@ const Footer = styled.footer`
 
   .copyright-left {
     grid-area: copyright-left;
+
+    ${theme.mq.tablet} {
+      margin-right: 10rem;
+    }
   }
 
   .copyright-right {
@@ -53,6 +58,11 @@ const Footer = styled.footer`
 
   .hours {
     grid-area: hours;
+    padding-right: 8vh;
+
+    ${theme.mq.tablet} {
+      padding-right: 0;
+    }
   }
 
   grid-template-columns: 1fr;
@@ -69,7 +79,7 @@ const Footer = styled.footer`
   }
 `;
 
-const LogoWrapper = styled.div`
+const LogoWrapper = styled(Link)`
   display: block;
   width: 138px;
   height: auto;
@@ -83,7 +93,12 @@ export default () => (
       <div className="footer-element copyright-right">
         <div>
           Created by{' '}
-          <a href="https://alterpage.pl/" className="footer-element__link">
+          <a
+            href="https://alterpage.pl/"
+            className="footer-element__link"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
             AlterPage
           </a>
         </div>
@@ -122,14 +137,14 @@ export default () => (
           <br />
           piątek 8:00 - 22:00
           <br />
-          sobota 10:00 - 20:22
+          sobota 10:00 - 22:00
           <br />
           niedziela 10:00 - 20:00
         </div>
       </div>
       <div className="footer-element logo">
-        <LogoWrapper>
-          <Image filename="logo.png" />
+        <LogoWrapper to='/'>
+          <img src={logo} width="127" height="81" alt="Litera Cafe"/>
         </LogoWrapper>
       </div>
     </Footer>

@@ -1,92 +1,90 @@
 import React from 'react';
-import { StaticQuery, graphql } from 'gatsby';
+import { StaticQuery, graphql, Link } from 'gatsby';
 import styled from 'styled-components';
-import Button from 'components/Button';
 import { theme } from 'assets/styles/theme';
 import Img from 'gatsby-image';
 
 const PostWrapper = styled.div`
-  margin: 3rem auto 5rem auto;
-  ${theme.mq.tablet} {
-    margin: 6rem auto 6rem auto;
-  }
-`;
-
-const ArticleContainer = styled.article`
-  height: 500px;
   display: grid;
-
-  grid-template-columns: 1fr;
-  grid-template-rows: 2fr 0.6fr 0.6fr 1fr;
-  grid-template-areas: 'photo' 'title' 'description' 'btn';
-
-  ${theme.mq.tablet} {
-    margin-bottom: 3rem;
-    height: 600px;
-    grid-template-columns: 0.2fr 1fr 1.7fr;
-    grid-template-rows: 1fr 1fr 1fr;
-    grid-template-areas: '. title photo' '. description photo' '. btn photo';
-  }
-
-  ${theme.mq.desktop} {
-    grid-template-columns: 0.5fr 1fr 1.7fr;
-  }
-
-  ${theme.mq.huge} {
-    grid-template-columns: 0.7fr 0.7fr 1.7fr;
-  }
+  grid-gap: 30px;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  margin: 8rem auto 6rem auto;
+  line-height: 1;
 `;
 
-const ArticlePhotoWrapper = styled(Img)`
+const ArticlePhotoWrapper = styled.div`
   grid-area: photo;
+  position: relative;
   overflow: hidden;
   display: flex;
   justify-content: center;
   align-items: center;
+  height: 200px;
+`;
+
+const ArticleContainer = styled.article`
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-rows: 1fr 0.2fr 0.4fr;
+  grid-template-areas: 'photo' 'title' 'description';
+`;
+
+const ArticleCategory = styled.div`
+  position: absolute;
+  bottom: 20px;
+  left: 20px;
+  background: white;
+  font-weight: 600;
+  padding: 0.7rem 1rem;
+  min-width: 90px;
+  text-align: center;
+  letter-spacing: 1px;
+  font-size: 1.5rem;
+`;
+
+const ArticlePhoto = styled(Img)`
+  position: relative;
+  width: 100%;
 
   img {
-    width: 100%;
+    max-width: 100%;
     height: auto;
   }
 `;
 
 const ArticleTitle = styled.h2`
   grid-area: title;
-  margin: 0;
   display: flex;
-  align-items: center;
-  padding: 0 15px;
+  align-items: start;
+  margin: 1.5rem 0 1.5rem 0;
+  position: relative;
 
-  ${theme.mq.tablet} {
-    align-items: flex-end;
-    padding-left: 0;
-    padding-right: 3rem;
+  font-family: ${theme.font.family.title};
+  font-weight: bold;
+  text-transform: uppercase;
+  letter-spacing: 0.15rem;
+  font-size: 2rem;
+
+  &:hover {
+    text-decoration: underline;
   }
 `;
 
 const ArticleLead = styled.p`
   grid-area: description;
   display: flex;
-  align-items: center;
-  padding: 0 15px;
+  align-items: start;
   margin: 0;
-
-  ${theme.mq.tablet} {
-    padding-left: 0;
-    padding-right: 3rem;
-  }
+  line-height: 1.3;
 `;
 
-const ArticleBtn = styled.div`
-  grid-area: btn;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-
-  ${theme.mq.tablet} {
-    justify-content: flex-start;
-    align-items: flex-start;
-  }
+const StyledLink = styled(Link)`
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  z-index: 999;
 `;
 
 export default () => (
@@ -99,10 +97,11 @@ export default () => (
               id
               title
               lead
+              category
               content
               photo {
                 childImageSharp {
-                  fluid(maxWidth: 900) {
+                  fluid(maxWidth: 700) {
                     ...GatsbyImageSharpFluid
                   }
                 }
@@ -113,19 +112,30 @@ export default () => (
       }
     `}
     render={data => (
-      <PostWrapper>
+      <PostWrapper className="container">
         {data.allStrapiArticle.edges.map(({ node }) => (
           <ArticleContainer key={node.id}>
-            <ArticlePhotoWrapper
-              fluid={node.photo.childImageSharp.fluid}
-              alt={node.title}
-            />
-            <ArticleLead>{node.lead}</ArticleLead>
-            <ArticleTitle>{node.title}</ArticleTitle>
+            <ArticlePhotoWrapper>
+              {node.photo && (
+                <ArticlePhoto
+                  fluid={node.photo.childImageSharp.fluid}
+                  alt={node.title}
+                />
+              )}
 
-            <ArticleBtn>
-              <Button title="Zobacz" to={node.id} />
-            </ArticleBtn>
+              <StyledLink to={node.id} />
+
+              {node.category && (
+                <ArticleCategory>{node.category}</ArticleCategory>
+              )}
+            </ArticlePhotoWrapper>
+
+            <ArticleLead>{node.lead}</ArticleLead>
+
+            <ArticleTitle>
+              {node.title}
+              <StyledLink to={node.id} />
+            </ArticleTitle>
           </ArticleContainer>
         ))}
       </PostWrapper>

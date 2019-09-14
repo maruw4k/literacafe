@@ -7,6 +7,7 @@ import styled from 'styled-components';
 import SectionHeader from 'components/SectionHeader';
 import Letter from 'components/Letter';
 import { theme } from 'assets/styles/theme';
+import useSiteText from 'components/SiteText';
 
 const StyledContainer = styled.div`
   margin-left: ${({ right }) => (right ? '0' : 'auto')};
@@ -19,7 +20,7 @@ const StyledContainer = styled.div`
   &:after {
     content: '';
     background-image: url(${({ cupCircle }) =>
-  '' + cupCircle + '' ? cupCircle : ''});
+      '' + cupCircle + '' ? cupCircle : ''});
     width: 35rem;
     height: 35rem;
     position: absolute;
@@ -74,7 +75,7 @@ const SignatureContainer = styled.div`
   }
 `;
 
-export default ({data}) => (
+export default ({ data }) => (
   <MainTemplate>
     <Hero
       fluid={data.mainHeroImg.childImageSharp.fluid}
@@ -90,13 +91,7 @@ export default ({data}) => (
         paddingBottom="4rem"
         cupCircle={data.cupCircle.childImageSharp.fluid.src}
       >
-        <StyledParagraph right>
-          LiteraCafe to kawiarnia zlokalizowana przy ulicy Literackiej, na
-          warszawskich Bielanach. Przyjazne wszystkim miejsce spotkań przy
-          pysznej kawie, doskonałych ciastach. Tu, codziennie rano będziecie
-          mogli Państwo kupić świeże bułeczki, croissanty, pieczywo jasne i
-          ciemne, z ziarnami i bez!
-        </StyledParagraph>
+        <StyledParagraph right>{useSiteText().about_1}</StyledParagraph>
         <Letter
           letter="O"
           background={data.letterO.childImageSharp.fixed.src}
@@ -110,14 +105,7 @@ export default ({data}) => (
       </PhotoContainer>
 
       <StyledContainer paddingBottom="4rem">
-        <StyledParagraph>
-          W naszej kawiarni znajdą Państwo wiele książek, które można czytać na
-          miejscu delektując się kawą lub „wypożyczyć”, ale nie jak w zwykłej
-          bibliotece. Żadnych kart i formalności! Wystarczy wziąć książkę z
-          półki a po jej przeczytaniu, to Państwo decydują czy oddać tę samą czy
-          przynieść inną. Do dyspozycji naszych Gości mamy gry planszowe zarówno
-          klasyczne jak i nowości, więc zapraszamy do…. grywalizacji !!!
-        </StyledParagraph>
+        <StyledParagraph>{useSiteText().about_2}</StyledParagraph>
       </StyledContainer>
 
       <Letter
@@ -139,13 +127,7 @@ export default ({data}) => (
       </StyledContainer>
 
       <StyledContainer paddingBottom="4rem">
-        <StyledParagraph right>
-          LiteraCafe to, także strefa sportowa. Wiosna i lato to świetna pora na
-          aktywne spędzanie czasu, a że we dwoje zawsze raźniej możecie u nas
-          wypożyczyć tandemy. Litera Cafe i Bielany to świetny początek udanej
-          wycieczki rowerowej. W trakcie całego roku zapraszamy do wspólnego
-          oglądania meczów. Już wkrótce aktualny kalendarz spotkań.
-        </StyledParagraph>
+        <StyledParagraph right>{useSiteText().about_3}</StyledParagraph>
       </StyledContainer>
 
       <Letter
@@ -160,12 +142,7 @@ export default ({data}) => (
       </PhotoContainer>
 
       <StyledContainer paddingBottom="4rem">
-        <StyledParagraph>
-          LiteraCafe to także, miejsce spotkań tematycznych z podróżnikami,
-          artystami. Jeśli chcesz się podzielić z innymi swoją pasją –
-          zapraszamy do kontaktu! LiteraCafe to po prostu przestrzeń Twojego
-          relaksu.
-        </StyledParagraph>
+        <StyledParagraph>{useSiteText().about_4}</StyledParagraph>
       </StyledContainer>
 
       <StyledContainer>

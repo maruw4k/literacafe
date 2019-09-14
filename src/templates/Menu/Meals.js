@@ -9,7 +9,7 @@ const StyledCategoryImg = styled.img`
     display: block;
     position: sticky;
     margin-top: 150px;
-    top: 30px;
+    top: 140px;
     height: auto;
     width: 20%;
     float: right;

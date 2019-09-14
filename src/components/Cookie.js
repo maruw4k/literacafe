@@ -2,6 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import cookiesImg from 'assets/images/cookies.png';
 import { theme } from 'assets/styles/theme';
+import cookiePdf from 'assets/pdf/cookie.pdf';
 
 const FooterContainer = styled.section`
   display: ${({ isCookieSet }) => (isCookieSet ? 'none' : 'flex')};
@@ -119,7 +120,7 @@ export default class extends React.Component {
             aktualnymi ustawieniami przeglądarki.
           </p>
 
-          <a href="#" target="_blank">
+          <a href={cookiePdf} target="_blank" rel="noopener noreferrer">
             Więcej szczegółów w naszej Polityce Cookies
           </a>
         </CookieText>
