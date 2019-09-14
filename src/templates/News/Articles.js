@@ -116,10 +116,12 @@ export default () => (
         {data.allStrapiArticle.edges.map(({ node }) => (
           <ArticleContainer key={node.id}>
             <ArticlePhotoWrapper>
-              <ArticlePhoto
-                fluid={node.photo.childImageSharp.fluid}
-                alt={node.title}
-              />
+              {node.photo && (
+                <ArticlePhoto
+                  fluid={node.photo.childImageSharp.fluid}
+                  alt={node.title}
+                />
+              )}
 
               <StyledLink to={node.id} />
 

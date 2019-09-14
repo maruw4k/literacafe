@@ -132,7 +132,9 @@ export default () => (
         <StyledContent>
           <PhotoContainer>
             <RevealBlock direction="left" />
-            <Img fixed={data.newestArticle.photo.childImageSharp.fixed} />
+            {data.newestArticle.photo && (
+              <Img fixed={data.newestArticle.photo.childImageSharp.fixed} />
+            )}
           </PhotoContainer>
 
           <StyledTextContainer>

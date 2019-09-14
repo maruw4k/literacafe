@@ -109,9 +109,11 @@ export default ({ data }) => {
           transformImageUri={transformImageUri}
         />
 
-        <ArticlePhotoWrapper>
-          <Img fluid={post.photo.childImageSharp.fluid} alt={post.title} />
-        </ArticlePhotoWrapper>
+        {post.photo && (
+          <ArticlePhotoWrapper>
+            <Img fluid={post.photo.childImageSharp.fluid} alt={post.title} />
+          </ArticlePhotoWrapper>
+        )}
       </ArticleWrapper>
     </MainTemplate>
   );
