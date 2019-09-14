@@ -5,24 +5,32 @@ import SectionHeader from 'components/SectionHeader';
 import { theme } from 'assets/styles/theme';
 import styled from 'styled-components';
 import Letter from 'components/Letter';
+import RevealBlock from 'components/RevealBlock';
 
-const StyledWrapper = styled.section`
+const Wrapper = styled.section`
   padding-bottom: 10rem;
   position: relative;
 `;
 
-const StyledHeader = styled(SectionHeader)`
+const StyledSectionHeader = styled(SectionHeader)`
   padding-bottom: 0;
   margin-bottom: 0;
   font-size: 20rem;
 `;
 
-const StyledLink = styled.a`
+const Anchor = styled.a`
   color: black;
   text-align: center;
-  font-weight: bold;
+  font-weight: 500;
   display: block;
   font-size: 2rem;
+  font-style: italic;
+`;
+
+const PhotoContainer = styled.div`
+  position: relative;
+  display: inline-block;
+  overflow: hidden;
 `;
 
 const InstagramWrapper = styled.section`
@@ -34,8 +42,14 @@ const InstagramWrapper = styled.section`
   ${theme.mq.tablet} {
     grid-template-columns: 1fr 1fr 1fr 1fr;
     grid-template-rows: 1fr;
+
+    ${PhotoContainer}:nth-child(even) {
+      top: 3rem;
+    }
   }
 `;
+
+const instagramUrl = 'https://www.instagram.com/litera_cafe/';
 
 export default () => (
   <StaticQuery
@@ -47,8 +61,8 @@ export default () => (
               timestamp
               localFile {
                 childImageSharp {
-                  fluid(maxWidth: 300) {
-                    ...GatsbyImageSharpFluid
+                  fixed(width: 290, height: 290) {
+                    ...GatsbyImageSharpFixed
                   }
                 }
               }
@@ -58,51 +72,70 @@ export default () => (
       }
     `}
     render={data => (
-      <StyledWrapper>
+      <Wrapper>
         <Letter
           letter="I"
           background={
-            data.allInstaNode.edges[0].node.localFile.childImageSharp.fluid.src
+            data.allInstaNode.edges[0].node.localFile.childImageSharp.fixed.src
           }
           top={-12}
           left={-15}
         />
 
-        <StyledHeader title="Instagram" />
+        <StyledSectionHeader title="Instagram" />
 
-        <StyledLink
+        <Anchor
           href="https://www.instagram.com/litera_cafe/"
           target="_blank"
+          rel="noopener noreferrer"
         >
           @literacafe
-        </StyledLink>
+        </Anchor>
 
-        <InstagramWrapper>
-          <Img
-            fluid={
-              data.allInstaNode.edges[0].node.localFile.childImageSharp.fluid
-            }
-          />
+        <a href={instagramUrl} target="_blank" rel="noopener noreferrer">
+          <InstagramWrapper>
+            <PhotoContainer>
+              <RevealBlock direction="bottom" />
+              <Img
+                fixed={
+                  data.allInstaNode.edges[0].node.localFile.childImageSharp
+                    .fixed
+                }
+              />
+            </PhotoContainer>
 
-          <Img
-            fluid={
-              data.allInstaNode.edges[1].node.localFile.childImageSharp.fluid
-            }
-          />
+            <PhotoContainer>
+              <RevealBlock direction="top" />
+              <Img
+                fixed={
+                  data.allInstaNode.edges[1].node.localFile.childImageSharp
+                    .fixed
+                }
+              />
+            </PhotoContainer>
 
-          <Img
-            fluid={
-              data.allInstaNode.edges[2].node.localFile.childImageSharp.fluid
-            }
-          />
+            <PhotoContainer>
+              <RevealBlock direction="bottom" />
+              <Img
+                fixed={
+                  data.allInstaNode.edges[2].node.localFile.childImageSharp
+                    .fixed
+                }
+              />
+            </PhotoContainer>
 
-          <Img
-            fluid={
-              data.allInstaNode.edges[3].node.localFile.childImageSharp.fluid
-            }
-          />
-        </InstagramWrapper>
-      </StyledWrapper>
+            <PhotoContainer>
+              <RevealBlock direction="top" />
+              <Img
+                fixed={
+                  data.allInstaNode.edges[3].node.localFile.childImageSharp
+                    .fixed
+                }
+              />
+            </PhotoContainer>
+          </InstagramWrapper>
+        </a>
+      </Wrapper>
     )}
   />
 );

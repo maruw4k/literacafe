@@ -6,6 +6,7 @@ import SectionHeader from 'components/SectionHeader';
 import Button from 'components/Button';
 import Letter from 'components/Letter';
 import { theme } from 'assets/styles/theme';
+import RevealBlock from 'components/RevealBlock';
 
 const StyledWrapper = styled.section`
   padding-bottom: 10rem;
@@ -52,8 +53,11 @@ const StyledContent = styled.div`
   }
 `;
 
-const StyledPhotoContainer = styled.div`
+const PhotoContainer = styled.div`
   grid-area: photo;
+  position: relative;
+  display: inline-block;
+  overflow: hidden;
 `;
 
 const StyledButtonContainer = styled.div`
@@ -86,13 +90,6 @@ export default () => (
   <StaticQuery
     query={graphql`
       query {
-        sectionPhoto: file(relativePath: { eq: "home-photo2.jpg" }) {
-          childImageSharp {
-            fluid(maxWidth: 700) {
-              ...GatsbyImageSharpFluid
-            }
-          }
-        }
         cupCircle: file(relativePath: { eq: "cup-circles/cup-circle-3.png" }) {
           childImageSharp {
             fluid(maxWidth: 400) {
@@ -113,8 +110,8 @@ export default () => (
           lead
           photo {
             childImageSharp {
-              fluid(maxWidth: 700) {
-                ...GatsbyImageSharpFluid
+              fixed(width: 600, height: 330) {
+                ...GatsbyImageSharpFixed
               }
             }
           }
@@ -133,11 +130,10 @@ export default () => (
         <SectionHeader title="Wydarzenia" />
 
         <StyledContent>
-          {data.newestArticle.photo && (
-            <StyledPhotoContainer>
-              <Img fluid={data.newestArticle.photo.childImageSharp.fluid} />
-            </StyledPhotoContainer>
-          )}
+          <PhotoContainer>
+            <RevealBlock direction="left" />
+            <Img fixed={data.newestArticle.photo.childImageSharp.fixed} />
+          </PhotoContainer>
 
           <StyledTextContainer>
             <NewsHeader>{data.newestArticle.title}</NewsHeader>
